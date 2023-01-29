@@ -1,19 +1,18 @@
-(ns ^:no-doc wkok.openai-clojure
+(ns wkok.openai-clojure
   (:require [martian.core :as martian]
             [martian.clj-http :as martian-http]
             [martian.yaml :as yaml]
             [martian.openapi :as openapi]
-            [clojure.java.io :as io]
-            [wkok.openai-clojure.api]))
+            [clojure.java.io :as io]))
 
-(def add-authentication-header
+(def ^:no-doc add-authentication-header
   {:name ::add-authentication-header
    :enter (fn [ctx]
             (assoc-in ctx
                       [:request :headers "Authorization"]
                       (str "Bearer " (System/getenv "OPEN_AI_API_KEY"))))})
 
-(defn bootstrap-openapi
+(defn ^:no-doc bootstrap-openapi
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
   (let [definition (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
@@ -22,30 +21,31 @@
                      :interceptors #(concat % [add-authentication-header]))]
     (martian/bootstrap-openapi base-url definition opts)))
 
-(def m (bootstrap-openapi))
+(def ^:no-doc m (bootstrap-openapi))
 
-(defn response-for
+(defn ^:no-doc response-for
   [operation]
   (-> (martian/response-for m operation)
       :body))
 
-(defn make-fn
+(defn ^:no-doc make-fn
   "Creates a clojure function using the swagger operation / endpoint definition"
   [operation]
   (fn op
     [n]
     (response-for operation)))
 
-(defn intern-fn
+(defn ^:no-doc intern-fn
   "Dynamically defines a clojure function in the api namespace, using
   the swagger operation / endpoint definition"
   [operation]
   (let [definition (martian/explore m operation)
         fn-name (-> operation name symbol
                     (with-meta {:doc (:summary definition)}))]
-    (intern 'wkok.openai-clojure.api fn-name (make-fn operation))))
+    (when-not (:deprecated definition)
+      (intern *ns* fn-name (make-fn operation)))))
 
-(defn def-operation-fns
+(defn ^:no-doc def-operation-fns
   "Dynamically define clojure functions for all operations / endpoints
   defined in the swagger definition"
   []
