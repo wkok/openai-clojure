@@ -1,7 +1,6 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
-        com.github.oliyh/martian {:local/root "../martian/core"
-                                  :deps/manifest :deps} #_{:mvn/version "0.1.22"}
+        com.github.oliyh/martian {:mvn/version "0.1.22"}
         com.github.oliyh/martian-clj-http {:mvn/version "0.1.22"}
         frankiesardo/tripod {:mvn/version "0.2.0"}
         prismatic/schema {:mvn/version "1.1.12"}
