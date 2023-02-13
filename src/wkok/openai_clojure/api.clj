@@ -108,8 +108,8 @@
   Example:
 
   ```
-  (create-image-edit {:image \"@otter.png\"
-                      :mask \"@mask.png\"
+  (create-image-edit {:image (clojure.java.io/file \"path/to/otter.png\")
+                      :mask (clojure.java.io/file \"path/to/mask.png\")
                       :prompt \"A cute baby sea otter wearing a beret\"
                       :n 2
                       :size \"1024x1024\"})
@@ -127,7 +127,7 @@
   Example:
 
   ```
-  (create-image-variation {:image (clojure.java.io/file \"otter.png\")
+  (create-image-variation {:image (clojure.java.io/file \"path/to/otter.png\")
                            :n 2
                            :size \"1024x1024\"})
   ```
@@ -153,6 +153,7 @@
                      :input \"The food was delicious and the waiter...\"})
   ```
 
+  For all available params, see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
   "
   {:doc/format :markdown}
   [params]
@@ -183,8 +184,8 @@
   Example:
 
   ```
-  (create-file {:purpose \"fint-tune\"
-                :file \"@mydata.json1\"})
+  (create-file {:purpose \"fine-tune\"
+                :file (clojure.java.io/file \"path/to/fine-tune.jsonl\")})
   ```
 
   "
@@ -248,6 +249,7 @@
   (create-fine-tune {:training_file \"file-xuhfiwuefb\"})
   ```
 
+  For all available params, see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/create)
   "
   {:doc/format :markdown}
   [params]
@@ -268,7 +270,7 @@
   (core/response-for :list-fine-tunes {}))
 
 (defn retrieve-fine-tune
-  "Gets info about the fine-tune job.\n\n[Learn more about Fine-tuning](/docs/guides/fine-tuning)
+  "Gets info about the fine-tune job.
 
   Example:
 
@@ -316,7 +318,7 @@
   Example:
 
   ```
-  (delete-model {:fine_tune_id \"ft-1wefweub\"})
+  (delete-model {:model \"fine-tune\"})
   ```
 
   "
