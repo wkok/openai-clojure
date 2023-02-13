@@ -9,13 +9,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.1.0"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.1.14"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.1.0"]
+[net.clojars.wkok/openai-clojure "0.1.14"]
 ```
 
 ## Authentication

@@ -18,13 +18,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.1.8"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.1.14"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.1.8"]
+[net.clojars.wkok/openai-clojure "0.1.14"]
 ```
 
 ## Authentication
@@ -41,7 +41,7 @@ An API key can be generated in your [OpenAI account](https://platform.openai.com
 
 ## Quickstart
 
-See the full [openai-clojure](wkok.openai-clojure.api.html) api documentation for examples of all the supported OpenAI APIs.
+See the full [openai-clojure](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
