@@ -53,18 +53,3 @@
   [operation params]
   (-> (martian/response-for m operation params)
       :body))
-
-
-(comment
-
-  ;; Get all operations from the spec
-  (->> (martian/explore m)
-       (map first)
-       (map #(-> (martian/explore m %)
-                 (assoc :operation %)))
-       (remove :deprecated)
-       #_(map #(select-keys % [:operation :summary])))
-
-  (martian/explore m :create-image-edit)
-
-  )

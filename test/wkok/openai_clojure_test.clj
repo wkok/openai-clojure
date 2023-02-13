@@ -1,7 +1,18 @@
 (ns wkok.openai-clojure-test
   (:require [clojure.test :refer :all]
-            [wkok.openai-clojure :refer :all]))
+            [wkok.openai-clojure.api :as api]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest list-models
+  (testing "lists the davinci model"
+    (is (= "davinci"
+           (->> (api/list-models)
+                :data
+                (some #(when (= "davinci" (:id %)) (:id %))))))))
+
+(deftest create-completion
+  (testing "creates a simple completion"
+    (is (contains? (api/create-completion {:model "text-davinci-003"
+                                           :prompt "Say this is a test"
+                                           :max_tokens 7
+                                           :temperature 0})
+                   :choices))))
