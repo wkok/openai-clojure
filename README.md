@@ -9,6 +9,17 @@ Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/int
 * [Introduction](https://wkok.github.io/openai-clojure/intro.html)
 * [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html)
 
+## Supported OpenAI APIs
+
+* [Models](https://platform.openai.com/docs/api-reference/models)
+* [Completion](https://platform.openai.com/docs/api-reference/completions)
+* [Edits](https://platform.openai.com/docs/api-reference/edits)
+* [Images](https://platform.openai.com/docs/api-reference/images)
+* [Embeddings](https://platform.openai.com/docs/api-reference/embeddings)
+* [Files](https://platform.openai.com/docs/api-reference/files)
+* [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes)
+* [Moderations](https://platform.openai.com/docs/api-reference/moderations)
+
 ## Configuration
 
 [![Clojars Project](https://img.shields.io/clojars/v/net.clojars.wkok/openai-clojure.svg)](https://clojars.org/net.clojars.wkok/openai-clojure)
@@ -41,7 +52,7 @@ An API key can be generated in your [OpenAI account](https://platform.openai.com
 
 ## Quickstart
 
-See the full [openai-clojure](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html) for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
