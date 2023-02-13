@@ -72,67 +72,6 @@ Result:
  :usage {:prompt_tokens 5, :completion_tokens 7, :total_tokens 12}}
 ```
 
-## Development
-
-### Emacs
-
-You can set your OpenAI API key environment variable in `.dir-locals.el`
-
-```
-((nil
-  (eval . (progn
-            (setenv "OPENAI_API_KEY" "your-key-here")))))
-```
-
-Use `cider-jack-in-clj` to start Clojure REPL for development.
-
-### Tests
-
-Run the project's tests:
-
-```
-clojure -T:build test
-```
-
-### Build
-
-Run the project's CI pipeline and build a JAR:
-
-```
-clojure -T:build ci
-```
-
-This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
-directory inside `target/classes` and the JAR in `target`. You can update the version (and SCM tag)
-information in generated `pom.xml` by updating `build.clj`
-
-### Install
-
-Install it locally (requires the `ci` task be run first):
-
-```
-clojure -T:build install
-```
-
-### Deploy
-
-Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
-variables (requires the `ci` task be run first):
-
-```
-clojure -T:build deploy
-```
-
-The library will be deployed to net.clojars.[user]/openai-clojure on clojars.org by default.
-
-### Docs
-
-Build the api docs
-
-```
-clojure -X:codox
-```
-
 ## Issues and features
 
 Please feel free to raise issues on Github or send pull requests
@@ -142,6 +81,8 @@ Please feel free to raise issues on Github or send pull requests
 This library uses [Martian](https://github.com/oliyh/martian) - An HTTP abstraction library
 
 ## License
+
+**This is an unofficial library, it is not affiliated with nor endorsed by OpenAI**
 
 [MIT License](https://github.com/wkok/re-frame-crux/blob/master/LICENSE)
 
