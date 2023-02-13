@@ -32,6 +32,8 @@ jobs:
 
     - name: Build
       run: clojure -T:build test
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Docs
       run: clojure -X:codox
