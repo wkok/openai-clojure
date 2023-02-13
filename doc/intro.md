@@ -1,6 +1,6 @@
 # Introduction to openai-clojure
 
-Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/api-reference/making-requests)
+Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 
 ## Configuration
 
