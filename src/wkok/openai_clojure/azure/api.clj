@@ -7,11 +7,11 @@
 
   Example:
   ```
+  (create-completion {:martian.core/body {:prompt \"How are you ?\"
+                                          :max_tokens 100}
+                      :deployment-id \"testtextdavanci003\"
+                      :api-version \"2022-12-01\"})
 
-  (create-completion {:model \"text-davinci-003\"
-                      :prompt \"Say this is a test\"
-                      :max_tokens 7
-                      :temperature 0})
   ```
   Also see the [Azure OpenAI documentation]https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions
   "
