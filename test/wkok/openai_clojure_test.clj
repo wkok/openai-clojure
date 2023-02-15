@@ -1,7 +1,6 @@
 (ns wkok.openai-clojure-test
   (:require [clojure.test :refer :all]
-            [wkok.openai-clojure.api :as api]
-            ))
+            [wkok.openai-clojure.api :as api]))
 
 (deftest list-models
   (testing "lists the davinci model"
@@ -36,10 +35,6 @@
                           :prompt "How are you ?"
                           :max_tokens 100
                           :temperature 0})
+
   (api/create-embedding :azure {:model "textembeddingada"
                                 :input "How are you ?"}))
-
-
-
-
-                          

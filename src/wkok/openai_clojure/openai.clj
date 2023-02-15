@@ -1,4 +1,4 @@
-(ns wkok.openai-clojure.openai
+(ns ^:no-doc wkok.openai-clojure.openai
   (:require
      [clojure.java.io :as io]
      [martian.clj-http :as martian-http]

@@ -1,4 +1,4 @@
-(ns wkok.openai-clojure.azure
+(ns ^:no-doc wkok.openai-clojure.azure
   (:require
    [cheshire.core :as json]
    [clojure.java.io :as io]
@@ -36,9 +36,7 @@
                                  :interceptors
                                  (fn [s] (concat [add-authentication-header] s)))))))
 
-
-
 (defn patch-params [params]
   {:api-version "2022-12-01"
-     :deployment-id (:model params)
-     :martian.core/body (dissoc params :model)})
+   :deployment-id (:model params)
+   :martian.core/body (dissoc params :model)})

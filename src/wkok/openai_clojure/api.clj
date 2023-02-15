@@ -16,7 +16,7 @@
   "
   {:doc/format :markdown}
   []
-  (core/response-for  :openai :list-models {}))
+  (core/response-for :openai :list-models {}))
 
 (defn retrieve-model
   "Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
@@ -46,13 +46,18 @@
                       :max_tokens 7
                       :temperature 0})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/completions/create)
+
+  For Azure OpenAI pass `:azure` for the `impl` argument
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
+
+  *Note - server-sent events (the `stream` param) is not yet supported*
   "
   {:doc/format :markdown}
-  ([implementation params]
-   (core/response-for implementation :create-completion params))
   ([params]
-   (create-completion :openai params)))
+   (create-completion :openai params))
+  ([impl params]
+   (core/response-for impl :create-completion params)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,7 +98,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for  :openai :create-image params))
+  (core/response-for :openai :create-image params))
 
 
 (defn create-image-edit
@@ -141,13 +146,16 @@
   (create-embedding {:model \"text-embedding-ada-002\"
                      :input \"The food was delicious and the waiter...\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
+
+  For Azure OpenAI pass `:azure` for the `impl` argument
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/embeddings/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings) documentation
   "
   {:doc/format :markdown}
-  ([implementation params]
-   (core/response-for implementation :create-embedding params))
   ([params]
-   (core/response-for  :openai :create-embedding params)))
+   (create-embedding :openai params))
+  ([impl params]
+   (core/response-for impl :create-embedding params)))
 
 
 
@@ -166,7 +174,7 @@
   "
   {:doc/format :markdown}
   []
-  (core/response-for  :openai :list-files {}))
+  (core/response-for :openai :list-files {}))
 
 (defn create-file
   "Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB.
@@ -290,7 +298,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for  :openai :list-fine-tune-events params))
+  (core/response-for :openai :list-fine-tune-events params))
 
 (defn delete-model
   "Delete a fine-tuned model. You must have the Owner role in your organization.
