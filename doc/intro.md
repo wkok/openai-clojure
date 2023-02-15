@@ -1,4 +1,4 @@
-# Introduction to openai-clojure
+# Introduction - OpenAI
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 
@@ -9,13 +9,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.1.14"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.2.0"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.1.14"]
+[net.clojars.wkok/openai-clojure "0.2.0"]
 ```
 
 ## Authentication
