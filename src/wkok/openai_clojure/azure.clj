@@ -13,12 +13,17 @@
                       (System/getenv "AZURE_OPENAI_API_KEY")))})
 
 
-
 (defn patch-handler [m]
-  (let [completion-handler (-> m :handlers first)
-        patched-handlers [(assoc completion-handler :route-name :create-completion)
-                          (second (-> m :handlers first))]]
+  ;; patching works for API version "2022-12-01"
+  (let [patched-completions-create-handler (->  (martian/handler-for  m :completions-create)
+                                                (assoc :route-name :create-completion))
+        embeddings-create-handler (martian/handler-for  m :embeddings-create)
+
+        patched-handlers [patched-completions-create-handler
+                          embeddings-create-handler]]
+
     (assoc m :handlers patched-handlers)))
+
 
 (def m
   (delay
