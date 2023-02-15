@@ -16,7 +16,7 @@
   "
   {:doc/format :markdown}
   []
-  (core/response-for :list-models {}))
+  (core/response-for  :openai :list-models {}))
 
 (defn retrieve-model
   "Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
@@ -29,7 +29,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :retrieve-model params))
+  (core/response-for :openai :retrieve-model params))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,8 +49,10 @@
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/completions/create)
   "
   {:doc/format :markdown}
-  [params]
-  (core/response-for :create-completion params))
+  ([implementation params]
+   (core/response-for implementation :create-completion params))
+  ([params]
+   (create-completion :openai params)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -70,7 +72,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-edit params))
+  (core/response-for :openai :create-edit params))
 
 
 
@@ -91,7 +93,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-image params))
+  (core/response-for  :openai :create-image params))
 
 
 (defn create-image-edit
@@ -109,7 +111,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-image-edit params))
+  (core/response-for :openai :create-image-edit params))
 
 (defn create-image-variation
   "Creates a variation of a given image.
@@ -124,7 +126,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-image-variation params))
+  (core/response-for :openai :create-image-variation params))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -143,7 +145,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-embedding params))
+  (core/response-for  :openai :create-embedding params))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -161,7 +163,7 @@
   "
   {:doc/format :markdown}
   []
-  (core/response-for :list-files {}))
+  (core/response-for  :openai :list-files {}))
 
 (defn create-file
   "Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB.
@@ -175,7 +177,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-file params))
+  (core/response-for :openai :create-file params))
 
 (defn delete-file
   "Delete a file.
@@ -188,7 +190,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :delete-file params))
+  (core/response-for :openai :delete-file params))
 
 (defn retrieve-file
   "Returns information about a specific file.
@@ -201,7 +203,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :retrieve-file params))
+  (core/response-for :openai :retrieve-file params))
 
 (defn download-file
   "Returns the contents of the specified file
@@ -214,7 +216,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :download-file params))
+  (core/response-for :openai :download-file params))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -232,7 +234,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-fine-tune params))
+  (core/response-for :openai :create-fine-tune params))
 
 (defn list-fine-tunes
   "List your organization's fine-tuning jobs
@@ -245,7 +247,7 @@
   "
   {:doc/format :markdown}
   []
-  (core/response-for :list-fine-tunes {}))
+  (core/response-for :openai :list-fine-tunes {}))
 
 (defn retrieve-fine-tune
   "Gets info about the fine-tune job.
@@ -258,7 +260,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :retrieve-fine-tune params))
+  (core/response-for :openai :retrieve-fine-tune params))
 
 (defn cancel-fine-tune
   "Immediately cancel a fine-tune job.
@@ -271,7 +273,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :cancel-fine-tune params))
+  (core/response-for :openai :cancel-fine-tune params))
 
 
 (defn list-fine-tune-events
@@ -285,7 +287,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :list-fine-tune-events params))
+  (core/response-for  :openai :list-fine-tune-events params))
 
 (defn delete-model
   "Delete a fine-tuned model. You must have the Owner role in your organization.
@@ -298,7 +300,7 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :delete-model params))
+  (core/response-for :openai :delete-model params))
 
 
 
@@ -317,4 +319,4 @@
   "
   {:doc/format :markdown}
   [params]
-  (core/response-for :create-moderation params))
+  (core/response-for :openai :create-moderation params))
