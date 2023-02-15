@@ -1,9 +1,10 @@
 (ns wkok.openai-clojure.azure
   (:require
-     [clojure.java.io :as io]
-     [martian.clj-http :as martian-http]
-     [martian.core :as martian]
-     [cheshire.core :as json]))
+   [cheshire.core :as json]
+   [clojure.java.io :as io]
+   [clojure.set :as set]
+   [martian.clj-http :as martian-http]
+   [martian.core :as martian]))
 
 (def add-authentication-header
   {:name ::add-authentication-header
@@ -31,3 +32,11 @@
                                  :interceptors
 
                                  (fn [s] (concat [add-authentication-header] s)))))))
+
+(defn patch-params [operation params]
+  (case operation
+    {:api-version (:api-version params)
+     :deployment-id (:model params)
+     :martian.core/body (select-keys params (set/difference
+                                             (into #{} (keys params))
+                                             #{:api-version :model}))}))

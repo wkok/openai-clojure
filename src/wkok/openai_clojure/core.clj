@@ -6,12 +6,19 @@
 
 
 
+
+
 (defn response-for
   [implementation operation params]
-  (let [m (case implementation
+  (let [m
+        (case implementation
+          :openai @openai/m
+          :azure @azure/m)
 
-            :openai @openai/m
-            :azure @azure/m)]
+        patch-parms-fn
+        (case :openai openai/noop-patch-params
+              :azure azure/patch-params)]
 
-    (-> (martian/response-for m operation params)
+
+    (-> (martian/response-for m operation (patch-parms-fn operation params))
         :body)))
