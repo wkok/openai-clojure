@@ -48,6 +48,3 @@
     (martian/bootstrap-openapi base-url definition opts)))
 
 (def m (delay (bootstrap-openapi)))
-
-(defn noop-patch-params [_ params]
-  params)

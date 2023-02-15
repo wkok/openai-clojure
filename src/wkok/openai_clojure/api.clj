@@ -144,8 +144,11 @@
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
   "
   {:doc/format :markdown}
-  [params]
-  (core/response-for  :openai :create-embedding params))
+  ([implementation params]
+   (core/response-for implementation :create-embedding params))
+  ([params]
+   (core/response-for  :openai :create-embedding params)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

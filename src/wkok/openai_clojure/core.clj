@@ -5,9 +5,6 @@
    [wkok.openai-clojure.openai :as openai]))
 
 
-
-
-
 (defn response-for
   [implementation operation params]
   (let [m
@@ -16,9 +13,9 @@
           :azure @azure/m)
 
         patch-parms-fn
-        (case :openai openai/noop-patch-params
-              :azure azure/patch-params)]
+        (case :openai identity
+              :azure azure/patch-params)
+        patched-params (patch-parms-fn params)]
 
-
-    (-> (martian/response-for m operation (patch-parms-fn operation params))
+    (-> (martian/response-for m operation patched-params)
         :body)))
