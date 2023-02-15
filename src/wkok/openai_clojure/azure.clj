@@ -34,9 +34,9 @@
                                  (fn [s] (concat [add-authentication-header] s)))))))
 
 (defn patch-params [operation params]
-  (case operation
-    {:api-version (:api-version params)
+  (case operation :create-completion
+    {:api-version "2022-12-01"
      :deployment-id (:model params)
      :martian.core/body (select-keys params (set/difference
                                              (into #{} (keys params))
-                                             #{:api-version :model}))}))
+                                             #{:model}))}))

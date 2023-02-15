@@ -34,5 +34,5 @@
                          {:model "testtextdavanci003"
                           :prompt "How are you ?"
                           :max_tokens 100
-                          :temperature 0
-                          :api-version "2022-12-01"}))
+                          :temperature 0}))
+                          
