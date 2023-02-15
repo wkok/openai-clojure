@@ -3,6 +3,11 @@
 ![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
+and [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
+
+The API aims to hide the small differences between the 2 APIs, and allows theerfore to develop 
+tools and applications which can work with variants.
+
 
 ## Documentation
 
@@ -19,6 +24,11 @@ Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/int
 * [Files](https://platform.openai.com/docs/api-reference/files)
 * [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes)
 * [Moderations](https://platform.openai.com/docs/api-reference/moderations)
+
+Azure OpenAI supports only 2 of them:
+
+* Completion
+* Embeddings
 
 ## Configuration
 
@@ -40,15 +50,24 @@ net.clojars.wkok/openai-clojure {:mvn/version "0.1.14"}
 
 ## Authentication
 
-### API Key
+### OpenAI
+#### API Key
 
 Set the environment variable `OPENAI_API_KEY` to your OpenAI API key.
 
 An API key can be generated in your [OpenAI account](https://platform.openai.com/account/api-keys)
 
-### Organization
+#### Organization
 
 *Optional* - If your OpenAI account uses multiple organizations, set the environment variable `OPENAI_ORGANIZATION` to the one used for your app.
+
+### Azure OpenAI
+#### API access key
+Set the environment variable `AZURE_OPENAI_API_KEY` to your Azure OpenAI access key.
+
+#### API endpoint
+Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your Azure OpenAI endpoint.
+(example 'https://myendpoint.openai.azure.com')
 
 ## Quickstart
 
