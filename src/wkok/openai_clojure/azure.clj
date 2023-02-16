@@ -25,12 +25,14 @@
 
     (assoc m :handlers patched-handlers)))
 
+(defn load-openai-spec []
+  (json/decode (slurp (io/resource "azure_openai.json")) keyword))
 
 (def m
   (delay
     (patch-handler
      (martian/bootstrap-openapi (format "%s/openai" (System/getenv "AZURE_OPENAI_API_ENDPOINT"))
-                                (json/decode (slurp (io/resource "azure_openai.json")) keyword)
+                                (load-openai-spec)
                                 (update
                                  martian-http/default-opts
                                  :interceptors
