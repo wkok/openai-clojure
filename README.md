@@ -16,7 +16,7 @@ tools and applications which can work with both variants.
 
 ## Supported APIs
 
-### OpenAI
+### OpenAI v1
 
 * [Models](https://platform.openai.com/docs/api-reference/models)
 * [Completion](https://platform.openai.com/docs/api-reference/completions)
@@ -27,7 +27,7 @@ tools and applications which can work with both variants.
 * [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes)
 * [Moderations](https://platform.openai.com/docs/api-reference/moderations)
 
-### Azure
+### Azure OpenAI v2022-12-01
 * [Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
 * [Embeddings](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)
 
