@@ -2,8 +2,9 @@
   (:require
    [cheshire.core :as json]
    [clojure.java.io :as io]
-   [martian.clj-http :as martian-http]
-   [martian.core :as martian]))
+   [martian.hato :as martian-http]
+   [martian.core :as martian]
+   [wkok.openai-clojure.sse :as sse]))
 
 (def add-authentication-header
   {:name ::add-authentication-header
@@ -36,7 +37,8 @@
                                 (update
                                  martian-http/default-opts
                                  :interceptors
-                                 (fn [s] (concat [add-authentication-header] s)))))))
+                                 #(-> (remove (comp #{martian-http/perform-request}) %)
+                                      (concat [add-authentication-header sse/perform-sse-capable-request])))))))
 
 (defn patch-params [params]
   {:api-version "2022-12-01"

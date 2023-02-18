@@ -49,9 +49,9 @@
 
   For Azure OpenAI pass `:azure` for the `impl` argument
 
-  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
+  Streaming of token events is supported via the `:stream` param, see [Streaming Token Events](sse.html)
 
-  *Note - server-sent events (the `stream` param) is not yet supported*
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
   "
   {:doc/format :markdown}
   ([params]
