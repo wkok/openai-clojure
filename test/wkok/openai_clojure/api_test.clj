@@ -2,10 +2,14 @@
   (:require
    [clojure.java.io :as io]
    [clojure.test :refer [deftest is testing]]
-   [martian.clj-http :as martian-http]
+   [martian.hato :as martian-http]
    [wkok.openai-clojure.api :as api]
    [wkok.openai-clojure.azure :as azure]
-   [wkok.openai-clojure.openai :as openai]))
+   [wkok.openai-clojure.openai :as openai]
+   [wkok.openai-clojure.sse :as sse]
+   [clojure.core.async :as a]
+   [cheshire.core :as json]
+   [hato.client :as http]))
 
 (def openai-martian @openai/m)
 
@@ -21,7 +25,8 @@
   [m]
   (update m :interceptors
           (fn [interceptors]
-            (-> (remove (comp #{martian-http/perform-request})
+            (-> (remove (comp #{martian-http/perform-request
+                                sse/perform-sse-capable-request})
                         interceptors)
                 (concat [success-response])))))
 
@@ -121,3 +126,23 @@
 
        (is (= :success
               (api/create-moderation {:input "I want to kill them"}))))))
+
+(deftest stream-test
+
+  (testing "streamed event is returned in the correct format"
+
+    (let [event {:id "cmpl-6lfczGsgHJi6B2pAtN4e91frDXRuM",
+                 :object "text_completion",
+                 :created 1676819453,
+                 :choices
+                 [{:text "This", :index 0, :logprobs nil, :finish_reason nil}],
+                 :model "text-davinci-003"}
+          http-fn (fn [_] {:body (io/input-stream (.getBytes (str "data: " (json/generate-string event)  "\n\n")))})
+          events (with-redefs [http/request http-fn]
+                   (api/create-completion {:model "text-davinci-003"
+                                           :prompt "Say this is a test"
+                                           :max_tokens 7
+                                           :temperature 0
+                                           :stream true}))]
+
+      (is (= event (a/<!! events))))))

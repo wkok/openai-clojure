@@ -49,6 +49,10 @@ net.clojars.wkok/openai-clojure {:mvn/version "0.2.0"}
 [net.clojars.wkok/openai-clojure "0.2.0"]
 ```
 
+## Java
+
+Minimum Java 11 required
+
 ## Authentication
 
 ### OpenAI
