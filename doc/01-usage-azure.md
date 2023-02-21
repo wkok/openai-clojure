@@ -1,4 +1,4 @@
-# Introduction - Azure OpenAI
+# Usage - Azure OpenAI
 
 Clojure functions to drive the [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
 
@@ -30,7 +30,7 @@ Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your [Azure OpenAPI 
 
 ## Quickstart
 
-See the full [openai-clojure](wkok.openai-clojure.api.html) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -65,12 +65,12 @@ Result:
 
 ### Completions
 
-* [create-completion](wkok.openai-clojure.api.html#var-create-completion)
+* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
 
 ### Embeddings
 
-* [create-embedding](wkok.openai-clojure.api.html#var-create-embedding)
+* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api#create-embedding)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)

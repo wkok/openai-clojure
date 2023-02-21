@@ -1,4 +1,4 @@
-# Streaming Token Events
+# Streaming Tokens
 
 Completions support the streaming of partial progress via [server-sent events](https://platform.openai.com/docs/api-reference/completions/create#completions/create-stream) using the `:stream` parameter
 
@@ -10,7 +10,7 @@ Completions support the streaming of partial progress via [server-sent events](h
                     :stream true})
 ```
 
-## Reading streamed token events
+## Reading streamed tokens
 
 Reading streamed tokens can be done either by providing your own callback function, or by taking from the returned [core.async](https://clojure.org/guides/async_walkthrough#_getting_started) channel
 
@@ -50,7 +50,7 @@ Provide your callback function in the `:on-next` parameter for example
 
 ```
 
-## Example returned token event
+## Example returned token
 
 ```
 {:id "cmpl-6lf3JsE7hsWSikTfbiZ2NZOZKlBcG",

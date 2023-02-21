@@ -1,6 +1,6 @@
 # openai-clojure
 
-![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg)
+![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg) [![cljdoc badge](https://cljdoc.org/badge/metosin/malli)](https://cljdoc.org/d/metosin/malli)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 and [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
@@ -10,9 +10,10 @@ tools and applications which can work with both variants.
 
 ## Documentation
 
-* [Introduction - OpenAI](https://wkok.github.io/openai-clojure/intro.html)
-* [Introduction - Azure OpenAI](https://wkok.github.io/openai-clojure/intro-azure.html)
-* [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html)
+* [Usage - OpenAI](/doc/01-usage.md)
+* [Usage - Azure OpenAI](/doc/02-usage-azure.md)
+* [Streaming Tokens](/doc/03-streaming.md)
+* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api)
 
 ## Supported APIs
 
@@ -79,7 +80,7 @@ Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your Azure OpenAI en
 
 ## Quickstart
 
-See the full [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html) for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
