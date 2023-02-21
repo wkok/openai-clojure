@@ -1,6 +1,6 @@
 # openai-clojure
 
-![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg)
+![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg) [![cljdoc badge](https://cljdoc.org/badge/net.clojars.wkok/openai-clojure)](https://cljdoc.org/d/net.clojars.wkok/openai-clojure)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 and [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
@@ -10,26 +10,24 @@ tools and applications which can work with both variants.
 
 ## Documentation
 
-* [Introduction - OpenAI](https://wkok.github.io/openai-clojure/intro.html)
-* [Introduction - Azure OpenAI](https://wkok.github.io/openai-clojure/intro-azure.html)
-* [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html)
+* [Usage - OpenAI](/doc/01-usage-openai.md)
+* [Usage - Azure OpenAI](/doc/02-usage-azure.md)
+* [Streaming Tokens](/doc/03-streaming.md)
+* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.1/api/wkok.openai-clojure.api)
 
 ## Supported APIs
 
-### OpenAI v1
-
-* [Models](https://platform.openai.com/docs/api-reference/models)
-* [Completion](https://platform.openai.com/docs/api-reference/completions)
-* [Edits](https://platform.openai.com/docs/api-reference/edits)
-* [Images](https://platform.openai.com/docs/api-reference/images)
-* [Embeddings](https://platform.openai.com/docs/api-reference/embeddings)
-* [Files](https://platform.openai.com/docs/api-reference/files)
-* [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes)
-* [Moderations](https://platform.openai.com/docs/api-reference/moderations)
-
-### Azure OpenAI v2022-12-01
-* [Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
-* [Embeddings](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)
+|             | OpenAI | Azure OpenAI |
+| ----------- | :----: | :----------: |
+| Version     | v1     | v2022-12-01  |
+| [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
+| [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
+| [Models](https://platform.openai.com/docs/api-reference/models) | X | |
+| [Edits](https://platform.openai.com/docs/api-reference/edits) | X | |
+| [Images](https://platform.openai.com/docs/api-reference/images) | X | |
+| [Files](https://platform.openai.com/docs/api-reference/files) | X | |
+| [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
+| [Moderations](https://platform.openai.com/docs/api-reference/moderations) | X | |
 
 ## Configuration
 
@@ -40,13 +38,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.3.0"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.3.1"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.3.0"]
+[net.clojars.wkok/openai-clojure "0.3.1"]
 ```
 
 ## Java
@@ -79,7 +77,7 @@ Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your Azure OpenAI en
 
 ## Quickstart
 
-See the full [API Reference](https://wkok.github.io/openai-clojure/wkok.openai-clojure.api.html) for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.1/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -132,7 +130,7 @@ This library uses [Martian](https://github.com/oliyh/martian) - An HTTP abstract
 
 **This is an unofficial library, it is not affiliated with nor endorsed by OpenAI**
 
-[MIT License](https://github.com/wkok/re-frame-crux/blob/master/LICENSE)
+[MIT License](https://github.com/wkok/openai-clojure/blob/master/LICENSE)
 
 Copyright (c) 2023 Werner Kok
 

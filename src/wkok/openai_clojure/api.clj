@@ -14,7 +14,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/models/list)
   "
-  {:doc/format :markdown}
   []
   (core/response-for :openai :list-models {}))
 
@@ -27,7 +26,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/models/retrieve)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :retrieve-model params))
 
@@ -49,11 +47,10 @@
 
   For Azure OpenAI pass `:azure` for the `impl` argument
 
-  Streaming of token events is supported via the `:stream` param, see [Streaming Token Events](sse.html)
+  Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
   Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
   "
-  {:doc/format :markdown}
   ([params]
    (create-completion :openai params))
   ([impl params]
@@ -75,7 +72,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/edits/create)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-edit params))
 
@@ -96,7 +92,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-image params))
 
@@ -114,7 +109,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-image-edit params))
 
@@ -129,7 +123,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-image-variation params))
 
@@ -151,7 +144,6 @@
 
   Also see the [OpenAI](https://platform.openai.com/docs/api-reference/embeddings/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings) documentation
   "
-  {:doc/format :markdown}
   ([params]
    (create-embedding :openai params))
   ([impl params]
@@ -172,7 +164,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/list)
   "
-  {:doc/format :markdown}
   []
   (core/response-for :openai :list-files {}))
 
@@ -186,7 +177,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/upload)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-file params))
 
@@ -199,7 +189,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/delete)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :delete-file params))
 
@@ -212,7 +201,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/retrieve)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :retrieve-file params))
 
@@ -225,7 +213,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/retrieve-content)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :download-file params))
 
@@ -243,7 +230,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/create)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-fine-tune params))
 
@@ -256,7 +242,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/list)
   "
-  {:doc/format :markdown}
   []
   (core/response-for :openai :list-fine-tunes {}))
 
@@ -269,7 +254,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/retrieve)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :retrieve-fine-tune params))
 
@@ -282,7 +266,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/cancel)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :cancel-fine-tune params))
 
@@ -296,7 +279,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/events)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :list-fine-tune-events params))
 
@@ -309,7 +291,6 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/delete-model)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :delete-model params))
 
@@ -328,6 +309,5 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/moderations/create)
   "
-  {:doc/format :markdown}
   [params]
   (core/response-for :openai :create-moderation params))

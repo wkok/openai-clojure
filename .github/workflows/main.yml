@@ -37,11 +37,3 @@ jobs:
       run: clojure -T:build test
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-    - name: Docs
-      run: clojure -X:codox
-
-    - name: Deploy Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        FOLDER: target/doc

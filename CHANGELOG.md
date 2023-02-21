@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.3.1 - 2023-02-23
+### Supported API versions
+- OpenAI v1
+- Azure OpenAI 2022-12-01
+### Changes
+- Replace codox documentation generation with cljdoc
+- Change documentation hosting from github pages to cljdoc
+
 ## 0.3.0 - 2023-02-20
 ### Supported API versions
 - OpenAI v1
