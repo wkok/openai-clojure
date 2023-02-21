@@ -1,6 +1,6 @@
 # openai-clojure
 
-![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg) [![cljdoc badge](https://cljdoc.org/badge/wkok/openai-clojure)](https://cljdoc.org/d/wkok/openai-clojure)
+![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg) [![cljdoc badge](https://cljdoc.org/badge/net.clojars.wkok/openai-clojure)](https://cljdoc.org/d/net.clojars.wkok/openai-clojure)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 and [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
