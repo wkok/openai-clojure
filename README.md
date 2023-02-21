@@ -10,7 +10,7 @@ tools and applications which can work with both variants.
 
 ## Documentation
 
-* [Usage - OpenAI](/doc/01-usage.md)
+* [Usage - OpenAI](/doc/01-usage-openai.md)
 * [Usage - Azure OpenAI](/doc/02-usage-azure.md)
 * [Streaming Tokens](/doc/03-streaming.md)
 * [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.0/api/wkok.openai-clojure.api)
