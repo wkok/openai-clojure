@@ -17,10 +17,17 @@ tools and applications which can work with both variants.
 
 ## Supported APIs
 
-|            | OpenAI | Azure OpenAI |
-| ---------- | -------| -----------  |
-| Version    | v1     | v2022-12-01  |
-| Models     | X      |              |
+|             | OpenAI | Azure OpenAI |
+| ----------- | :----: | :----------: |
+| Version     | v1     | v2022-12-01  |
+| Completion  | X      | X            |
+| Embeddings  | X      | X            |
+| Models      | X      |              |
+| Edits       | X      |              |
+| Images      | X      |              |
+| Files       | X      |              |
+| Fine-tunes  | X      |              |
+| Moderations | X      |              |
 
 ### OpenAI v1
 
