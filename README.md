@@ -20,29 +20,14 @@ tools and applications which can work with both variants.
 |             | OpenAI | Azure OpenAI |
 | ----------- | :----: | :----------: |
 | Version     | v1     | v2022-12-01  |
-| Completion  | X      | X            |
-| Embeddings  | X      | X            |
-| Models      | X      |              |
-| Edits       | X      |              |
-| Images      | X      |              |
-| Files       | X      |              |
-| Fine-tunes  | X      |              |
-| Moderations | X      |              |
-
-### OpenAI v1
-
-* [Models](https://platform.openai.com/docs/api-reference/models)
-* [Completion](https://platform.openai.com/docs/api-reference/completions)
-* [Edits](https://platform.openai.com/docs/api-reference/edits)
-* [Images](https://platform.openai.com/docs/api-reference/images)
-* [Embeddings](https://platform.openai.com/docs/api-reference/embeddings)
-* [Files](https://platform.openai.com/docs/api-reference/files)
-* [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes)
-* [Moderations](https://platform.openai.com/docs/api-reference/moderations)
-
-### Azure OpenAI v2022-12-01
-* [Completion](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
-* [Embeddings](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)
+| [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
+| [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
+| [Models](https://platform.openai.com/docs/api-reference/models) | X | |
+| [Edits](https://platform.openai.com/docs/api-reference/edits) | X | |
+| [Images](https://platform.openai.com/docs/api-reference/images) | X | |
+| [Files](https://platform.openai.com/docs/api-reference/files) | X | |
+| [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
+| [Moderations](https://platform.openai.com/docs/api-reference/moderations) | X | |
 
 ## Configuration
 
