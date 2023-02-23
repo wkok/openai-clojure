@@ -1,6 +1,6 @@
 # openai-clojure
 
-![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg) [![cljdoc badge](https://cljdoc.org/badge/net.clojars.wkok/openai-clojure)](https://cljdoc.org/d/net.clojars.wkok/openai-clojure)
+![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
 and [Azure OpenAI API](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
@@ -9,6 +9,8 @@ This library aims to hide the small differences between the 2 APIs, and allows t
 tools and applications which can work with both variants.
 
 ## Documentation
+
+[![cljdoc badge](https://cljdoc.org/badge/net.clojars.wkok/openai-clojure)](https://cljdoc.org/d/net.clojars.wkok/openai-clojure)
 
 * [Usage - OpenAI](/doc/01-usage-openai.md)
 * [Usage - Azure OpenAI](/doc/02-usage-azure.md)
