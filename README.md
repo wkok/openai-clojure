@@ -21,7 +21,7 @@ tools and applications which can work with both variants.
 
 |             | OpenAI | Azure OpenAI |
 | ----------- | :----: | :----------: |
-| Version     | v1     | v2022-12-01  |
+| Version     | v1.1.0 | v2022-12-01  |
 | [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
 | [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
 | [Models](https://platform.openai.com/docs/api-reference/models) | X | |
