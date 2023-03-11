@@ -70,7 +70,7 @@
 
   Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
-  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/chat/create) documentation
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create)
   "
   ([params]
    (core/response-for :openai :create-chat-completion params)))
@@ -181,7 +181,7 @@
   (create-transcription {:file (clojure.java.io/file \"path/to/audio.mp3\")
                          :model \"whisper-1\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/transcriptions)
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
   "
   [params]
   (core/response-for :openai :create-transcription params))
@@ -194,7 +194,7 @@
   (create-translation {:file (clojure.java.io/file \"path/to/file/german.m4a\")
                        :model \"whisper-1\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/translations)
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
   "
   [params]
   (core/response-for :openai :create-translation params))
