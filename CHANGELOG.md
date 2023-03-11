@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.4.0 - 2023-03-11
+### Supported API versions
+- OpenAI v1.2.0
+- Azure OpenAI 2022-12-01
+### Changes
+- Add support for Chat API
+- Add support for Audio API
+
 ## 0.3.1 - 2023-02-23
 ### Supported API versions
 - OpenAI v1.1.0

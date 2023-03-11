@@ -61,6 +61,13 @@
                                              :temperature 0})))
 
        (is (= :success
+              (api/create-chat-completion {:model "gpt-3.5-turbo"
+                                           :messages [{:role "system" :content "You are a helpful assistant."}
+                                                      {:role "user" :content "Who won the world series in 2020?"}
+                                                      {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                                      {:role "user" :content "Where was it played?"}]})))
+
+       (is (= :success
               (api/create-edit {:model "text-davinci-edit-001"
                                 :input "What day of the wek is it?"
                                 :instruction "Fix the spelling mistakes"})))
@@ -89,6 +96,14 @@
        (is (= :success
               (api/create-embedding :azure {:model "text-embedding-ada-002"
                                             :input "The food was delicious and the waiter..."})))
+
+       (is (= :success
+              (api/create-transcription {:file (io/file "path/to/audio.mp3")
+                                         :model "whisper-1"})))
+
+       (is (= :success
+              (api/create-translation {:file (io/file "path/to/file/german.m4a")
+                                       :model "whisper-1"})))
 
        (is (= :success
               (api/list-files)))
@@ -129,7 +144,25 @@
 
 (deftest stream-test
 
-  (testing "streamed event is returned in the correct format"
+  (testing "streamed event is returned in the correct format for chat"
+
+    (let [event {:id "chatcmpl-6srv5jx3p4I9deNDzU7ucNXKoGS0L"
+                 :object "chat.completion.chunk"
+                 :created 1678534999
+                 :model "gpt-3.5-turbo-0301"
+                 :choices [{:delta {:content "The"} :index 0, :finish_reason nil}]}
+          http-fn (fn [_] {:body (io/input-stream (.getBytes (str "data: " (json/generate-string event)  "\n\n")))})
+          events (with-redefs [http/request http-fn]
+                   (api/create-chat-completion {:model "gpt-3.5-turbo"
+                                                :messages [{:role "system" :content "You are a helpful assistant."}
+                                                           {:role "user" :content "Who won the world series in 2020?"}
+                                                           {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                                           {:role "user" :content "Where was it played?"}]
+                                                :stream true}))]
+
+      (is (= event (a/<!! events)))))
+
+  (testing "streamed event is returned in the correct format for completions"
 
     (let [event {:id "cmpl-6lfczGsgHJi6B2pAtN4e91frDXRuM",
                  :object "text_completion",

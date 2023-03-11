@@ -56,6 +56,25 @@
   ([impl params]
    (core/response-for impl :create-completion params)))
 
+(defn create-chat-completion
+  "Creates a completion for the chat message
+
+  Example:
+  ```
+  (create-chat-completion {:model \"gpt-3.5-turbo\"
+                           :messages [{:role \"system\" :content \"You are a helpful assistant.\"}
+                                      {:role \"user\" :content \"Who won the world series in 2020?\"}
+                                      {:role \"assistant\" :content \"The Los Angeles Dodgers won the World Series in 2020.\"}
+                                      {:role \"user\" :content \"Where was it played?\"}]})
+  ```
+
+  Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/chat/create) documentation
+  "
+  ([params]
+   (core/response-for :openai :create-chat-completion params)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Edit
@@ -149,6 +168,36 @@
   ([impl params]
    (core/response-for impl :create-embedding params)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Audio
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn create-transcription
+  "Transcribes audio into the input language.
+
+  Example:
+  ```
+  (create-transcription {:file (clojure.java.io/file \"path/to/audio.mp3\")
+                         :model \"whisper-1\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/transcriptions)
+  "
+  [params]
+  (core/response-for :openai :create-transcription params))
+
+(defn create-translation
+  "Translates audio into English.
+
+  Example:
+  ```
+  (create-translation {:file (clojure.java.io/file \"path/to/file/german.m4a\")
+                       :model \"whisper-1\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/translations)
+  "
+  [params]
+  (core/response-for :openai :create-translation params))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
