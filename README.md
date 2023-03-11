@@ -15,13 +15,15 @@ tools and applications which can work with both variants.
 * [Usage - OpenAI](/doc/01-usage-openai.md)
 * [Usage - Azure OpenAI](/doc/02-usage-azure.md)
 * [Streaming Tokens](/doc/03-streaming.md)
-* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.1/api/wkok.openai-clojure.api)
+* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.4.0/api/wkok.openai-clojure.api)
 
 ## Supported APIs
 
 |             | OpenAI | Azure OpenAI |
 | ----------- | :----: | :----------: |
-| Version     | v1.1.0 | v2022-12-01  |
+| Version     | v1.2.0 | v2022-12-01  |
+| [Chat](https://platform.openai.com/docs/api-reference/chat) | X | |
+| [Audio](https://platform.openai.com/docs/api-reference/audio) | X | |
 | [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
 | [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
 | [Models](https://platform.openai.com/docs/api-reference/models) | X | |
@@ -40,13 +42,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.3.1"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.4.0"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.3.1"]
+[net.clojars.wkok/openai-clojure "0.4.0"]
 ```
 
 ## Java
@@ -69,17 +71,11 @@ An API key can be generated in your [OpenAI account](https://platform.openai.com
 
 ### Azure OpenAI
 
-#### API Key
-
-Set the environment variable `AZURE_OPENAI_API_KEY` to your Azure OpenAI key.
-
-#### API endpoint
-
-Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your Azure OpenAI endpoint, example: *https://myendpoint.openai.azure.com*
+See: [Authentication - Azure OpenAI](/doc/02-usage-azure.md#authentication)
 
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.3.1/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.4.0/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -87,37 +83,30 @@ Require the `api` namespace
 (:require [wkok.openai-clojure.api :as api])
 ```
 
-A simple completion prompt for OpenAI could be:
+A simple chat conversation with OpenAI's ChatGPT could be:
 
 ```
-(api/create-completion {:model "text-davinci-003"
-                        :prompt "Say this is a test"
-                        :max_tokens 7
-                        :temperature 0})
+(api/create-chat-completion {:model "gpt-3.5-turbo"
+                             :messages [{:role "system" :content "You are a helpful assistant."}
+                                        {:role "user" :content "Who won the world series in 2020?"}
+                                        {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                        {:role "user" :content "Where was it played?"}]})
 ```
-
-or for Azure OpenAI:
-
-```
-(api/create-completion :azure {:model "text-davinci-003"
-                               :prompt "Say this is a test"
-                               :max_tokens 7
-                               :temperature 0})
-```
-
 
 Result:
 ```
-{:id "cmpl-6jY1xInJeGGpzUgsZtkuxDsf5DdBa",
- :object "text_completion",
- :created 1676313593,
- :model "text-davinci-003",
+{:id "chatcmpl-6srOKLabYTpTRwRUQxjkcBxw3uf1H",
+ :object "chat.completion",
+ :created 1678532968,
+ :model "gpt-3.5-turbo-0301",
+ :usage {:prompt_tokens 56, :completion_tokens 19, :total_tokens 75},
  :choices
- [{:text "\n\nThis is indeed a test",
-   :index 0,
-   :logprobs nil,
-   :finish_reason "length"}],
- :usage {:prompt_tokens 5, :completion_tokens 7, :total_tokens 12}}
+ [{:message
+   {:role "assistant",
+    :content
+    "The 2020 World Series was played at Globe Life Field in Arlington, Texas."},
+   :finish_reason "stop",
+   :index 0}]}
 ```
 
 ## Issues and features

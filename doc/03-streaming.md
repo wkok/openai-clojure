@@ -1,13 +1,14 @@
 # Streaming Tokens
 
-Completions support the streaming of partial progress via [server-sent events](https://platform.openai.com/docs/api-reference/completions/create#completions/create-stream) using the `:stream` parameter
+[Chat](https://platform.openai.com/docs/api-reference/chat/create#chat/create-stream) and [Completions](https://platform.openai.com/docs/api-reference/completions/create#completions/create-stream) support the streaming of partial progress via server-sent events using the `:stream` parameter
 
 ```
-(create-completion {:model "text-davinci-003"
-                    :prompt "Say this is a test"
-                    :max_tokens 7
-                    :temperature 0
-                    :stream true})
+(api/create-chat-completion {:model "gpt-3.5-turbo"
+                             :messages [{:role "system" :content "You are a helpful assistant."}
+                                        {:role "user" :content "Who won the world series in 2020?"}
+                                        {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                        {:role "user" :content "Where was it played?"}]
+                             :stream true})
 ```
 
 ## Reading streamed tokens
@@ -19,12 +20,13 @@ Reading streamed tokens can be done either by providing your own callback functi
 Provide your callback function in the `:on-next` parameter for example
 
 ```
-(create-completion {:model "text-davinci-003"
-                    :prompt "Say this is a test"
-                    :max_tokens 7
-                    :temperature 0
-                    :stream true
-                    :on-next #(prn %)})
+(api/create-chat-completion {:model "gpt-3.5-turbo"
+                             :messages [{:role "system" :content "You are a helpful assistant."}
+                                        {:role "user" :content "Who won the world series in 2020?"}
+                                        {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                        {:role "user" :content "Where was it played?"}]
+                             :stream true
+                             :on-next #(prn %)})
 ```
 
 ### Option 2 - core.async channel
@@ -32,11 +34,12 @@ Provide your callback function in the `:on-next` parameter for example
 ```
   (require '[clojure.core.async :as a])
 
-  (def events (create-completion {:model "text-davinci-003"
-                                  :prompt "Say this is a test"
-                                  :max_tokens 7
-                                  :temperature 0
-                                  :stream true}))
+  (def events (api/create-chat-completion {:model "gpt-3.5-turbo"
+                                           :messages [{:role "system" :content "You are a helpful assistant."}
+                                                      {:role "user" :content "Who won the world series in 2020?"}
+                                                      {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                                      {:role "user" :content "Where was it played?"}]
+                                           :stream true}))
 
   (a/go
     (loop []
@@ -53,10 +56,9 @@ Provide your callback function in the `:on-next` parameter for example
 ## Example returned token
 
 ```
-{:id "cmpl-6lf3JsE7hsWSikTfbiZ2NZOZKlBcG",
- :object "text_completion",
- :created 1676817241,
- :choices
- [{:text "This", :index 0, :logprobs nil, :finish_reason "length"}],
- :model "text-davinci-003"}
+{:id "chatcmpl-6srv5jx3p4I9deNDzU7ucNXKoGS0L"
+   :object "chat.completion.chunk"
+   :created 1678534999
+   :model "gpt-3.5-turbo-0301"
+   :choices [{:delta {:content "The"} :index 0, :finish_reason nil}]}
 ```
