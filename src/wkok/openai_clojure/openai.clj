@@ -10,8 +10,10 @@
 (def add-headers
   {:name ::add-headers
    :enter (fn [ctx]
-            (let [api-key (System/getenv "OPENAI_API_KEY")
-                  organization (System/getenv "OPENAI_ORGANIZATION")]
+            (let [api-key (or (-> ctx :params :wkok.openai-clojure.core/options :api-key)
+                              (System/getenv "OPENAI_API_KEY"))
+                  organization (or (-> ctx :params :wkok.openai-clojure.core/options :organization)
+                                   (System/getenv "OPENAI_ORGANIZATION"))]
               (update-in ctx [:request :headers]
                          (fn [headers]
                            (cond-> headers

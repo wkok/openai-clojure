@@ -14,8 +14,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/models/list)
   "
-  []
-  (core/response-for :openai :list-models {}))
+  ([]
+   (list-models nil))
+  ([options]
+   (core/response-for :list-models {} options)))
 
 (defn retrieve-model
   "Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
@@ -26,8 +28,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/models/retrieve)
   "
-  [params]
-  (core/response-for :openai :retrieve-model params))
+  ([params]
+   (retrieve-model params nil))
+  ([params options]
+   (core/response-for :retrieve-model params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,16 +49,16 @@
                       :temperature 0})
   ```
 
-  For Azure OpenAI pass `:azure` for the `impl` argument
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
 
   Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
   Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
   "
   ([params]
-   (create-completion :openai params))
-  ([impl params]
-   (core/response-for impl :create-completion params)))
+   (create-completion params nil))
+  ([params options]
+   (core/response-for :create-completion params options)))
 
 (defn create-chat-completion
   "Creates a completion for the chat message
@@ -73,7 +77,9 @@
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create)
   "
   ([params]
-   (core/response-for :openai :create-chat-completion params)))
+   (create-chat-completion params nil))
+  ([params options]
+   (core/response-for :create-chat-completion params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -91,8 +97,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/edits/create)
   "
-  [params]
-  (core/response-for :openai :create-edit params))
+  ([params]
+   (create-edit params nil))
+  ([params options]
+   (core/response-for :create-edit params options)))
 
 
 
@@ -111,8 +119,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create)
   "
-  [params]
-  (core/response-for :openai :create-image params))
+  ([params]
+   (create-image params nil))
+  ([params options]
+   (core/response-for :create-image params options)))
 
 
 (defn create-image-edit
@@ -128,8 +138,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
   "
-  [params]
-  (core/response-for :openai :create-image-edit params))
+  ([params]
+   (create-image-edit params nil))
+  ([params options]
+   (core/response-for :create-image-edit params options)))
 
 (defn create-image-variation
   "Creates a variation of a given image.
@@ -142,8 +154,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
   "
-  [params]
-  (core/response-for :openai :create-image-variation params))
+  ([params]
+   (create-image-variation params nil))
+  ([params options]
+   (core/response-for :create-image-variation params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -159,14 +173,17 @@
                      :input \"The food was delicious and the waiter...\"})
   ```
 
-  For Azure OpenAI pass `:azure` for the `impl` argument
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
 
   Also see the [OpenAI](https://platform.openai.com/docs/api-reference/embeddings/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings) documentation
   "
   ([params]
-   (create-embedding :openai params))
-  ([impl params]
-   (core/response-for impl :create-embedding params)))
+   (create-embedding params nil))
+  ([params options]
+   (let [opt (if (keyword? options)
+               {:impl options} ;; backwards compatibility for when 2nd arg was impl
+               options)]
+     (core/response-for :create-embedding params opt))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,8 +200,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
   "
-  [params]
-  (core/response-for :openai :create-transcription params))
+  ([params]
+   (create-transcription params nil))
+  ([params options]
+   (core/response-for :create-transcription params options)))
 
 (defn create-translation
   "Translates audio into English.
@@ -196,8 +215,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
   "
-  [params]
-  (core/response-for :openai :create-translation params))
+  ([params]
+   (create-translation params nil))
+  ([params options]
+   (core/response-for :create-translation params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -213,8 +234,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/list)
   "
-  []
-  (core/response-for :openai :list-files {}))
+  ([]
+   (list-files nil))
+  ([options]
+   (core/response-for :list-files {} options)))
 
 (defn create-file
   "Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB.
@@ -226,8 +249,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/upload)
   "
-  [params]
-  (core/response-for :openai :create-file params))
+  ([params]
+   (create-file params nil))
+  ([params options]
+   (core/response-for :create-file params options)))
 
 (defn delete-file
   "Delete a file.
@@ -238,8 +263,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/delete)
   "
-  [params]
-  (core/response-for :openai :delete-file params))
+  ([params]
+   (delete-file params nil))
+  ([params options]
+   (core/response-for :delete-file params options)))
 
 (defn retrieve-file
   "Returns information about a specific file.
@@ -250,8 +277,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/retrieve)
   "
-  [params]
-  (core/response-for :openai :retrieve-file params))
+  ([params]
+   (retrieve-file params nil))
+  ([params options]
+   (core/response-for :retrieve-file params options)))
 
 (defn download-file
   "Returns the contents of the specified file
@@ -262,8 +291,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files/retrieve-content)
   "
-  [params]
-  (core/response-for :openai :download-file params))
+  ([params]
+   (download-file params nil))
+  ([params options]
+   (core/response-for :download-file params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -279,8 +310,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/create)
   "
-  [params]
-  (core/response-for :openai :create-fine-tune params))
+  ([params]
+   (create-fine-tune params nil))
+  ([params options]
+   (core/response-for :create-fine-tune params options)))
 
 (defn list-fine-tunes
   "List your organization's fine-tuning jobs
@@ -291,8 +324,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/list)
   "
-  []
-  (core/response-for :openai :list-fine-tunes {}))
+  ([]
+   (list-fine-tunes nil))
+  ([options]
+   (core/response-for :list-fine-tunes {} options)))
 
 (defn retrieve-fine-tune
   "Gets info about the fine-tune job.
@@ -303,8 +338,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/retrieve)
   "
-  [params]
-  (core/response-for :openai :retrieve-fine-tune params))
+  ([params]
+   (retrieve-fine-tune params nil))
+  ([params options]
+   (core/response-for :retrieve-fine-tune params options)))
 
 (defn cancel-fine-tune
   "Immediately cancel a fine-tune job.
@@ -315,8 +352,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/cancel)
   "
-  [params]
-  (core/response-for :openai :cancel-fine-tune params))
+  ([params]
+   (cancel-fine-tune params nil))
+  ([params options]
+   (core/response-for :cancel-fine-tune params options)))
 
 
 (defn list-fine-tune-events
@@ -328,8 +367,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/events)
   "
-  [params]
-  (core/response-for :openai :list-fine-tune-events params))
+  ([params]
+   (list-fine-tune-events params nil))
+  ([params options]
+   (core/response-for :list-fine-tune-events params options)))
 
 (defn delete-model
   "Delete a fine-tuned model. You must have the Owner role in your organization.
@@ -340,8 +381,10 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/delete-model)
   "
-  [params]
-  (core/response-for :openai :delete-model params))
+  ([params]
+   (delete-model params nil))
+  ([params options]
+   (core/response-for :delete-model params options)))
 
 
 
@@ -358,5 +401,7 @@
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/moderations/create)
   "
-  [params]
-  (core/response-for :openai :create-moderation params))
+  ([params]
+   (create-moderation params nil))
+  ([params options]
+   (core/response-for :create-moderation params options)))

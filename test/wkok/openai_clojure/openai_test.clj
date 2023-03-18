@@ -31,3 +31,14 @@
         (let [prompt (find-multipart request "prompt")]
           (is (= "A cute baby sea otter wearing a beret"
                  (:content prompt))))))))
+
+(deftest add-headers-init
+  (let [add-headers-fn (-> openai/add-headers :enter)]
+    (testing "atoms get initialized correctly"
+
+      (is (= {"Authorization" "Bearer my-secret-key",
+              "OpenAI-Organization" "my-company"}
+             (-> (add-headers-fn {:params {:wkok.openai-clojure.core/options {:api-key "my-secret-key"
+                                                                              :organization "my-company"}}})
+                 :request
+                 :headers))))))

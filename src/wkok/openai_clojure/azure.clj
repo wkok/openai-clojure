@@ -9,8 +9,10 @@
 (def add-authentication-header
   {:name ::add-authentication-header
    :enter (fn [ctx]
-            (assoc-in ctx [:request :headers "api-key"]
-                      (System/getenv "AZURE_OPENAI_API_KEY")))})
+            (let [api-key (or (-> ctx :params :wkok.openai-clojure.core/options :api-key)
+                              (System/getenv "AZURE_OPENAI_API_KEY"))]
+              (assoc-in ctx [:request :headers "api-key"]
+                        api-key)))})
 
 
 (defn patch-handler [m]

@@ -31,3 +31,12 @@
                 :deployment-id (:model params)
                 :martian.core/body (dissoc params :model)}
                (azure/patch-params params)))))))
+
+(deftest add-headers-init
+  (let [add-headers-fn (-> azure/add-authentication-header :enter)]
+    (testing "atoms get initialized correctly"
+
+      (is (= {"api-key" "my-secret-key"}
+             (-> (add-headers-fn {:params {:wkok.openai-clojure.core/options {:api-key "my-secret-key"}}})
+                 :request
+                 :headers))))))
