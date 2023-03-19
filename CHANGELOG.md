@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.5.0 - 2023-03-19
+### Supported API versions
+- OpenAI v1.2.0
+- Azure OpenAI 2022-12-01
+### Changes
+- Support passing `:api-key` and `:impl` as options to api functions
+- Deprecate support for passing `:impl` as 2nd argument, while remaining backward compatible.
+
 ## 0.4.0 - 2023-03-11
 ### Supported API versions
 - OpenAI v1.2.0

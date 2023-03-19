@@ -61,6 +61,13 @@
                                              :temperature 0})))
 
        (is (= :success
+              (api/create-completion  {:model "text-davinci-003"
+                                       :prompt "Say this is a test"
+                                       :max_tokens 7
+                                       :temperature 0}
+                                      {:impl :azure})))
+
+       (is (= :success
               (api/create-chat-completion {:model "gpt-3.5-turbo"
                                            :messages [{:role "system" :content "You are a helpful assistant."}
                                                       {:role "user" :content "Who won the world series in 2020?"}
@@ -96,6 +103,11 @@
        (is (= :success
               (api/create-embedding :azure {:model "text-embedding-ada-002"
                                             :input "The food was delicious and the waiter..."})))
+
+       (is (= :success
+              (api/create-embedding  {:model "text-embedding-ada-002"
+                                      :input "The food was delicious and the waiter..."}
+                                     {:impl :azure})))
 
        (is (= :success
               (api/create-transcription {:file (io/file "path/to/audio.mp3")

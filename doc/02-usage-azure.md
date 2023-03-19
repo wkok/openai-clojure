@@ -9,28 +9,41 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.4.0"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.5.0"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.4.0"]
+[net.clojars.wkok/openai-clojure "0.5.0"]
 ```
 
 ## Authentication
+
+### API Key
 
 Set the environment variable `AZURE_OPENAI_API_KEY` to your Azure OpenAI API key.
 
 An API key can be retrieved from your [Azure account](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/quickstart?pivots=programming-language-python#retrieve-key-and-endpoint)
 
-## Endpoint
+### Endpoint
 
 Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your [Azure OpenAPI endpoint](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/quickstart?pivots=programming-language-python#retrieve-key-and-endpoint), example: *https://myendpoint.openai.azure.com*
 
+### Options
+
+Alternatively the `api-key` can be passed in the `options` argument of each api function
+
+```
+(api/create-completion {:model "text-davinci-003"
+                        :prompt "Say this is a test"}
+                       {:api-key "xxxxx"
+                        :impl :azure})
+```
+
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.4.0/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -41,10 +54,11 @@ Require the `api` namespace
 A simple completion prompt could be:
 
 ```
-(api/create-completion :azure {:model "text-davinci-003"
-                               :prompt "Say this is a test"
-                               :max_tokens 7
-                               :temperature 0})
+(api/create-completion {:model "text-davinci-003"
+                        :prompt "Say this is a test"
+                        :max_tokens 7
+                        :temperature 0}
+                       {:impl :azure})
 ```
 
 Result:
@@ -65,12 +79,12 @@ Result:
 
 ### Completions
 
-* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.4.0/api/wkok.openai-clojure.api#create-completion)
+* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
 
 ### Embeddings
 
-* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.4.0/api/wkok.openai-clojure.api#create-embedding)
+* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api#create-embedding)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)
