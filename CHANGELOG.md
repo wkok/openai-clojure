@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.5.1 - 2023-04-15
+### Supported API versions
+- OpenAI v1.2.0
+- Azure OpenAI 2022-12-01
+### Changes
+- Fix content-type warnings printed to console on first invocation
+
 ## 0.5.0 - 2023-03-19
 ### Supported API versions
 - OpenAI v1.2.0

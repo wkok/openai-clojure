@@ -1,15 +1,16 @@
 (ns wkok.openai-clojure.api-test
   (:require
+   [cheshire.core :as json]
+   [clojure.core.async :as a]
    [clojure.java.io :as io]
    [clojure.test :refer [deftest is testing]]
+   [hato.client :as http]
+   [martian.core :as martian]
    [martian.hato :as martian-http]
    [wkok.openai-clojure.api :as api]
    [wkok.openai-clojure.azure :as azure]
    [wkok.openai-clojure.openai :as openai]
-   [wkok.openai-clojure.sse :as sse]
-   [clojure.core.async :as a]
-   [cheshire.core :as json]
-   [hato.client :as http]))
+   [wkok.openai-clojure.sse :as sse]))
 
 (def openai-martian @openai/m)
 
@@ -191,3 +192,10 @@
                                            :stream true}))]
 
       (is (= event (a/<!! events))))))
+
+(deftest multipart-test
+  (let [multipart (-> (martian/request-for @openai/m :create-transcription {:file (io/file "path/to/audio.mp3")
+                                                                            :model "whisper-1"})
+                      :multipart)]
+    (is (some #(#{"file"} (:name %)) multipart))
+    (is (some #(#{"model"} (:name %)) multipart))))

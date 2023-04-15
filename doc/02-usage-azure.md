@@ -9,13 +9,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.5.0"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.5.1"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.5.0"]
+[net.clojars.wkok/openai-clojure "0.5.1"]
 ```
 
 ## Authentication
@@ -43,7 +43,7 @@ Alternatively the `api-key` can be passed in the `options` argument of each api 
 
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.1/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -79,12 +79,12 @@ Result:
 
 ### Completions
 
-* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api#create-completion)
+* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.1/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
 
 ### Embeddings
 
-* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.0/api/wkok.openai-clojure.api#create-embedding)
+* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.1/api/wkok.openai-clojure.api#create-embedding)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)

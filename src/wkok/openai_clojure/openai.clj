@@ -5,7 +5,10 @@
      [martian.core :as martian]
      [martian.openapi :as openapi]
      [martian.yaml :as yaml]
-     [wkok.openai-clojure.sse :as sse]))
+     [wkok.openai-clojure.sse :as sse]
+     [martian.encoders :as encoders]
+     [martian.interceptors :as interceptors]
+     [schema.core :as s]))
 
 (def add-headers
   {:name ::add-headers
@@ -37,18 +40,42 @@
   {:name ::multipart-form-data
    :enter (fn [{:keys [handler params] :as ctx}]
             (if (multipart-form-data? handler)
-              (assoc-in ctx [:request :multipart]
-                        (map param->multipart-entry params))
+              (-> (assoc-in ctx [:request :multipart]
+                            (map param->multipart-entry params))
+                  (update-in [:request :headers] dissoc "Content-Type")
+                  (update :request dissoc :body))
               ctx))})
+
+(defn update-file-schema
+  [m operation-id field-name]
+  (martian/update-handler m operation-id assoc-in [:body-schema :body field-name] java.io.File))
+
+(defn update-file-schemas
+  [m]
+  (-> m
+      (update-file-schema :create-transcription :file)
+      (update-file-schema :create-translation :file)
+      (update-file-schema :create-file :file)
+      (update-file-schema :create-image-edit :image)
+      (update-file-schema :create-image-edit (schema.core/optional-key :mask))
+      (update-file-schema :create-image-variation :image)))
 
 (defn bootstrap-openapi
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
   (let [definition (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
         base-url (openapi/base-url nil nil definition)
+        encoders (assoc (encoders/default-encoders)
+                        "multipart/form-data" nil)
         opts (update martian-http/default-opts
-                     :interceptors #(-> (remove (comp #{martian-http/perform-request}) %)
-                                        (concat [add-headers multipart-form-data sse/perform-sse-capable-request])))]
-    (martian/bootstrap-openapi base-url definition opts)))
+                     :interceptors (fn [interceptors]
+                                     (-> (remove #(#{:martian.hato/perform-request} (:name %))
+                                                 interceptors)
+                                         (concat [add-headers
+                                                  (interceptors/encode-body encoders)
+                                                  multipart-form-data
+                                                  sse/perform-sse-capable-request]))))]
+    (-> (martian/bootstrap-openapi base-url definition opts)
+        update-file-schemas)))
 
 (def m (delay (bootstrap-openapi)))
