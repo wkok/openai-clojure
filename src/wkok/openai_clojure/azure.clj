@@ -25,16 +25,20 @@
                                idx (s/index-of url "/openai")]
                            (str endpoint (subs url idx))))))})
 
-(defn patch-handler [m]
-  ;; patching works for API version "2022-12-01"
+(defn patch-handler
+  "Patching azure's handlers to support the same operation-id names as the standard openai api"
+  [m]
   (let [patched-completions-create-handler (->  (martian/handler-for  m :completions-create)
                                                 (assoc :route-name :create-completion))
+        patched-chat-completions-create-handler (->  (martian/handler-for  m :chat-completions-create)
+                                                (assoc :route-name :create-chat-completion))
         patched-embeddings-create-handler (->  (martian/handler-for  m :embeddings-create)
                                                (assoc :route-name :create-embedding))
 
 
         patched-handlers [patched-completions-create-handler
-                          patched-embeddings-create-handler]]
+                          patched-embeddings-create-handler
+                          patched-chat-completions-create-handler]]
 
     (assoc m :handlers patched-handlers)))
 
@@ -53,6 +57,6 @@
                                       (concat [add-authentication-header override-api-endpoint sse/perform-sse-capable-request])))))))
 
 (defn patch-params [params]
-  {:api-version "2022-12-01"
+  {:api-version "2023-05-15"
    :deployment-id (:model params)
    :martian.core/body (dissoc params :model)})
