@@ -5,7 +5,8 @@
 - OpenAI v1.2.0
 - Azure OpenAI v2023-05-15
 ### Changes
-- Fix content-type warnings printed to console on first invocation
+- Add support for Azure Chat Completions api
+- Support passing the Azure `:api-endpoint` in `options` of each api function
 
 ## 0.5.1 - 2023-04-15
 ### Supported API versions
