@@ -72,9 +72,11 @@
                                       {:role \"user\" :content \"Where was it played?\"}]})
   ```
 
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
+
   Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create)
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#chat-completions) documentation
   "
   ([params]
    (create-chat-completion params nil))

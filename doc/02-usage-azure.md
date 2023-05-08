@@ -51,28 +51,31 @@ Require the `api` namespace
 (:require [wkok.openai-clojure.api :as api])
 ```
 
-A simple completion prompt could be:
+A simple chat conversation with ChatGPT could be:
 
 ```
-(api/create-completion {:model "text-davinci-003"
-                        :prompt "Say this is a test"
-                        :max_tokens 7
-                        :temperature 0}
-                       {:impl :azure})
+(api/create-chat-completion {:model "gpt-35-turbo"
+                             :messages [{:role "system" :content "You are a helpful assistant."}
+                                        {:role "user" :content "Who won the world series in 2020?"}
+                                        {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                        {:role "user" :content "Where was it played?"}]}
+                            {:impl :azure})
 ```
 
 Result:
 ```
-{:id "cmpl-6jY1xInJeGGpzUgsZtkuxDsf5DdBa",
- :object "text_completion",
- :created 1676313593,
- :model "text-davinci-003",
+{:id "chatcmpl-6srOKLabYTpTRwRUQxjkcBxw3uf1H",
+ :object "chat.completion",
+ :created 1678532968,
+ :model "gpt-35-turbo-0301",
+ :usage {:prompt_tokens 56, :completion_tokens 19, :total_tokens 75},
  :choices
- [{:text "\n\nThis is indeed a test",
-   :index 0,
-   :logprobs nil,
-   :finish_reason "length"}],
- :usage {:prompt_tokens 5, :completion_tokens 7, :total_tokens 12}}
+ [{:message
+   {:role "assistant",
+    :content
+    "The 2020 World Series was played at Globe Life Field in Arlington, Texas."},
+   :finish_reason "stop",
+   :index 0}]}
 ```
 
 ## Supported Azure OpenAI APIs
@@ -82,6 +85,12 @@ Result:
 * [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.1/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
+
+### Chat
+
+* [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.5.1/api/wkok.openai-clojure.api#create-chat-completion)
+
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#chat-completions)
 
 ### Embeddings
 
