@@ -2,8 +2,9 @@
   (:require
    [cheshire.core :as json]
    [clojure.java.io :as io]
-   [martian.hato :as martian-http]
+   [clojure.string :as s]
    [martian.core :as martian]
+   [martian.hato :as martian-http]
    [wkok.openai-clojure.sse :as sse]))
 
 (def add-authentication-header
@@ -14,6 +15,15 @@
               (assoc-in ctx [:request :headers "api-key"]
                         api-key)))})
 
+(def override-api-endpoint
+  {:name ::override-api-endpoint
+   :enter (fn [ctx]
+            (update-in ctx [:request :url]
+                       (fn [url]
+                         (let [endpoint (or (-> ctx :params :wkok.openai-clojure.core/options :api-endpoint)
+                                            (System/getenv "AZURE_OPENAI_API_ENDPOINT"))
+                               idx (s/index-of url "/openai")]
+                           (str endpoint (subs url idx))))))})
 
 (defn patch-handler [m]
   ;; patching works for API version "2022-12-01"
@@ -34,13 +44,13 @@
 (def m
   (delay
     (patch-handler
-     (martian/bootstrap-openapi (format "%s/openai" (System/getenv "AZURE_OPENAI_API_ENDPOINT"))
+     (martian/bootstrap-openapi "/openai"
                                 (load-openai-spec)
                                 (update
                                  martian-http/default-opts
                                  :interceptors
                                  #(-> (remove (comp #{martian-http/perform-request}) %)
-                                      (concat [add-authentication-header sse/perform-sse-capable-request])))))))
+                                      (concat [add-authentication-header override-api-endpoint sse/perform-sse-capable-request])))))))
 
 (defn patch-params [params]
   {:api-version "2022-12-01"

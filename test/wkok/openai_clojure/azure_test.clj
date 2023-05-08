@@ -40,3 +40,18 @@
              (-> (add-headers-fn {:params {:wkok.openai-clojure.core/options {:api-key "my-secret-key"}}})
                  :request
                  :headers))))))
+
+(deftest override-api-endpoint-test
+  (let [override-api-endpoint-fn (-> azure/override-api-endpoint :enter)]
+    (testing "api endpoint gets correctly overridden"
+
+      (let [api-endpoint "https://myendpoint.openai.azure.com"
+            path "/openai/some/chat/prompt"
+            test-fn (fn [url]
+                      (is (= (str api-endpoint path)
+                             (-> (override-api-endpoint-fn {:request {:url url}
+                                                            :params {:wkok.openai-clojure.core/options {:api-endpoint api-endpoint}}})
+                                 :request
+                                 :url))))]
+        (test-fn "/openai/some/chat/prompt")
+        (test-fn "https://www.some-other-endpoint.com/openai/some/chat/prompt")))))
