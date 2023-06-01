@@ -1,5 +1,6 @@
 # openai-clojure (Unofficial)
 
+[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.wkok/openai-clojure.svg)](https://clojars.org/net.clojars.wkok/openai-clojure)
 ![CI](https://github.com/wkok/openai-clojure/workflows/CI/badge.svg)
 
 Clojure functions to drive the [OpenAI API](https://platform.openai.com/docs/introduction)
