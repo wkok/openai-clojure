@@ -44,24 +44,26 @@
         buffer-size (calc-buffer-size params)
         events (a/chan (a/sliding-buffer buffer-size) (map parse-event))]
     (a/thread
-      (loop [data nil]
-        (let [byte-array (byte-array (max 1 (.available event-stream)))
-              bytes-read (.read event-stream byte-array)]
+      (loop [byte-coll []]
+        (let [byte-arr (byte-array (max 1 (.available event-stream)))
+              bytes-read (.read event-stream byte-arr)]
 
           (if (neg? bytes-read)
 
             ;; Input stream closed, exiting read-loop
             (.close event-stream)
 
-            (let [data (str data (slurp byte-array))]
+            (let [next-byte-coll (concat byte-coll (seq byte-arr))
+                  data (slurp (byte-array next-byte-coll))]
               (if-let [es (not-empty (re-seq event-mask data))]
                 (if (every? true? (map #(a/>!! events %) es))
-                  (recur (string/replace data event-mask ""))
+                  (recur (drop (apply + (map #(count (.getBytes %)) es))
+                               next-byte-coll))
 
                   ;; Output stream closed, exiting read-loop
                   (.close event-stream))
 
-                (recur data)))))))
+                (recur next-byte-coll)))))))
     events))
 
 (defn sse-request
