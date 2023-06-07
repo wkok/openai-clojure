@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.6.1 - 2023-06-07
+### Supported API versions
+- OpenAI v1.2.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Fixed issue with multibyte characters when streaming events [PR21](https://github.com/wkok/openai-clojure/pull/21)
+
 ## 0.6.0 - 2023-05-08
 ### Supported API versions
 - OpenAI v1.2.0
