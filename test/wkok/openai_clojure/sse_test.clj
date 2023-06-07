@@ -33,4 +33,17 @@
             (is (= (first test-data)
                    (a/<!! events)))
             (is (= (second test-data)
+                   (a/<!! events))))))))
+
+  (testing "support multibytes"
+    (let [test-data [{:text "こんにちは"} {:text "你好"}]
+          test-events (generate-events test-data)]
+      (with-open [output-stream (PipedOutputStream.)
+                  input-stream (PipedInputStream. output-stream)]
+        (with-redefs [http/request (constantly {:body input-stream})]
+          (let [events (sse/sse-events {})]
+            (stream-string output-stream test-events)
+            (is (= (first test-data)
+                   (a/<!! events)))
+            (is (= (second test-data)
                    (a/<!! events)))))))))
