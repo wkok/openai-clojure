@@ -1,0 +1,12 @@
+{:paths ["script"]
+ :deps {}
+ :tasks
+ {test   {:doc "Run tests"
+          :task (shell "clojure -T:build test")
+          :depends []}
+  build  {:doc "Build the jar"
+          :task (shell "clojure -T:build ci")
+          :depends []}
+  deploy {:doc "Deploy to clojars"
+          :task (shell "clojure -T:build deploy")
+          :depends []}}}
