@@ -76,7 +76,7 @@
                                                       {:role "user" :content "Where was it played?"}]})))
 
        (is (= :success
-              (api/qcreate-chat-completion {:model    "gpt-3.5-turbo-0613"
+              (api/create-chat-completion {:model    "gpt-3.5-turbo-0613"
                                            :messages [{:role    "user"
                                                        :content "Wikipedia page about foxes"}]
                                            :functions
