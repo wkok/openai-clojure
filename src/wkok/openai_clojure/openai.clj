@@ -1,14 +1,14 @@
 (ns ^:no-doc wkok.openai-clojure.openai
   (:require
-     [clojure.java.io :as io]
-     [martian.hato :as martian-http]
-     [martian.core :as martian]
-     [martian.openapi :as openapi]
-     [martian.yaml :as yaml]
-     [wkok.openai-clojure.sse :as sse]
-     [martian.encoders :as encoders]
-     [martian.interceptors :as interceptors]
-     [schema.core :as s]))
+   [clojure.java.io :as io]
+   [cheshire.core :as json]
+   [martian.hato :as martian-http]
+   [martian.core :as martian]
+   [martian.openapi :as openapi]
+   [wkok.openai-clojure.sse :as sse]
+   [martian.encoders :as encoders]
+   [martian.interceptors :as interceptors]
+   [schema.core :as s]))
 
 (def add-headers
   {:name ::add-headers
@@ -63,7 +63,7 @@
 (defn bootstrap-openapi
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
-  (let [definition (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
+  (let [definition (json/decode (slurp (io/resource "openapi.json")) keyword)
         base-url (openapi/base-url nil nil definition)
         encoders (assoc (encoders/default-encoders)
                         "multipart/form-data" nil)
