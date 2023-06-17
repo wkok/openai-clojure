@@ -76,6 +76,20 @@
                                                       {:role "user" :content "Where was it played?"}]})))
 
        (is (= :success
+              (api/create-chat-completion {:model    "gpt-3.5-turbo-0613"
+                                           :messages [{:role    "user"
+                                                       :content "Wikipedia page about foxes"}]
+                                           :functions
+                                           [{:name        "get_current_weather"
+                                             :description "Get the current weather in a given location"
+                                             :parameters
+                                             {:type       "object"
+                                              :properties {:location {:type        "string"
+                                                                      :description "The city and state, e.g. San Francisco, CA"}
+                                                           :unit     {:type "string"
+                                                                      :enum ["celsius" "fahrenheit"]}}}}]})))
+
+       (is (= :success
               (api/create-chat-completion {:model "gpt-3.5-turbo"
                                            :messages [{:role "system" :content "You are a helpful assistant."}
                                                       {:role "user" :content "Who won the world series in 2020?"}

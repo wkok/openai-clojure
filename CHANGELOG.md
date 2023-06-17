@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.7.0 - 2023-06-17
+### Supported API versions
+- OpenAI v1.3.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Added support for OpenAI API v1.3.0 which includes functions
+
 ## 0.6.1 - 2023-06-07
 ### Supported API versions
 - OpenAI v1.2.0
