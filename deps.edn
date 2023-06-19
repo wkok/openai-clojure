@@ -1,7 +1,8 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
-        com.github.oliyh/martian {:mvn/version "0.1.22"}
-        com.github.oliyh/martian-hato {:mvn/version "0.1.22"}
+        com.github.oliyh/martian {:mvn/version "0.1.23"}
+        com.github.oliyh/martian-hato {:mvn/version "0.1.23"}
+        com.github.oliyh/martian-cljs-http {:mvn/version "0.1.23"}
         org.clojure/core.async {:mvn/version "1.6.673"}}
  :aliases
  {:build {:deps {io.github.seancorfield/build-clj

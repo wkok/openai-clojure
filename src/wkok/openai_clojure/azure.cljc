@@ -1,17 +1,19 @@
 (ns ^:no-doc wkok.openai-clojure.azure
   (:require
-   [cheshire.core :as json]
-   [clojure.java.io :as io]
+   #?(:clj [cheshire.core :as json])
+   #?(:clj [clojure.java.io :as io])
    [clojure.string :as s]
    [martian.core :as martian]
-   [martian.hato :as martian-http]
+   #?(:clj [martian.hato :as martian-http])
+   #?(:cljs [martian.cljs-http :as martian-http])
    [wkok.openai-clojure.sse :as sse]))
 
 (def add-authentication-header
   {:name ::add-authentication-header
    :enter (fn [ctx]
             (let [api-key (or (-> ctx :params :wkok.openai-clojure.core/options :api-key)
-                              (System/getenv "AZURE_OPENAI_API_KEY"))]
+                              #?(:clj (System/getenv "AZURE_OPENAI_API_KEY")
+                                 :cljs ""))]
               (assoc-in ctx [:request :headers "api-key"]
                         api-key)))})
 
@@ -21,7 +23,8 @@
             (update-in ctx [:request :url]
                        (fn [url]
                          (let [endpoint (or (-> ctx :params :wkok.openai-clojure.core/options :api-endpoint)
-                                            (System/getenv "AZURE_OPENAI_API_ENDPOINT"))
+                                            #?(:clj (System/getenv "AZURE_OPENAI_API_ENDPOINT")
+                                               :cljs ""))
                                idx (s/index-of url "/openai")]
                            (str endpoint (subs url idx))))))})
 
@@ -43,7 +46,8 @@
     (assoc m :handlers patched-handlers)))
 
 (defn load-openai-spec []
-  (json/decode (slurp (io/resource "azure_openai.json")) keyword))
+  #?(:clj (json/decode (slurp (io/resource "azure_openai.json")) keyword)
+     :cljs (js/fetch "openai-clojure/azure_openai.json")))
 
 (def m
   (delay

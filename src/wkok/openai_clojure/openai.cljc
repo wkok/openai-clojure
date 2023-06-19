@@ -1,22 +1,29 @@
 (ns ^:no-doc wkok.openai-clojure.openai
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [wkok.openai-clojure.macros :refer [inline-resource-yaml]])
   (:require
-   [clojure.java.io :as io]
-   [cheshire.core :as json]
-   [martian.hato :as martian-http]
+   #?(:clj [clojure.java.io :as io])
+   #?(:clj [cheshire.core :as json])
+   #?(:clj [martian.hato :as martian-http])
+   #?(:clj [martian.yaml :as yaml])
+   #?(:cljs [martian.cljs-http :as martian-http])
    [martian.core :as martian]
    [martian.openapi :as openapi]
    [wkok.openai-clojure.sse :as sse]
    [martian.encoders :as encoders]
    [martian.interceptors :as interceptors]
-   [schema.core :as s]))
+   [schema.core :as s]
+   [cljs.core.async :refer [<!]]))
 
 (def add-headers
   {:name ::add-headers
    :enter (fn [ctx]
             (let [api-key (or (-> ctx :params :wkok.openai-clojure.core/options :api-key)
-                              (System/getenv "OPENAI_API_KEY"))
+                              #?(:clj (System/getenv "OPENAI_API_KEY")
+                                 :cljs ""))
                   organization (or (-> ctx :params :wkok.openai-clojure.core/options :organization)
-                                   (System/getenv "OPENAI_ORGANIZATION"))]
+                                   #?(:clj (System/getenv "OPENAI_ORGANIZATION")
+                                      :cljs ""))]
               (update-in ctx [:request :headers]
                          (fn [headers]
                            (cond-> headers
@@ -30,11 +37,12 @@
 (defn- param->multipart-entry
   [[param content]]
   {:name (name param)
-   :content (if (or (instance? java.io.File content)
-                    (instance? java.io.InputStream content)
-                    (bytes? content))
-              content
-              (str content))})
+   :content #?(:clj (if (or (instance? java.io.File content)
+                            (instance? java.io.InputStream content)
+                            (bytes? content))
+                      content
+                      (str content))
+               :cljs (str content))})
 
 (def multipart-form-data
   {:name ::multipart-form-data
@@ -48,7 +56,7 @@
 
 (defn update-file-schema
   [m operation-id field-name]
-  (martian/update-handler m operation-id assoc-in [:body-schema :body field-name] java.io.File))
+  (martian/update-handler m operation-id assoc-in [:body-schema :body field-name] #?(:clj java.io.File)))
 
 (defn update-file-schemas
   [m]
@@ -63,8 +71,10 @@
 (defn bootstrap-openapi
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
-  (let [definition (json/decode (slurp (io/resource "openapi.json")) keyword)
-        base-url (openapi/base-url nil nil definition)
+  (let [definition #?(:clj (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
+                      :cljs (inline-resource-yaml "openapi.yaml"))
+        base-url #?(:clj (openapi/base-url nil nil definition)
+                    :cljs "")
         encoders (assoc (encoders/default-encoders)
                         "multipart/form-data" nil)
         opts (update martian-http/default-opts
