@@ -1,10 +1,11 @@
 # Change Log
 
-## 0.8.0 - 2023-06-21
+## 0.8.0 - 2023-06-22
 ### Supported API versions
 - OpenAI v2.0.0
 - Azure OpenAI v2023-05-15
 ### Changes
+- Fixed issue with spec validation failing when spec instrumentation is enabled [Issue 25](https://github.com/wkok/openai-clojure/issues/25)
 - Added support for OpenAI API v2.0.0 which mainly removed unused & deprecated operations
 
 ## 0.7.0 - 2023-06-17
