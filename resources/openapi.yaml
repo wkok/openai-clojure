@@ -33,7 +33,6 @@ paths:
         name: Create chat completion
         group: chat
         path: create
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/chat/completions \
@@ -117,6 +116,7 @@ paths:
         name: Create completion
         group: completions
         path: create
+        legacy: true
         examples:
           curl: |
             curl https://api.openai.com/v1/completions \
@@ -185,6 +185,7 @@ paths:
   /edits:
     post:
       operationId: createEdit
+      deprecated: true
       tags:
         - OpenAI
       summary: Creates a new edit for the provided input, instruction, and parameters.
@@ -281,7 +282,6 @@ paths:
         name: Create image
         group: images
         path: create
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/generations \
@@ -354,7 +354,6 @@ paths:
         name: Create image edit
         group: images
         path: create-edit
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/edits \
@@ -383,8 +382,8 @@ paths:
             const openai = new OpenAIApi(configuration);
             const response = await openai.createImageEdit(
               fs.createReadStream("otter.png"),
-              fs.createReadStream("mask.png"),
               "A cute baby sea otter wearing a beret",
+              fs.createReadStream("mask.png"),
               2,
               "1024x1024"
             );
@@ -424,7 +423,6 @@ paths:
         name: Create image variation
         group: images
         path: create-variation
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/variations \
@@ -565,7 +563,6 @@ paths:
         name: Create transcription
         group: audio
         path: create
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/audio/transcriptions \
@@ -622,7 +619,6 @@ paths:
         name: Create translation
         group: audio
         path: create
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/audio/translations \
@@ -1543,29 +1539,37 @@ paths:
           }
         response: |
           {
-            "id": "modr-5MWoLO",
-            "model": "text-moderation-001",
+            "id": "modr-XXXXX",
+            "model": "text-moderation-005",
             "results": [
               {
+                "flagged": true,
                 "categories": {
-                  "hate": false,
-                  "hate/threatening": true,
-                  "self-harm": false,
                   "sexual": false,
+                  "hate": false,
+                  "harassment": false,
+                  "self-harm": false,
                   "sexual/minors": false,
+                  "hate/threatening": false,
+                  "violence/graphic": false,
+                  "self-harm/intent": false,
+                  "self-harm/instructions": false,
+                  "harassment/threatening": true,
                   "violence": true,
-                  "violence/graphic": false
                 },
                 "category_scores": {
-                  "hate": 0.22714105248451233,
-                  "hate/threatening": 0.4132447838783264,
-                  "self-harm": 0.005232391878962517,
-                  "sexual": 0.01407341007143259,
-                  "sexual/minors": 0.0038522258400917053,
-                  "violence": 0.9223177433013916,
-                  "violence/graphic": 0.036865197122097015
-                },
-                "flagged": true
+                  "sexual": 1.2282071e-06,
+                  "hate": 0.010696256,
+                  "harassment": 0.29842457,
+                  "self-harm": 1.5236925e-08,
+                  "sexual/minors": 5.7246268e-08,
+                  "hate/threatening": 0.0060676364,
+                  "violence/graphic": 4.435014e-06,
+                  "self-harm/intent": 8.098441e-10,
+                  "self-harm/instructions": 2.8498655e-11,
+                  "harassment/threatening": 0.63055265,
+                  "violence": 0.99011886,
+                }
               }
             ]
           }
@@ -1634,10 +1638,11 @@ components:
         model:
           description: &model_description |
             ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["text-davinci-003","text-davinci-002","text-davinci-001","code-davinci-002","text-curie-001","text-babbage-001","text-ada-001"]
+          x-oaiTypeLabel: string
         prompt:
           description: &completions_prompt_description |
             The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
@@ -1793,6 +1798,8 @@ components:
           x-oaiTypeLabel: map
           default: null
           nullable: true
+          additionalProperties:
+            type: integer
           description: &completions_logit_bias_description |
             Modify the likelihood of specified tokens appearing in the completion.
 
@@ -1849,6 +1856,8 @@ components:
                     type: array
                     items:
                       type: object
+                      additionalProperties:
+                        type: integer
                   text_offset:
                     type: array
                     items:
@@ -1885,7 +1894,8 @@ components:
           description: The role of the messages author. One of `system`, `user`, `assistant`, or `function`.
         content:
           type: string
-          description: The contents of the message. `content` is required for all messages except assistant messages with function calls.
+          nullable: true
+          description: The contents of the message. `content` is required for all messages, and may be null for assistant messages with function calls.
         name:
           type: string
           description: The name of the author of this message. `name` is required if role is `function`, and it should be the name of the function whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of 64 characters.
@@ -1899,13 +1909,16 @@ components:
             arguments:
               type: string
               description: The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+          required:
+            - name
+            - arguments
       required:
         - role
+        - content
 
     ChatCompletionFunctionParameters:
       type: object
-      description: The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/gpt/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
-      # TODO type this as json schema
+      description: "The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/gpt/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.\n\nTo describe a function that accepts no parameters, provide the value `{\"type\": \"object\", \"properties\": {}}`."
       additionalProperties: true
 
     ChatCompletionFunctions:
@@ -1916,10 +1929,11 @@ components:
           description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
         description:
           type: string
-          description: The description of what the function does.
+          description: A description of what the function does, used by the model to choose when and how to call the function.
         parameters: {}
       required:
         - name
+        - parameters
 
     ChatCompletionResponseMessage:
       type: object
@@ -1973,10 +1987,11 @@ components:
         model:
           description: ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
           example: "gpt-3.5-turbo"
-          oneOf:
+          anyOf:
             - type: string
             - type: string
-              enum: ["gpt-4","gpt-4-0613","gpt-4-32k","gpt-4-32k-0613","gpt-3.5-turbo","gpt-3.5-turbo-16k","gpt-3.5-turbo-0613","gpt-3.5-turbo-16k-0613"]
+              enum: ["gpt-4","gpt-4-0314","gpt-4-0613","gpt-4-32k","gpt-4-32k-0314","gpt-4-32k-0613","gpt-3.5-turbo","gpt-3.5-turbo-16k","gpt-3.5-turbo-0301","gpt-3.5-turbo-0613","gpt-3.5-turbo-16k-0613"]
+          x-oaiTypeLabel: string
         messages:
           description: A list of messages comprising the conversation so far. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
           type: array
@@ -2070,6 +2085,8 @@ components:
           x-oaiTypeLabel: map
           default: null
           nullable: true
+          additionalProperties:
+            type: integer
           description: |
             Modify the likelihood of specified tokens appearing in the completion.
 
@@ -2094,6 +2111,10 @@ components:
           type: array
           items:
             type: object
+            required:
+              - index
+              - message
+              - finish_reason
             properties:
               index:
                 type: integer
@@ -2137,6 +2158,10 @@ components:
           type: array
           items:
             type: object
+            required:
+              - index
+              - delta
+              - finish_reason
             properties:
               index:
                 type: integer
@@ -2145,6 +2170,7 @@ components:
               finish_reason:
                 type: string
                 enum: ["stop", "length", "function_call"]
+                nullable: true
       required:
         - id
         - object
@@ -2157,12 +2183,12 @@ components:
       properties:
         model:
           description: ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
-          type: string
           example: "text-davinci-edit-001"
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["text-davinci-edit-001","code-davinci-edit-001"]
+          x-oaiTypeLabel: string
         input:
           description:
             The input text to use as a starting point for the edit.
@@ -2215,31 +2241,15 @@ components:
           type: array
           items:
             type: object
+            required:
+              - text
+              - index
+              - finish_reason
             properties:
               text:
                 type: string
               index:
                 type: integer
-              logprobs:
-                type: object
-                nullable: true
-                properties:
-                  tokens:
-                    type: array
-                    items:
-                      type: string
-                  token_logprobs:
-                    type: array
-                    items:
-                      type: number
-                  top_logprobs:
-                    type: array
-                    items:
-                      type: object
-                  text_offset:
-                    type: array
-                    items:
-                      type: integer
               finish_reason:
                 type: string
                 enum: ["stop", "length"]
@@ -2371,10 +2381,11 @@ components:
           nullable: false
           default: "text-moderation-latest"
           example: "text-moderation-stable"
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["text-moderation-latest","text-moderation-stable"]
+          x-oaiTypeLabel: string
       required:
         - input
 
@@ -2542,10 +2553,11 @@ components:
           default: "curie"
           example: "curie"
           nullable: true
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["ada","babbage","curie","davinci"]
+          x-oaiTypeLabel: string
         n_epochs:
           description: |
             The number of epochs to train the model for. An epoch refers to one
@@ -2684,10 +2696,11 @@ components:
         model:
           description: *model_description
           example: "text-embedding-ada-002"
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["text-embedding-ada-002"]
+          x-oaiTypeLabel: string
         input:
           description: |
             Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed the max input tokens for the model (8191 tokens for `text-embedding-ada-002`). [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb) for counting tokens.
@@ -2773,10 +2786,11 @@ components:
           description: |
             ID of the model to use. Only `whisper-1` is currently available.
           example: whisper-1
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["whisper-1"]
+          x-oaiTypeLabel: string
         prompt:
           description: |
             An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
@@ -2785,6 +2799,12 @@ components:
           description: |
             The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
           type: string
+          enum:
+            - json
+            - text
+            - srt
+            - verbose_json
+            - vtt
           default: json
         temperature:
           description: |
@@ -2822,10 +2842,11 @@ components:
           description: |
             ID of the model to use. Only `whisper-1` is currently available.
           example: whisper-1
-          oneOf:
+          anyOf:
             - type: string
             - type: string
               enum: ["whisper-1"]
+          x-oaiTypeLabel: string
         prompt:
           description: |
             An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
@@ -2888,7 +2909,7 @@ components:
         status:
           type: string
         status_details:
-          type: object
+          type: string
           nullable: true
       required:
         - id
@@ -2920,6 +2941,26 @@ components:
           type: string
         hyperparams:
           type: object
+          properties:
+            n_epochs:
+              type: integer
+            batch_size:
+              type: integer
+            prompt_loss_weight:
+              type: number
+            learning_rate_multiplier:
+              type: number
+            compute_classification_metrics:
+              type: boolean
+            classification_positive_class:
+              type: string
+            classification_n_classes:
+              type: integer
+          required:
+            - n_epochs
+            - batch_size
+            - prompt_loss_weight
+            - learning_rate_multiplier
         training_files:
           type: array
           items:
@@ -2980,11 +3021,7 @@ x-oaiMeta:
     - id: completions
       title: Completions
       description: |
-        Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.
-    - id: edits
-      title: Edits
-      description: |
-        Given a prompt and an instruction, the model will return an edited version of the prompt.
+        Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position. Note: We recommend most users use our Chat Completions API. [Learn more](/docs/deprecations/2023-07-06-gpt-and-embeddings)
     - id: images
       title: Images
       description: |
@@ -3019,3 +3056,7 @@ x-oaiMeta:
         Given a input text, outputs if the model classifies it as violating OpenAI's content policy.
 
         Related guide: [Moderations](/docs/guides/moderation)
+    - id: edits
+      title: Edits
+      description: |
+        Given a prompt and an instruction, the model will return an edited version of the prompt.

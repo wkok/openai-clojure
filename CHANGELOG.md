@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.9.0 - 2023-07-26
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Updated to the latest OpenAI API v2.0.0 spec patches which includes allowing the content field nullable when function calling. Fixes [Issue 30](https://github.com/wkok/openai-clojure/issues/30)
+
 ## 0.8.0 - 2023-06-22
 ### Supported API versions
 - OpenAI v2.0.0
