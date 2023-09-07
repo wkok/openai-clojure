@@ -42,3 +42,18 @@
                                                                               :organization "my-company"}}})
                  :request
                  :headers))))))
+
+(deftest override-api-endpoint-test
+  (let [base-url "https://api.openai.com/v2"
+        override-api-endpoint-fn (-> base-url openai/override-api-endpoint :enter)]
+    (testing "api endpoint gets correctly overridden"
+
+      (let [api-endpoint "https://myendpoint.my-openai.com/v2"
+            path "/some/chat/prompt"
+            test-fn (fn [url]
+                      (is (= (str api-endpoint path)
+                             (-> (override-api-endpoint-fn {:request {:url url}
+                                                            :params {:wkok.openai-clojure.core/options {:api-endpoint api-endpoint}}})
+                                 :request
+                                 :url))))]
+        (test-fn (str base-url "/some/chat/prompt"))))))
