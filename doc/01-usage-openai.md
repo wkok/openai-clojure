@@ -30,15 +30,20 @@ An API key can be generated in your [OpenAI account](https://platform.openai.com
 
 *Optional* - If your OpenAI account uses multiple organizations, set the environment variable `OPENAI_ORGANIZATION` to the one used for your app.
 
+### Endpoint
+
+It is not necessary to specify the endpoint url if using the default OpenAI service. If you do need to point to a different endpoint set the environment variable `OPENAI_API_ENDPOINT` for example: *https://myendpoint.my-openai.com*
+
 ### Options
 
-Alternatively the `api-key` and/or `organization` can be passed in the `options` argument of each api function
+Alternatively the `api-key` and/or `organization` and/or `api-endpoint` can be passed in the `options` argument of each api function
 
 ```
 (api/create-completion {:model "text-davinci-003"
                         :prompt "Say this is a test"}
                        {:api-key "xxxxx"
-                        :organization "abcd"})
+                        :organization "abcd"
+                        :api-endpoint "https://myendpoint.my-openai.com"})
 ```
 
 ## Quickstart
