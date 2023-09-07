@@ -8,7 +8,8 @@
      [wkok.openai-clojure.sse :as sse]
      [martian.encoders :as encoders]
      [martian.interceptors :as interceptors]
-     [schema.core :as s]))
+     [schema.core :as s]
+     [clojure.string :as string]))
 
 (def add-headers
   {:name ::add-headers
@@ -22,6 +23,17 @@
                            (cond-> headers
                              (not-empty api-key) (assoc "Authorization" (str "Bearer " api-key))
                              (not-empty organization) (assoc "OpenAI-Organization" organization))))))})
+
+(defn override-api-endpoint
+  [base-url]
+  {:name ::override-api-endpoint
+   :enter (fn [ctx]
+            (update-in ctx [:request :url]
+                       (fn [url]
+                         (let [endpoint (or (-> ctx :params :wkok.openai-clojure.core/options :api-endpoint)
+                                            (System/getenv "OPENAI_API_ENDPOINT")
+                                            base-url)]
+                           (str endpoint (subs url (count base-url)))))))})
 
 (defn- multipart-form-data?
   [handler]
@@ -72,6 +84,7 @@
                                      (-> (remove #(#{:martian.hato/perform-request} (:name %))
                                                  interceptors)
                                          (concat [add-headers
+                                                  (override-api-endpoint base-url)
                                                   (interceptors/encode-body encoders)
                                                   multipart-form-data
                                                   sse/perform-sse-capable-request]))))]
