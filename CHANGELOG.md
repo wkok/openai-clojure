@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.10.0 - 2023-09-07
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Added ability to override the OpenAI `:api-endpoint` either in `options` or as ENV variable `OPENAI_API_ENDPOINT`
+
 ## 0.9.0 - 2023-07-26
 ### Supported API versions
 - OpenAI v2.0.0
