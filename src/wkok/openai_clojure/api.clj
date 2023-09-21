@@ -300,11 +300,11 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fine tune
+;; Fine tune (deprecated)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn create-fine-tune
-  "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+(defn ^:deprecated create-fine-tune
+  "(Deprecated) Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
 
   Example:
   ```
@@ -317,8 +317,8 @@
   ([params options]
    (core/response-for :create-fine-tune params options)))
 
-(defn list-fine-tunes
-  "List your organization's fine-tuning jobs
+(defn ^:deprecated list-fine-tunes
+  "(Deprecated) List your organization's fine-tuning jobs
 
   Example:
   ```
@@ -331,8 +331,8 @@
   ([options]
    (core/response-for :list-fine-tunes {} options)))
 
-(defn retrieve-fine-tune
-  "Gets info about the fine-tune job.
+(defn ^:deprecated retrieve-fine-tune
+  "(Deprecated) Gets info about the fine-tune job.
 
   Example:
   ```
@@ -345,8 +345,8 @@
   ([params options]
    (core/response-for :retrieve-fine-tune params options)))
 
-(defn cancel-fine-tune
-  "Immediately cancel a fine-tune job.
+(defn ^:deprecated cancel-fine-tune
+  "(Deprecated) Immediately cancel a fine-tune job.
 
   Example:
   ```
@@ -360,8 +360,8 @@
    (core/response-for :cancel-fine-tune params options)))
 
 
-(defn list-fine-tune-events
-  "Get fine-grained status updates for a fine-tune job.
+(defn ^:deprecated list-fine-tune-events
+  "(Deprecated) Get fine-grained status updates for a fine-tune job.
 
   Example:
   ```
@@ -373,6 +373,81 @@
    (list-fine-tune-events params nil))
   ([params options]
    (core/response-for :list-fine-tune-events params options)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fine tuning (replaces Fine-tunes API)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn create-fine-tuning-job
+  "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+
+  Example:
+  ```
+  (create-fine-tuning-job {:training_file \"file-xuhfiwuefb\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/create)
+  "
+  ([params]
+   (create-fine-tuning-job params nil))
+  ([params options]
+   (core/response-for :create-fine-tuning-job params options)))
+
+(defn list-fine-tuning-jobs
+  "List your organization's fine-tuning jobs
+
+  Example:
+  ```
+  (list-fine-tuning-jobs)
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/list)
+  "
+  ([]
+   (list-fine-tuning-jobs nil))
+  ([options]
+   (core/response-for :list-fine-tuning-jobs {} options)))
+
+(defn retrieve-fine-tuning-job
+  "Gets info about a fine-tuning job.
+
+  Example:
+  ```
+  (retrieve-fine-tuning-job {:fine_tuning_job_id \"ft-1wefweub\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/retrieve)
+  "
+  ([params]
+   (retrieve-fine-tuning-job params nil))
+  ([params options]
+   (core/response-for :retrieve-fine-tuning-job params options)))
+
+(defn cancel-fine-tuning-job
+  "Immediately cancel a fine-tuning job.
+
+  Example:
+  ```
+  (cancel-fine-tuning-job {:fine_tuning_job_id \"ft-1wefweub\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/cancel)
+  "
+  ([params]
+   (cancel-fine-tuning-job params nil))
+  ([params options]
+   (core/response-for :cancel-fine-tuning-job params options)))
+
+(defn list-fine-tuning-job-events
+  "Get status updates for a fine-tuning job.
+
+  Example:
+  ```
+  (list-fine-tuning-events {:fine_tuning_job_id \"ft-1wefweub\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/events)
+  "
+  ([params]
+   (list-fine-tuning-job-events params nil))
+  ([params options]
+   (core/response-for :list-fine-tuning-job-events params options)))
 
 (defn delete-model
   "Delete a fine-tuned model. You must have the Owner role in your organization.
