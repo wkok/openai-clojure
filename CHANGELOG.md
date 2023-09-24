@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.11.0 - 2023-09-24
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Updated to the latest OpenAI API v2.0.0
+- Added support for new fine tuning api
+- Deprecated old fine tunes api
+
 ## 0.10.0 - 2023-09-07
 ### Supported API versions
 - OpenAI v2.0.0
