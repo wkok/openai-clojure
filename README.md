@@ -31,8 +31,9 @@ tools and applications which can work with both variants.
 | [Edits](https://platform.openai.com/docs/api-reference/edits) | X | |
 | [Images](https://platform.openai.com/docs/api-reference/images) | X | |
 | [Files](https://platform.openai.com/docs/api-reference/files) | X | |
-| [Fine-tunes](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
+| [Fine-tuning](https://platform.openai.com/docs/api-reference/fine-tuning) | X | |
 | [Moderations](https://platform.openai.com/docs/api-reference/moderations) | X | |
+| [Fine-tunes (deprecated)](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
 
 ## Configuration
 
