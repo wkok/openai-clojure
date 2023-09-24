@@ -172,10 +172,27 @@
               (api/list-fine-tune-events {:fine_tune_id "ft-1wefweub"})))
 
        (is (= :success
+              (api/create-fine-tuning-job {:training_file "file-xuhfiwuefb"
+                                           :model "gpt-3.5-turbo"})))
+
+       (is (= :success
+              (api/list-fine-tuning-jobs)))
+
+       (is (= :success
+              (api/retrieve-fine-tuning-job {:fine_tuning_job_id "ft-1wefweub"})))
+
+       (is (= :success
+              (api/cancel-fine-tuning-job {:fine_tuning_job_id "ft-1wefweub"})))
+
+       (is (= :success
+              (api/list-fine-tuning-events {:fine_tuning_job_id "ft-1wefweub"})))
+
+       (is (= :success
               (api/delete-model {:model "fine-tune"})))
 
        (is (= :success
               (api/create-moderation {:input "I want to kill them"}))))))
+
 
 (deftest stream-test
 

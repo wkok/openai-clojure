@@ -384,7 +384,8 @@
 
   Example:
   ```
-  (create-fine-tuning-job {:training_file \"file-xuhfiwuefb\"})
+  (create-fine-tuning-job {:training_file \"file-xuhfiwuefb\"
+                           :model \"gpt-3.5-turbo\"})
   ```
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/create)
   "
@@ -405,7 +406,7 @@
   ([]
    (list-fine-tuning-jobs nil))
   ([options]
-   (core/response-for :list-fine-tuning-jobs {} options)))
+   (core/response-for :list-paginated-fine-tuning-jobs {} options)))
 
 (defn retrieve-fine-tuning-job
   "Gets info about a fine-tuning job.
@@ -435,7 +436,7 @@
   ([params options]
    (core/response-for :cancel-fine-tuning-job params options)))
 
-(defn list-fine-tuning-job-events
+(defn list-fine-tuning-events
   "Get status updates for a fine-tuning job.
 
   Example:
@@ -445,9 +446,9 @@
   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning/events)
   "
   ([params]
-   (list-fine-tuning-job-events params nil))
+   (list-fine-tuning-events params nil))
   ([params options]
-   (core/response-for :list-fine-tuning-job-events params options)))
+   (core/response-for :list-fine-tuning-events params options)))
 
 (defn delete-model
   "Delete a fine-tuned model. You must have the Owner role in your organization.
