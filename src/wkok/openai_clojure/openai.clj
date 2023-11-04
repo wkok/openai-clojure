@@ -51,12 +51,13 @@
 (def multipart-form-data
   {:name ::multipart-form-data
    :enter (fn [{:keys [handler params] :as ctx}]
-            (if (multipart-form-data? handler)
-              (-> (assoc-in ctx [:request :multipart]
-                            (map param->multipart-entry params))
-                  (update-in [:request :headers] dissoc "Content-Type")
-                  (update :request dissoc :body))
-              ctx))})
+            (let [params' (dissoc params :wkok.openai-clojure.core/options)]
+              (if (multipart-form-data? handler)
+                (-> (assoc-in ctx [:request :multipart]
+                              (map param->multipart-entry params'))
+                    (update-in [:request :headers] dissoc "Content-Type")
+                    (update :request dissoc :body))
+                ctx)))})
 
 (defn update-file-schema
   [m operation-id field-name]

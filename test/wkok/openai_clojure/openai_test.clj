@@ -18,7 +18,8 @@
                                         :mask (io/file "path/to/mask.png")
                                         :prompt "A cute baby sea otter wearing a beret"
                                         :n 2
-                                        :size "1024x1024"})]
+                                        :size "1024x1024"
+                                        :wkok.openai-clojure.core/options {:api-key "123"}})]
 
       (testing "contains Authorization header"
         (is (contains? (:headers request) "Authorization")))
@@ -30,7 +31,10 @@
       (testing "multipart prompt set correctly"
         (let [prompt (find-multipart request "prompt")]
           (is (= "A cute baby sea otter wearing a beret"
-                 (:content prompt))))))))
+                 (:content prompt)))))
+
+      (testing "options not set in multipart fields"
+        (is (nil? (find-multipart request "options")))))))
 
 (deftest add-headers-init
   (let [add-headers-fn (-> openai/add-headers :enter)]
