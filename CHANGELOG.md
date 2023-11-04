@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.11.1 - 2023-11-04
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Fixed issue where options was incorrectly added into multipart fields
+
 ## 0.11.0 - 2023-09-24
 ### Supported API versions
 - OpenAI v2.0.0

@@ -3,7 +3,7 @@
   (:require [org.corfield.build :as bb]))
 
 (def lib 'net.clojars.wkok/openai-clojure)
-(def version "0.11.0")
+(def version "0.11.1")
 
 (defn test "Run the tests." [opts]
   (bb/run-tests opts))
