@@ -666,7 +666,7 @@
 
   Example:
   ```
-  (modify-thread {:thread_id \",,,\"})
+  (delete-thread {:thread_id \",,,\"})
   ```
   thread_id required
 
@@ -677,6 +677,148 @@
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :delete-thread params opts))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Messages (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn create-message
+  "Create a message.
+
+  Example:
+  ```
+  (create-message {:thread_id \",,,\"
+                   :role      \"user\"})
+  ```
+  thread_id required
+  :role only user supported
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/createMessage
+  "
+  ([params]
+   (create-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-message params opts))))
+
+
+(defn list-messages
+  "Returns a list of messages for a given thread.
+
+  Example:
+  ```
+  (list-messages {:thread_id \",,,\"
+                  :limit      20})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessages
+  "
+  ([params]
+   (list-messages params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-messages params opts))))
+
+
+(defn get-message
+  "Retrieve a message.
+
+  Example:
+  ```
+  (get-message {:thread_id   \",,,\"
+                :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+  "
+  ([params]
+   (get-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-message params opts))))
+
+
+(defn modify-message
+  "Retrieve a message.
+
+  Example:
+  ```
+  (modify-message {:thread_id   \",,,\"
+                   :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  You can attach key-value pairs to the message with this function.
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+  "
+  ([params]
+   (modify-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-message params opts))))
+
+
+
+(defn list-message-files
+  "Returns a list of message files.
+
+  Example:
+  ```
+  (list-message-files {:thread_id   \",,,\"
+                       :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  file_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessageFiles
+  "
+  ([params]
+   (list-message-files params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-message-files params opts))))
+
+
+
+(defn get-message-file
+  "Retrieves a message file.
+
+  Example:
+  ```
+  (get-message-file {:thread_id   \",,,\"
+                       :message_id  \",,,\"
+                       :file_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  file_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessageFile
+  "
+  ([params]
+   (get-message-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-message-file params opts))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Runs (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
 
 
 
