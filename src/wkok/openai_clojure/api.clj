@@ -1034,26 +1034,73 @@
 
 
 
-  (defn cancel-run
-    "Returns a list of run steps belonging to a run.
+(defn cancel-run
+  "Returns a list of run steps belonging to a run.
 
    Example:
 
    ```
    (cancel-run {:thread_id    \",,,\"
                 :run_id       \",,,\"})
+   ```
+   thread_id required
+   run_id required
+
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/cancelRun
+   "
+  ([params]
+   (cancel-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :cancel-run params opts))))
+
+
+
+
+(defn retrieve-run-step
+  "Retrieves a run step.
+
+   Example:
+
+   ```
+   (retrieve-run-step-steps {:thread_id    \",,,\"
+                             :run_id       \",,,\"
+                             :step_id      \",,,\"})
     ```
     thread_id required
-    run_id required
+    run_id    required
+    step_id   required
 
 
-    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/cancelRun
+    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
     "
-    ([params]
-     (cancel-run params nil))
-    ([params options]
-     (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
-       (core/response-for :cancel-run params opts))))
+  ([params]
+   (retrieve-run-step params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-run-step params opts))))
+
+
+
+
+(defn create-thread-and-run
+  "Create a thread and run it in one request.
+
+   Example:
+
+   ```
+   (create-thread-and-run {:assistant_id    \",,,\"})
+   ```
+   assistant_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createThreadAndRun
+   "
+  ([params]
+   (create-thread-and-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-thread-and-run params opts))))
 
 
 
@@ -1061,198 +1108,4 @@
 
 
 
-
-
-(comment
-  ; createThreadAndRun
-
-  (list-runs {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"})
-
-  {:object   "list",
-   :data     [],
-   :first_id nil,
-   :last_id  nil,
-   :has_more false}
-
-  (create-run {:thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw"
-               :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs"})
-
-  {:expires_at   1699470170,
-   :file_ids     [],
-   :started_at   nil,
-   :completed_at nil,
-   :tools        [{:type "code_interpreter"}],
-   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
-   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-   :last_error   nil,
-   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
-   :failed_at    nil,
-   :status       "queued",
-   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
-   :cancelled_at nil,
-   :metadata     {},
-   :object       "thread.run",
-   :created_at   1699469570,
-   :model        "gpt-4-1106-preview"}
-
-  (retrieve-run {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"
-                 :run_id    "run_iKJswzMihDASp71LS8JH1nmY"})
-
-  {:expires_at   nil,
-   :file_ids     [],
-   :started_at   1699469571,
-   :completed_at 1699469580,
-   :tools        [{:type "code_interpreter"}],
-   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
-   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-   :last_error   nil,
-   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
-   :failed_at    nil,
-   :status       "completed",
-   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
-   :cancelled_at nil,
-   :metadata     {},
-   :object       "thread.run",
-   :created_at   1699469570,
-   :model        "gpt-4-1106-preview"}
-
-
-  (modify-run {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"
-               :run_id    "run_fxrLAV9BwFQ71DTCwTqOEg5G"
-               :metadata  {:user_id "abc123"}})
-
-  {:expires_at   nil,
-   :file_ids     [],
-   :started_at   1699469571,
-   :completed_at 1699469580,
-   :tools        [{:type "code_interpreter"}],
-   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
-   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-   :last_error   nil,
-   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
-   :failed_at    nil,
-   :status       "completed",
-   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
-   :cancelled_at nil,
-   :metadata     {:user_id "abc123"},
-   :object       "thread.run",
-   :created_at   1699469570,
-   :model        "gpt-4-1106-preview"}
-
-  (submit-tool-outputs-to-run {:thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR"
-                               :run_id       "run_dL6oDz6cPiMkL7ySRJAsFuVr"
-                               :tool_outputs [{:tool_call_id "call_wwg3TUcP8F0SCT7UTTvqxjZc",
-                                               :output       "Budapest"}]})
-
-  {:expires_at   1699472302,
-   :file_ids     [],
-   :started_at   1699471719,
-   :completed_at nil,
-   :tools        [{:type "code_interpreter"}
-                  {:type     "function",
-                   :function {:name        "get_weather",
-                              :description "Determine weather in my location",
-                              :parameters  {:type       "object",
-                                            :properties {:location {:type        "string",
-                                                                    :description "The city and state e.g. San Francisco, CA"},
-                                                         :unit     {:type "string", :enum ["c" "f"]}},
-                                            :required   ["location"]}}}],
-   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
-   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-   :last_error   nil,
-   :thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR",
-   :failed_at    nil,
-   :status       "queued",
-   :id           "run_dL6oDz6cPiMkL7ySRJAsFuVr",
-   :cancelled_at nil,
-   :metadata     {},
-   :object       "thread.run",
-   :created_at   1699471702,
-   :model        "gpt-4-1106-preview"}
-
-  (list-run-steps {:thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR"
-                   :run_id           "run_dL6oDz6cPiMkL7ySRJAsFuVr"})
-
-  {:object "list",
-   :data [{:expires_at nil,
-           :step_details {:type "tool_calls",
-                          :tool_calls [{:id "call_MIFAWBN9OmiVW5D1szRSSAmt",
-                                        :type "function",
-                                        :function {:name "get_weather", :arguments "{\"location\":\"Budapest\"}"}}]},
-           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
-           :completed_at nil,
-           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-           :type "tool_calls",
-           :last_error nil,
-           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
-           :failed_at nil,
-           :status "expired",
-           :id "step_vqMsvuQcBcDA7RNwYpTt9GVW",
-           :cancelled_at nil,
-           :object "thread.run.step",
-           :created_at 1699472246}
-          {:expires_at nil,
-           :step_details {:type "message_creation", :message_creation {:message_id "msg_GVQxbARc0ZRC771CQE9LigGT"}},
-           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
-           :completed_at 1699472246,
-           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-           :type "message_creation",
-           :last_error nil,
-           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
-           :failed_at nil,
-           :status "completed",
-           :id "step_98f03Jn5N9jpGxhXBudgG56y",
-           :cancelled_at nil,
-           :object "thread.run.step",
-           :created_at 1699472245}
-          {:expires_at nil,
-           :step_details {:type "tool_calls",
-                          :tool_calls [{:id "call_wwg3TUcP8F0SCT7UTTvqxjZc",
-                                        :type "function",
-                                        :function {:name "get_weather",
-                                                   :arguments "{\"location\":\"Budapest\"}",
-                                                   :output "Budapest"}}]},
-           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
-           :completed_at 1699472244,
-           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-           :type "tool_calls",
-           :last_error nil,
-           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
-           :failed_at nil,
-           :status "completed",
-           :id "step_sFKVSdqp6yM7nsdZSEt7S9VE",
-           :cancelled_at nil,
-           :object "thread.run.step",
-           :created_at 1699471719}
-          {:expires_at nil,
-           :step_details {:type "tool_calls",
-                          :tool_calls [{:id "call_7LMplVMwxUeTY3XwDaz0GqVW",
-                                        :type "function",
-                                        :function {:name "get_weather",
-                                                   :arguments "{\"location\":\"New York, NY\"}",
-                                                   :output "Budapest"}}]},
-           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
-           :completed_at 1699471718,
-           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
-           :type "tool_calls",
-           :last_error nil,
-           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
-           :failed_at nil,
-           :status "completed",
-           :id "step_tD4cOFI7eCu8aUhD64H4StGR",
-           :cancelled_at nil,
-           :object "thread.run.step",
-           :created_at 1699471703}],
-   :first_id "step_vqMsvuQcBcDA7RNwYpTt9GVW",
-   :last_id "step_tD4cOFI7eCu8aUhD64H4StGR",
-   :has_more false}
-
-  ;; test with long running task, because you can't cancel 'completed' tasks
-  (cancel-run {:thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw"
-               :run_id        "run_LMDvP7RrxLCBE5AgYiZBAFyd"})
-
-
-
-
-  )
 
