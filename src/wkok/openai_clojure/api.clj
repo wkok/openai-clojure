@@ -534,12 +534,12 @@
 
 
 
-(defn get-assistant
+(defn retrieve-assistant
   "Retrieves an assistant.
 
   Example:
   ```
-  (get-assistants {:assistant_id \"----id----\"})
+  (retrieve-assistants {:assistant_id \"----id----\"})
   ```
   :assistant_id param required
   :model too (but not in spec)
@@ -547,7 +547,7 @@
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistant
   "
   ([params]
-   (get-assistant params nil))
+   (retrieve-assistant params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-assistant params opts))))
@@ -632,12 +632,12 @@
 
 
 
-(defn get-assistant-file
+(defn retrieve-assistant-file
   "Retrieves an AssistantFile.
 
   Example:
   ```
-  (get-assistant-file {:assistant_id \"----id----\"
+  (retrieve-assistant-file {:assistant_id \"----id----\"
                        :file_id \"----id----\"})
   ```
   :assistant_id param required
@@ -646,7 +646,7 @@
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistantFile
   "
   ([params]
-   (get-assistant-file params nil))
+   (retrieve-assistant-file params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-assistant-file params opts))))
@@ -705,19 +705,19 @@
 
 
 
-(defn get-thread
+(defn retrieve-thread
   "Retrieves a thread.
 
   Example:
   ```
-  (get-thread {:thread_id \",,,\"})
+  (retrieve-thread {:thread_id \",,,\"})
   ```
   thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/getThread
   "
   ([params]
-   (get-thread params nil))
+   (retrieve-thread params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-thread params opts))))
@@ -807,12 +807,12 @@
      (core/response-for :list-messages params opts))))
 
 
-(defn get-message
+(defn retrieve-message
   "Retrieve a message.
 
   Example:
   ```
-  (get-message {:thread_id   \",,,\"
+  (retrieve-message {:thread_id   \",,,\"
                 :message_id  \",,,\"})
   ```
   thread_id required
@@ -821,7 +821,7 @@
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
   "
   ([params]
-   (get-message params nil))
+   (retrieve-message params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-message params opts))))
@@ -871,12 +871,12 @@
 
 
 
-(defn get-message-file
+(defn retrieve-message-file
   "Retrieves a message file.
 
   Example:
   ```
-  (get-message-file {:thread_id   \",,,\"
+  (retrieve-message-file {:thread_id   \",,,\"
                        :message_id  \",,,\"
                        :file_id  \",,,\"})
   ```
@@ -887,7 +887,7 @@
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessageFile
   "
   ([params]
-   (get-message-file params nil))
+   (retrieve-message-file params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-message-file params opts))))
@@ -941,12 +941,12 @@
 
 
 
-(defn get-run
+(defn retrieve-run
   "Retrieves a run.
 
   Example:
   ```
-  (get-run {:thread_id   \",,,\"
+  (retrieve-run {:thread_id   \",,,\"
             :run_id      \",,,\"})
   ```
   thread_id required
@@ -955,7 +955,7 @@
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
   "
   ([params]
-   (get-run params nil))
+   (retrieve-run params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :get-run params opts))))
@@ -1032,9 +1032,7 @@
      (core/response-for :list-run-steps params opts))))
 
 
-(comment
 
-  ;; freezing out OpenAPI API now at tests, I continue from this point
 
   (defn cancel-run
     "Returns a list of run steps belonging to a run.
@@ -1059,10 +1057,202 @@
 
 
 
+
+
+
+
+
+
+(comment
+  ; createThreadAndRun
+
+  (list-runs {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"})
+
+  {:object   "list",
+   :data     [],
+   :first_id nil,
+   :last_id  nil,
+   :has_more false}
+
+  (create-run {:thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw"
+               :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs"})
+
+  {:expires_at   1699470170,
+   :file_ids     [],
+   :started_at   nil,
+   :completed_at nil,
+   :tools        [{:type "code_interpreter"}],
+   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
+   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+   :last_error   nil,
+   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
+   :failed_at    nil,
+   :status       "queued",
+   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
+   :cancelled_at nil,
+   :metadata     {},
+   :object       "thread.run",
+   :created_at   1699469570,
+   :model        "gpt-4-1106-preview"}
+
+  (retrieve-run {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"
+                 :run_id    "run_iKJswzMihDASp71LS8JH1nmY"})
+
+  {:expires_at   nil,
+   :file_ids     [],
+   :started_at   1699469571,
+   :completed_at 1699469580,
+   :tools        [{:type "code_interpreter"}],
+   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
+   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+   :last_error   nil,
+   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
+   :failed_at    nil,
+   :status       "completed",
+   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
+   :cancelled_at nil,
+   :metadata     {},
+   :object       "thread.run",
+   :created_at   1699469570,
+   :model        "gpt-4-1106-preview"}
+
+
+  (modify-run {:thread_id "thread_evOSW10XZgRPJ9bPcIeYHxXw"
+               :run_id    "run_fxrLAV9BwFQ71DTCwTqOEg5G"
+               :metadata  {:user_id "abc123"}})
+
+  {:expires_at   nil,
+   :file_ids     [],
+   :started_at   1699469571,
+   :completed_at 1699469580,
+   :tools        [{:type "code_interpreter"}],
+   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
+   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+   :last_error   nil,
+   :thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw",
+   :failed_at    nil,
+   :status       "completed",
+   :id           "run_fxrLAV9BwFQ71DTCwTqOEg5G",
+   :cancelled_at nil,
+   :metadata     {:user_id "abc123"},
+   :object       "thread.run",
+   :created_at   1699469570,
+   :model        "gpt-4-1106-preview"}
+
+  (submit-tool-outputs-to-run {:thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR"
+                               :run_id       "run_dL6oDz6cPiMkL7ySRJAsFuVr"
+                               :tool_outputs [{:tool_call_id "call_wwg3TUcP8F0SCT7UTTvqxjZc",
+                                               :output       "Budapest"}]})
+
+  {:expires_at   1699472302,
+   :file_ids     [],
+   :started_at   1699471719,
+   :completed_at nil,
+   :tools        [{:type "code_interpreter"}
+                  {:type     "function",
+                   :function {:name        "get_weather",
+                              :description "Determine weather in my location",
+                              :parameters  {:type       "object",
+                                            :properties {:location {:type        "string",
+                                                                    :description "The city and state e.g. San Francisco, CA"},
+                                                         :unit     {:type "string", :enum ["c" "f"]}},
+                                            :required   ["location"]}}}],
+   :instructions "You are my personal PDF assistant. You modify and extract pages from the file.",
+   :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+   :last_error   nil,
+   :thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR",
+   :failed_at    nil,
+   :status       "queued",
+   :id           "run_dL6oDz6cPiMkL7ySRJAsFuVr",
+   :cancelled_at nil,
+   :metadata     {},
+   :object       "thread.run",
+   :created_at   1699471702,
+   :model        "gpt-4-1106-preview"}
+
+  (list-run-steps {:thread_id    "thread_zL61qfz9xjwGxMib4oIVRoVR"
+                   :run_id           "run_dL6oDz6cPiMkL7ySRJAsFuVr"})
+
+  {:object "list",
+   :data [{:expires_at nil,
+           :step_details {:type "tool_calls",
+                          :tool_calls [{:id "call_MIFAWBN9OmiVW5D1szRSSAmt",
+                                        :type "function",
+                                        :function {:name "get_weather", :arguments "{\"location\":\"Budapest\"}"}}]},
+           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
+           :completed_at nil,
+           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+           :type "tool_calls",
+           :last_error nil,
+           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
+           :failed_at nil,
+           :status "expired",
+           :id "step_vqMsvuQcBcDA7RNwYpTt9GVW",
+           :cancelled_at nil,
+           :object "thread.run.step",
+           :created_at 1699472246}
+          {:expires_at nil,
+           :step_details {:type "message_creation", :message_creation {:message_id "msg_GVQxbARc0ZRC771CQE9LigGT"}},
+           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
+           :completed_at 1699472246,
+           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+           :type "message_creation",
+           :last_error nil,
+           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
+           :failed_at nil,
+           :status "completed",
+           :id "step_98f03Jn5N9jpGxhXBudgG56y",
+           :cancelled_at nil,
+           :object "thread.run.step",
+           :created_at 1699472245}
+          {:expires_at nil,
+           :step_details {:type "tool_calls",
+                          :tool_calls [{:id "call_wwg3TUcP8F0SCT7UTTvqxjZc",
+                                        :type "function",
+                                        :function {:name "get_weather",
+                                                   :arguments "{\"location\":\"Budapest\"}",
+                                                   :output "Budapest"}}]},
+           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
+           :completed_at 1699472244,
+           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+           :type "tool_calls",
+           :last_error nil,
+           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
+           :failed_at nil,
+           :status "completed",
+           :id "step_sFKVSdqp6yM7nsdZSEt7S9VE",
+           :cancelled_at nil,
+           :object "thread.run.step",
+           :created_at 1699471719}
+          {:expires_at nil,
+           :step_details {:type "tool_calls",
+                          :tool_calls [{:id "call_7LMplVMwxUeTY3XwDaz0GqVW",
+                                        :type "function",
+                                        :function {:name "get_weather",
+                                                   :arguments "{\"location\":\"New York, NY\"}",
+                                                   :output "Budapest"}}]},
+           :run_id "run_dL6oDz6cPiMkL7ySRJAsFuVr",
+           :completed_at 1699471718,
+           :assistant_id "asst_CCSsiXhYc90mgANEBDtKAMFs",
+           :type "tool_calls",
+           :last_error nil,
+           :thread_id "thread_zL61qfz9xjwGxMib4oIVRoVR",
+           :failed_at nil,
+           :status "completed",
+           :id "step_tD4cOFI7eCu8aUhD64H4StGR",
+           :cancelled_at nil,
+           :object "thread.run.step",
+           :created_at 1699471703}],
+   :first_id "step_vqMsvuQcBcDA7RNwYpTt9GVW",
+   :last_id "step_tD4cOFI7eCu8aUhD64H4StGR",
+   :has_more false}
+
+  ;; test with long running task, because you can't cancel 'completed' tasks
+  (cancel-run {:thread_id    "thread_evOSW10XZgRPJ9bPcIeYHxXw"
+               :run_id        "run_LMDvP7RrxLCBE5AgYiZBAFyd"})
+
+
+
+
   )
-
-
-
-
-
 
