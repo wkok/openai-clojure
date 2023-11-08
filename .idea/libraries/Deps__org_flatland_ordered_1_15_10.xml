@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Deps: org.flatland/ordered:1.15.10">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/flatland/ordered/1.15.10/ordered-1.15.10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

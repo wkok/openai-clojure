@@ -183,7 +183,7 @@
    (create-embedding params nil))
   ([params options]
    (let [opt (if (keyword? options)
-               {:impl options} ;; backwards compatibility for when 2nd arg was impl
+               {:impl options}                              ;; backwards compatibility for when 2nd arg was impl
                options)]
      (core/response-for :create-embedding params opt))))
 
@@ -483,3 +483,34 @@
    (create-moderation params nil))
   ([params options]
    (core/response-for :create-moderation params options)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Assistants (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(defn list-assistants
+  "Returns a list of files that belong to the user's organization.
+
+  Example:
+  ```
+  (list-assistants {:limit 3})
+  ```
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistants
+  "
+  ([]
+   (list-assistants nil))
+  ([params]
+   (list-assistants params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-assistants params opts))))
+
+
+
+
+
+

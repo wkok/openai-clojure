@@ -37,6 +37,9 @@
                 azure/m (delay (stub-martian azure-martian))]
     (f)))
 
+
+
+
 (deftest api-test
 
   (with-stubbed-martians

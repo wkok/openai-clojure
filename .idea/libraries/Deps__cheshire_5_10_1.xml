@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Deps: cheshire:5.10.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cheshire/cheshire/5.10.1/cheshire-5.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

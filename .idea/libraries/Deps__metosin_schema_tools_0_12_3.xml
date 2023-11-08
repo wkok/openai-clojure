@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Deps: metosin/schema-tools:0.12.3">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/metosin/schema-tools/0.12.3/schema-tools-0.12.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,32 +1,34 @@
 (ns ^:no-doc wkok.openai-clojure.openai
   (:require
-     [clojure.java.io :as io]
-     [martian.hato :as martian-http]
-     [martian.core :as martian]
-     [martian.openapi :as openapi]
-     [martian.yaml :as yaml]
-     [wkok.openai-clojure.sse :as sse]
-     [martian.encoders :as encoders]
-     [martian.interceptors :as interceptors]
-     [schema.core :as s]
-     [clojure.string :as string]))
+    [clojure.java.io :as io]
+    [martian.hato :as martian-http]
+    [martian.core :as martian]
+    [martian.openapi :as openapi]
+    [martian.yaml :as yaml]
+    [wkok.openai-clojure.sse :as sse]
+    [martian.encoders :as encoders]
+    [martian.interceptors :as interceptors]
+    [schema.core :as s]
+    [clojure.string :as string]))
 
 (def add-headers
-  {:name ::add-headers
+  {:name  ::add-headers
    :enter (fn [ctx]
             (let [api-key (or (-> ctx :params :wkok.openai-clojure.core/options :api-key)
                               (System/getenv "OPENAI_API_KEY"))
                   organization (or (-> ctx :params :wkok.openai-clojure.core/options :organization)
-                                   (System/getenv "OPENAI_ORGANIZATION"))]
+                                   (System/getenv "OPENAI_ORGANIZATION"))
+                  openai-beta (-> ctx :params :wkok.openai-clojure.core/options :openai-beta)]
               (update-in ctx [:request :headers]
                          (fn [headers]
                            (cond-> headers
-                             (not-empty api-key) (assoc "Authorization" (str "Bearer " api-key))
-                             (not-empty organization) (assoc "OpenAI-Organization" organization))))))})
+                                   (not-empty api-key) (assoc "Authorization" (str "Bearer " api-key))
+                                   (not-empty organization) (assoc "OpenAI-Organization" organization)
+                                   (not-empty openai-beta)  (assoc "OpenAI-Beta" openai-beta))))))})
 
 (defn override-api-endpoint
   [base-url]
-  {:name ::override-api-endpoint
+  {:name  ::override-api-endpoint
    :enter (fn [ctx]
             (update-in ctx [:request :url]
                        (fn [url]
@@ -41,7 +43,7 @@
 
 (defn- param->multipart-entry
   [[param content]]
-  {:name (name param)
+  {:name    (name param)
    :content (if (or (instance? java.io.File content)
                     (instance? java.io.InputStream content)
                     (bytes? content))
@@ -49,7 +51,7 @@
               (str content))})
 
 (def multipart-form-data
-  {:name ::multipart-form-data
+  {:name  ::multipart-form-data
    :enter (fn [{:keys [handler params] :as ctx}]
             (let [params' (dissoc params :wkok.openai-clojure.core/options)]
               (if (multipart-form-data? handler)
@@ -79,7 +81,7 @@
   (let [definition (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
         base-url (openapi/base-url nil nil definition)
         encoders (assoc (encoders/default-encoders)
-                        "multipart/form-data" nil)
+                   "multipart/form-data" nil)
         opts (update martian-http/default-opts
                      :interceptors (fn [interceptors]
                                      (-> (remove #(#{:martian.hato/perform-request} (:name %))

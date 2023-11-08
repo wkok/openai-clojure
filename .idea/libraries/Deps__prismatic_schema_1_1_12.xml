@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Deps: prismatic/schema:1.1.12">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/prismatic/schema/1.1.12/schema-1.1.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
