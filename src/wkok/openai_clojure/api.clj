@@ -493,7 +493,7 @@
 
 
 (defn list-assistants
-  "Returns a list of files that belong to the user's organization.
+  "Returns a list of assistants.
 
   Example:
   ```
@@ -508,6 +508,182 @@
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :list-assistants params opts))))
+
+
+
+(defn create-assistant
+  "Create an assistant with a model and instructions.
+
+  Example:
+  ```
+  (create-assistants {:name \"My PDF Assistant\"
+                      :model \"gpt-4-1106-preview\"
+                      :instructions \"You are my personal PDF assistant. You modify
+                                      and extract pages from the file.\"
+                      :tools [{:type \"code_interpreter\"}]
+  ```
+  :model param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistant
+  "
+  ([params]
+   (create-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-assistant params opts))))
+
+
+
+(defn get-assistant
+  "Retrieves an assistant.
+
+  Example:
+  ```
+  (get-assistants {:assistant_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :model too (but not in spec)
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistant
+  "
+  ([params]
+   (get-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-assistant params opts))))
+
+
+(defn modify-assistant
+  "Modifies an assistant.
+
+  Example:
+  ```
+  (modify-assistant {:name \"assistant-name\"
+                     :model \"gpt4.. \"
+                     :description \" update the assistant \"
+                      ...})
+  ```
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/modifyAssistant
+  "
+  ([params]
+   (modify-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-assistant params opts))))
+
+
+(defn delete-assistant
+  "Delete an assistant.
+
+  Example:
+  ```
+  (delete-assistant {:assistant_id \"----id----\"})
+  ```
+  :assistant_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
+  "
+  ([params]
+   (delete-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-assistant params opts))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Threads (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(defn create-thread
+  "Create a thread.
+
+  Example:
+  ```
+  (create-thread) or
+  (create-thread {:messages [{:role    \"user\"
+                              :content \"Hello, what is AI?\"}
+                             {:role    \"user\"
+                              :content \"How does AI work? Explain it in simple terms.\"}]})
+  ```
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/createThread
+  "
+  ([]
+   (create-thread {} nil))
+  ([params]
+   (create-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-thread params opts))))
+
+
+
+(defn get-thread
+  "Retrieves a thread.
+
+  Example:
+  ```
+  (get-thread {:thread_id \",,,\"})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/getThread
+  "
+  ([params]
+   (get-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-thread params opts))))
+
+
+
+(defn modify-thread
+  "Modifies a thread.
+
+  Example:
+  ```
+  (modify-thread {:thread_id \",,,\"
+                  :metadata {,,,}})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/modifyThread
+  "
+  ([params]
+   (modify-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-thread params opts))))
+
+
+(defn delete-thread
+  "Delete a thread.
+
+  Example:
+  ```
+  (modify-thread {:thread_id \",,,\"})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/deleteThread
+  "
+  ([params]
+   (delete-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-thread params opts))))
+
+
+
+
+
+
+
 
 
 
