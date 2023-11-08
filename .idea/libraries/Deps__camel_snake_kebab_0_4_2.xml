@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Deps: camel-snake-kebab:0.4.2">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/camel-snake-kebab/camel-snake-kebab/0.4.2/camel-snake-kebab-0.4.2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

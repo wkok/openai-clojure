@@ -1,6 +1,7 @@
 .calva/output-window/
 .classpath
 .clj-kondo/.cache
+.idea/
 .cpcache
 .DS_Store
 .eastwood

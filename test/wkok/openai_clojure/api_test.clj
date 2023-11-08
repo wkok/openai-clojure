@@ -195,7 +195,7 @@
 
        (is (= :success
               (api/create-moderation {:input "I want to kill them"})))
-       
+
        (is (= :success
               (api/list-assistants {:limit 3}))))))
 

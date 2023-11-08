@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Deps: org.yaml/snakeyaml:1.26">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.26/snakeyaml-1.26.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
