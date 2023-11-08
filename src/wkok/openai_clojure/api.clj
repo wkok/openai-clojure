@@ -591,6 +591,88 @@
      (core/response-for :delete-assistant params opts))))
 
 
+(defn list-assistant-files
+  "Returns a list of assistant files.
+
+  Example:
+  ```
+  (list-assistant-files {:assistant_id \"----id----\"
+                         :limit 5})
+  ```
+  :assistant_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles
+  "
+  ([params]
+   (list-assistant-files params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-assistant-files params opts))))
+
+
+
+(defn create-assistant-file
+  "Create an assistant file by attaching a File to an assistant.
+
+  Example:
+  ```
+  (create-assistant-file {:assistant_id \"----id----\"
+                          :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistantFile
+  "
+  ([params]
+   (create-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-assistant-file params opts))))
+
+
+
+(defn get-assistant-file
+  "Retrieves an AssistantFile.
+
+  Example:
+  ```
+  (get-assistant-file {:assistant_id \"----id----\"
+                       :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistantFile
+  "
+  ([params]
+   (get-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-assistant-file params opts))))
+
+
+(defn delete-assistant-file
+  "Delete an assistant file.
+
+  Example:
+  ```
+  (delete-assistant-file {:assistant_id \"----id----\"
+                          :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile
+  "
+  ([params]
+   (delete-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-assistant-file params opts))))
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -746,7 +828,7 @@
 
 
 (defn modify-message
-  "Retrieve a message.
+  "Modify a message.
 
   Example:
   ```
@@ -816,7 +898,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Runs (beta)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 
 
