@@ -31,3 +31,4 @@
 /resources/.keep
 /setCredentials.sh
 /.clj-kondo/
+*.iml
