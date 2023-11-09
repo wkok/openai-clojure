@@ -499,7 +499,7 @@
   ```
   (list-assistants {:limit 3})
   ```
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistants
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/listAssistants)
   "
   ([]
    (list-assistants nil))
@@ -523,7 +523,7 @@
                      :tools [{:type \"code_interpreter\"}]}
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistant
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
   "
   ([params]
    (create-assistant params nil))
@@ -542,7 +542,7 @@
   :assistant_id param required
   :model too (but not in spec)
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistant
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/getAssistant)
   "
   ([params]
    (retrieve-assistant params nil))
@@ -562,7 +562,7 @@
                      :description \" update the assistant \"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/modifyAssistant
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/modifyAssistant)
   "
   ([params]
    (modify-assistant params nil))
@@ -579,7 +579,7 @@
   (delete-assistant {:assistant_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/deleteAssistant)
   "
   ([params]
    (delete-assistant params nil))
@@ -598,7 +598,7 @@
   ```
   :assistant_id param required
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles)
   "
   ([params]
    (list-assistant-files params nil))
@@ -617,7 +617,7 @@
                           :file_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistantFile
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/createAssistantFile)
   "
   ([params]
    (create-assistant-file params nil))
@@ -636,7 +636,7 @@
                             :file_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistantFile
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/getAssistantFile)
   "
   ([params]
    (retrieve-assistant-file params nil))
@@ -654,7 +654,7 @@
                           :file_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile)
   "
   ([params]
    (delete-assistant-file params nil))
@@ -684,7 +684,7 @@
                               :content \"How does AI work? Explain it in simple terms.\"}]})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/createThread
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/threads/createThread)
   "
   ([]
    (create-thread {} nil))
@@ -704,7 +704,7 @@
   (retrieve-thread {:thread_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/getThread
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/threads/getThread)
   "
   ([params]
    (retrieve-thread params nil))
@@ -723,7 +723,7 @@
                   :metadata {}})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/modifyThread
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/threads/modifyThread)
   "
   ([params]
    (modify-thread params nil))
@@ -740,7 +740,7 @@
   (delete-thread {:thread_id \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/deleteThread
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/threads/deleteThread)
   "
   ([params]
    (delete-thread params nil))
@@ -766,7 +766,7 @@
                    :content   \"How does AI work\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/createMessage
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/createMessage)
   "
   ([params]
    (create-message params nil))
@@ -784,7 +784,7 @@
                   :limit      20})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessages
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/listMessages)
   "
   ([params]
    (list-messages params nil))
@@ -802,7 +802,7 @@
                      :message_id  \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/getMessage)
   "
   ([params]
    (retrieve-message params nil))
@@ -820,7 +820,7 @@
                    :message_id  \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/getMessage)
   "
   ([params]
    (modify-message params nil))
@@ -839,7 +839,7 @@
                        :message_id  \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessageFiles
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/listMessageFiles)
   "
   ([params]
    (list-message-files params nil))
@@ -859,7 +859,7 @@
                           :file_id  \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessageFile
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/getMessageFile)
   "
   ([params]
    (retrieve-message-file params nil))
@@ -884,7 +884,7 @@
   (list-runs {:thread_id   \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRuns
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/listRuns)
   "
   ([params]
    (list-runs params nil))
@@ -903,7 +903,7 @@
                :assistant_id   \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createRun
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/createRun)
   "
   ([params]
    (create-run params nil))
@@ -922,7 +922,7 @@
                  :run_id      \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/getRun)
   "
   ([params]
    (retrieve-run params nil))
@@ -941,7 +941,7 @@
                :run_id      \"----id----\"})
   ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/modifyRun
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/modifyRun)
   "
   ([params]
    (modify-run params nil))
@@ -965,7 +965,7 @@
                                                  :output        \"Budapest, Hungary\"}]})
     ```
 
-    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/submitToolOutputs
+    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs)
     "
   ([params]
    (submit-tool-outputs-to-run params nil))
@@ -984,7 +984,7 @@
                     :run_id       \"----id----\"})
     ```
 
-    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRunSteps
+    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/listRunSteps)
     "
   ([params]
    (list-run-steps params nil))
@@ -1005,7 +1005,7 @@
                 :run_id       \"----id----\"})
    ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/cancelRun
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/cancelRun)
    "
   ([params]
    (cancel-run params nil))
@@ -1027,7 +1027,7 @@
                        :step_id      \"----id----\"})
     ```
 
-    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
+    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/getRun)
     "
   ([params]
    (retrieve-run-step params nil))
@@ -1047,7 +1047,7 @@
    (create-thread-and-run {:assistant_id    \"----id----\"})
    ```
 
-   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createThreadAndRun
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/createThreadAndRun)
    "
   ([params]
    (create-thread-and-run params nil))
