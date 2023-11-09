@@ -53,26 +53,26 @@
               (api/retrieve-model {:model "text-davinci-003"})))
 
        (is (= :success
-              (api/create-completion {:model "text-davinci-003"
-                                      :prompt "Say this is a test"
-                                      :max_tokens 7
+              (api/create-completion {:model       "text-davinci-003"
+                                      :prompt      "Say this is a test"
+                                      :max_tokens  7
                                       :temperature 0})))
 
        (is (= :success
-              (api/create-completion :azure {:model "text-davinci-003"
-                                             :prompt "Say this is a test"
-                                             :max_tokens 7
+              (api/create-completion :azure {:model       "text-davinci-003"
+                                             :prompt      "Say this is a test"
+                                             :max_tokens  7
                                              :temperature 0})))
 
        (is (= :success
-              (api/create-completion  {:model "text-davinci-003"
-                                       :prompt "Say this is a test"
-                                       :max_tokens 7
+              (api/create-completion  {:model       "text-davinci-003"
+                                       :prompt      "Say this is a test"
+                                       :max_tokens  7
                                        :temperature 0}
                                       {:impl :azure})))
 
        (is (= :success
-              (api/create-chat-completion {:model "gpt-3.5-turbo"
+              (api/create-chat-completion {:model    "gpt-3.5-turbo"
                                            :messages [{:role "system" :content "You are a helpful assistant."}
                                                       {:role "user" :content "Who won the world series in 2020?"}
                                                       {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
@@ -93,7 +93,7 @@
                                                                       :enum ["celsius" "fahrenheit"]}}}}]})))
 
        (is (= :success
-              (api/create-chat-completion {:model "gpt-3.5-turbo"
+              (api/create-chat-completion {:model    "gpt-3.5-turbo"
                                            :messages [{:role "system" :content "You are a helpful assistant."}
                                                       {:role "user" :content "Who won the world series in 2020?"}
                                                       {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
@@ -101,26 +101,26 @@
                                           {:impl :azure})))
 
        (is (= :success
-              (api/create-edit {:model "text-davinci-edit-001"
-                                :input "What day of the wek is it?"
+              (api/create-edit {:model       "text-davinci-edit-001"
+                                :input       "What day of the wek is it?"
                                 :instruction "Fix the spelling mistakes"})))
 
        (is (= :success
               (api/create-image {:prompt "A cute baby sea otter"
-                                 :n 2
-                                 :size "1024x1024"})))
+                                 :n      2
+                                 :size   "1024x1024"})))
 
        (is (= :success
-              (api/create-image-edit {:image (io/file "path/to/otter.png")
-                                      :mask (io/file "path/to/mask.png")
+              (api/create-image-edit {:image  (io/file "path/to/otter.png")
+                                      :mask   (io/file "path/to/mask.png")
                                       :prompt "A cute baby sea otter wearing a beret"
-                                      :n 2
-                                      :size "1024x1024"})))
+                                      :n      2
+                                      :size   "1024x1024"})))
 
        (is (= :success
               (api/create-image-variation {:image (io/file "path/to/otter.png")
-                                           :n 2
-                                           :size "1024x1024"})))
+                                           :n     2
+                                           :size  "1024x1024"})))
 
        (is (= :success
               (api/create-embedding {:model "text-embedding-ada-002"
@@ -136,11 +136,11 @@
                                      {:impl :azure})))
 
        (is (= :success
-              (api/create-transcription {:file (io/file "path/to/audio.mp3")
+              (api/create-transcription {:file  (io/file "path/to/audio.mp3")
                                          :model "whisper-1"})))
 
        (is (= :success
-              (api/create-translation {:file (io/file "path/to/file/german.m4a")
+              (api/create-translation {:file  (io/file "path/to/file/german.m4a")
                                        :model "whisper-1"})))
 
        (is (= :success
@@ -148,7 +148,7 @@
 
        (is (= :success
               (api/create-file {:purpose "fine-tune"
-                                :file (io/file "path/to/fine-tune.jsonl")})))
+                                :file    (io/file "path/to/fine-tune.jsonl")})))
 
        (is (= :success
               (api/delete-file {:file-id "file-wefuhweof"})))
@@ -176,7 +176,7 @@
 
        (is (= :success
               (api/create-fine-tuning-job {:training_file "file-xuhfiwuefb"
-                                           :model "gpt-3.5-turbo"})))
+                                           :model         "gpt-3.5-turbo"})))
 
        (is (= :success
               (api/list-fine-tuning-jobs)))
@@ -197,7 +197,123 @@
               (api/create-moderation {:input "I want to kill them"})))
 
        (is (= :success
-              (api/list-assistants {:limit 3}))))))
+              (api/list-assistants {:limit 3})))
+
+       (is (= :success
+              (api/create-assistant {:name         "My PDF Assistant"
+                                     :model        "gpt-4-1106-preview"
+                                     :instructions "You are my personal PDF assistant. You modify  and extract pages from the file."
+                                     :tools        [{:type "code_interpreter"}]})))
+
+       (is (= :success
+              (api/retrieve-assistant {:assistant_id "----id----"})))
+
+       (is (= :success
+              (api/modify-assistant {:assistant_id "id"
+                                     :name         "assistant-name"
+                                     :model        "gpt4.."
+                                     :description  " update the assistant"})))
+
+       (is (= :success
+              (api/delete-assistant {:assistant_id "----id----"})))
+
+       (is (= :success
+              (api/list-assistant-files {:assistant_id "----id----"
+                                         :limit        5})))
+
+       (is (= :success
+              (api/create-assistant-file {:assistant_id "----id----"
+                                          :file_id      "----id----"})))
+
+       (is (= :success
+              (api/retrieve-assistant-file {:assistant_id "----id----"
+                                            :file_id      "----id----"})))
+
+       (is (= :success
+              (api/delete-assistant-file {:assistant_id "----id----"
+                                          :file_id      "----id----"})))
+
+       (is (= :success
+              (api/create-thread)))
+
+       (is (= :success
+              (api/create-thread {:messages [{:role    "user"
+                                              :content "Hello, what is AI?"}
+                                             {:role    "user"
+                                              :content "How does AI work? Explain it in simple terms."}]})))
+
+       (is (= :success
+              (api/retrieve-thread {:thread_id "----id----"})))
+
+       (is (= :success
+              (api/modify-thread {:thread_id "----id----"
+                                  :metadata  {}})))
+
+       (is (= :success
+              (api/delete-thread {:thread_id "----id----"})))
+
+       (is (= :success
+              (api/create-message {:thread_id "----id----"
+                                   :role      "user"
+                                   :content   "How does AI work"})))
+
+       (is (= :success
+              (api/list-messages {:thread_id "----id----"
+                                  :limit     20})))
+
+       (is (= :success
+              (api/retrieve-message {:thread_id  "----id----"
+                                     :message_id "----id----"})))
+
+       (is (= :success
+              (api/modify-message {:thread_id  "----id----"
+                                   :message_id "----id----"})))
+
+       (is (= :success
+              (api/list-message-files {:thread_id  "----id----"
+                                       :message_id "----id----"})))
+
+       (is (= :success
+              (api/retrieve-message-file {:thread_id  "----id----"
+                                          :message_id "----id----"
+                                          :file_id    "----id----"})))
+
+       (is (= :success
+              (api/list-runs {:thread_id   "----id----"})))
+
+       (is (= :success
+              (api/create-run {:thread_id   "----id----"
+                               :assistant_id   "----id----"})))
+
+       (is (= :success
+              (api/retrieve-run {:thread_id   "----id----"
+                                 :run_id      "----id----"})))
+
+       (is (= :success
+              (api/modify-run {:thread_id   "----id----"
+                               :run_id      "----id----"})))
+
+       (is (= :success
+              (api/submit-tool-outputs-to-run {:thread_id    "----id----"
+                                               :run_id       "----id----"
+                                               :tool_outputs [{:tool_call_id "call_wwg3TXXXF0SCT7UTTvqxjZc"
+                                                               :output       "Budapest, Hungary"}]})))
+
+       (is (= :success
+              (api/list-run-steps {:thread_id    "----id----"
+                                   :run_id       "----id----"})))
+
+       (is (= :success
+              (api/cancel-run {:thread_id "----id----"
+                               :run_id    "----id----"})))
+
+       (is (= :success
+              (api/retrieve-run-step {:thread_id "----id----"
+                                      :run_id    "----id----"
+                                      :step_id   "----id----"})))
+
+       (is (= :success
+              (api/create-thread-and-run {:assistant_id    "----id----"}))))))
 
 
 (deftest stream-test

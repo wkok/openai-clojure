@@ -516,13 +516,12 @@
 
   Example:
   ```
-  (create-assistants {:name \"My PDF Assistant\"
-                      :model \"gpt-4-1106-preview\"
-                      :instructions \"You are my personal PDF assistant. You modify
-                                      and extract pages from the file.\"
-                      :tools [{:type \"code_interpreter\"}]
+  (create-assistant {:name \"My PDF Assistant\"
+                     :model \"gpt-4-1106-preview\"
+                     :instructions \"You are my personal PDF assistant. You modify
+                                     and extract pages from the file.\"
+                     :tools [{:type \"code_interpreter\"}]}
   ```
-  :model param required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistant
   "
@@ -533,13 +532,12 @@
      (core/response-for :create-assistant params opts))))
 
 
-
 (defn retrieve-assistant
   "Retrieves an assistant.
 
   Example:
   ```
-  (retrieve-assistants {:assistant_id \"----id----\"})
+  (retrieve-assistant {:assistant_id \"----id----\"})
   ```
   :assistant_id param required
   :model too (but not in spec)
@@ -558,10 +556,10 @@
 
   Example:
   ```
-  (modify-assistant {:name \"assistant-name\"
+  (modify-assistant {:assistant_id \"id\"
+                     :name \"assistant-name\"
                      :model \"gpt4.. \"
-                     :description \" update the assistant \"
-                      ...})
+                     :description \" update the assistant \"})
   ```
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/modifyAssistant
@@ -580,7 +578,6 @@
   ```
   (delete-assistant {:assistant_id \"----id----\"})
   ```
-  :assistant_id param required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
   "
@@ -619,8 +616,6 @@
   (create-assistant-file {:assistant_id \"----id----\"
                           :file_id \"----id----\"})
   ```
-  :assistant_id param required
-  :file_id param required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistantFile
   "
@@ -638,10 +633,8 @@
   Example:
   ```
   (retrieve-assistant-file {:assistant_id \"----id----\"
-                       :file_id \"----id----\"})
+                            :file_id \"----id----\"})
   ```
-  :assistant_id param required
-  :file_id param required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistantFile
   "
@@ -660,8 +653,6 @@
   (delete-assistant-file {:assistant_id \"----id----\"
                           :file_id \"----id----\"})
   ```
-  :assistant_id param required
-  :file_id param required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile
   "
@@ -710,9 +701,8 @@
 
   Example:
   ```
-  (retrieve-thread {:thread_id \",,,\"})
+  (retrieve-thread {:thread_id \"----id----\"})
   ```
-  thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/getThread
   "
@@ -729,10 +719,9 @@
 
   Example:
   ```
-  (modify-thread {:thread_id \",,,\"
-                  :metadata {,,,}})
+  (modify-thread {:thread_id \"----id----\"
+                  :metadata {}})
   ```
-  thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/modifyThread
   "
@@ -748,9 +737,8 @@
 
   Example:
   ```
-  (delete-thread {:thread_id \",,,\"})
+  (delete-thread {:thread_id \"----id----\"})
   ```
-  thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/deleteThread
   "
@@ -773,11 +761,10 @@
 
   Example:
   ```
-  (create-message {:thread_id \",,,\"
-                   :role      \"user\"})
+  (create-message {:thread_id \"----id----\"
+                   :role      \"user\"
+                   :content   \"How does AI work\"})
   ```
-  thread_id required
-  :role only user supported
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/createMessage
   "
@@ -796,7 +783,6 @@
   (list-messages {:thread_id \",,,\"
                   :limit      20})
   ```
-  thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessages
   "
@@ -812,11 +798,9 @@
 
   Example:
   ```
-  (retrieve-message {:thread_id   \",,,\"
-                :message_id  \",,,\"})
+  (retrieve-message {:thread_id   \"----id----\"
+                     :message_id  \"----id----\"})
   ```
-  thread_id required
-  message_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
   "
@@ -832,12 +816,9 @@
 
   Example:
   ```
-  (modify-message {:thread_id   \",,,\"
-                   :message_id  \",,,\"})
+  (modify-message {:thread_id   \"----id----\"
+                   :message_id  \"----id----\"})
   ```
-  thread_id required
-  message_id required
-  You can attach key-value pairs to the message with this function.
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
   "
@@ -854,12 +835,9 @@
 
   Example:
   ```
-  (list-message-files {:thread_id   \",,,\"
-                       :message_id  \",,,\"})
+  (list-message-files {:thread_id   \"----id----\"
+                       :message_id  \"----id----\"})
   ```
-  thread_id required
-  message_id required
-  file_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessageFiles
   "
@@ -876,13 +854,10 @@
 
   Example:
   ```
-  (retrieve-message-file {:thread_id   \",,,\"
-                       :message_id  \",,,\"
-                       :file_id  \",,,\"})
+  (retrieve-message-file {:thread_id   \"----id----\"
+                          :message_id  \"----id----\"
+                          :file_id  \"----id----\"})
   ```
-  thread_id required
-  message_id required
-  file_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessageFile
   "
@@ -906,9 +881,8 @@
 
   Example:
   ```
-  (list-runs {:thread_id   \",,,\"})
+  (list-runs {:thread_id   \"----id----\"})
   ```
-  thread_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRuns
   "
@@ -925,11 +899,9 @@
 
   Example:
   ```
-  (create-run {:thread_id   \",,,\"
-               :assistant_id   \",,,\"})
+  (create-run {:thread_id   \"----id----\"
+               :assistant_id   \"----id----\"})
   ```
-  thread_id required
-  assistant_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createRun
   "
@@ -946,11 +918,9 @@
 
   Example:
   ```
-  (retrieve-run {:thread_id   \",,,\"
-            :run_id      \",,,\"})
+  (retrieve-run {:thread_id   \"----id----\"
+                 :run_id      \"----id----\"})
   ```
-  thread_id required
-  run_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
   "
@@ -967,11 +937,9 @@
 
   Example:
   ```
-  (modify-run {:thread_id   \",,,\"
-               :run_id      \",,,\"})
+  (modify-run {:thread_id   \"----id----\"
+               :run_id      \"----id----\"})
   ```
-  thread_id required
-  run_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/modifyRun
   "
@@ -991,15 +959,11 @@
    Example:
 
    ```
-   (submit-tool-outputs-to-run {:thread_id    \",,,\"
-                             :run_id       \",,,\"
-                              :tool_outputs  [{:tool_call_id  \"call_wwg3TXXXF0SCT7UTTvqxjZc\",\n
-                                               :output        \"Budapest, Hungary\"}]})
+   (submit-tool-outputs-to-run {:thread_id    \"----id----\"
+                                :run_id       \"----id----\"
+                                :tool_outputs  [{:tool_call_id  \"call_wwg3TXXXF0SCT7UTTvqxjZc\"
+                                                 :output        \"Budapest, Hungary\"}]})
     ```
-    thread_id required
-    run_id required
-    tool_outputs required
-
 
     Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/submitToolOutputs
     "
@@ -1016,12 +980,9 @@
    Example:
 
    ```
-   (list-run-steps {:thread_id    \",,,\"
-                    :run_id       \",,,\"})
+   (list-run-steps {:thread_id    \"----id----\"
+                    :run_id       \"----id----\"})
     ```
-    thread_id required
-    run_id required
-
 
     Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRunSteps
     "
@@ -1040,12 +1001,9 @@
    Example:
 
    ```
-   (cancel-run {:thread_id    \",,,\"
-                :run_id       \",,,\"})
+   (cancel-run {:thread_id    \"----id----\"
+                :run_id       \"----id----\"})
    ```
-   thread_id required
-   run_id required
-
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/cancelRun
    "
@@ -1064,14 +1022,10 @@
    Example:
 
    ```
-   (retrieve-run-step-steps {:thread_id    \",,,\"
-                             :run_id       \",,,\"
-                             :step_id      \",,,\"})
+   (retrieve-run-step {:thread_id    \"----id----\"
+                       :run_id       \"----id----\"
+                       :step_id      \"----id----\"})
     ```
-    thread_id required
-    run_id    required
-    step_id   required
-
 
     Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
     "
@@ -1090,9 +1044,8 @@
    Example:
 
    ```
-   (create-thread-and-run {:assistant_id    \",,,\"})
+   (create-thread-and-run {:assistant_id    \"----id----\"})
    ```
-   assistant_id required
 
    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createThreadAndRun
    "
@@ -1101,11 +1054,3 @@
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
      (core/response-for :create-thread-and-run params opts))))
-
-
-
-
-
-
-
-
