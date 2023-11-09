@@ -155,4 +155,45 @@ Also see the [OpenAI documentation](https://platform.openai.com/docs/api-referen
 
 * [create-moderation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.1/api/wkok.openai-clojure.api#create-moderation)
 
+### Assistants
+
+* [create-assistant](https://platform.openai.com/docs/api-reference/assistants/createAssistant)
+* [retrieve-assistant](https://platform.openai.com/docs/api-reference/assistants/getAssistant)
+* [modify-assistant](https://platform.openai.com/docs/api-reference/assistants/modifyAssistant)
+* [delete-assistant](https://platform.openai.com/docs/api-reference/assistants/deleteAssistant)
+* [list-assistants](https://platform.openai.com/docs/api-reference/assistants/listAssistants)
+* [create-assistant-file](https://platform.openai.com/docs/api-reference/assistants/createAssistantFile)
+* [retrieve-assistant-file](https://platform.openai.com/docs/api-reference/assistants/getAssistantFile)
+* [delete-assistant-file](https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile)
+* [list-assistant-files](https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles)
+
+### Threads
+
+* [create-thread](https://platform.openai.com/docs/api-reference/threads/createThread)
+* [retrieve-thread](https://platform.openai.com/docs/api-reference/threads/getThread)
+* [modify-thread](https://platform.openai.com/docs/api-reference/threads/modifyThread)
+* [delete-thread](https://platform.openai.com/docs/api-reference/threads/deleteThread)
+
+### Messages
+
+* [create-message](https://platform.openai.com/docs/api-reference/messages/createMessage)
+* [retrieve-message](https://platform.openai.com/docs/api-reference/messages/getMessage)
+* [modify-message](https://platform.openai.com/docs/api-reference/messages/modifyMessage)
+* [list-messages](https://platform.openai.com/docs/api-reference/messages/listMessages)
+* [retrieve-message-file](https://platform.openai.com/docs/api-reference/messages/getMessageFile)
+* [list-message-files](https://platform.openai.com/docs/api-reference/messages/listMessageFiles)
+
+### Runs
+
+* [create-run](https://platform.openai.com/docs/api-reference/runs/createRun)
+* [retrieve-run](https://platform.openai.com/docs/api-reference/runs/getRun)
+* [modify-run](https://platform.openai.com/docs/api-reference/runs/modifyRun)
+* [list-runs](https://platform.openai.com/docs/api-reference/runs/listRuns)
+* [cancel-run](https://platform.openai.com/docs/api-reference/runs/cancelRun)
+* [submit-tool-outputs-to-run](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs)
+* [retrieve-run-step](https://platform.openai.com/docs/api-reference/runs/getRunStep)
+* [create-thread-and-run](https://platform.openai.com/docs/api-reference/runs/createThreadAndRun)
+* [list-run-steps](https://platform.openai.com/docs/api-reference/runs/listRunSteps)
+
+
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/moderations)
