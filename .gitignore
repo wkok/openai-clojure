@@ -1,6 +1,7 @@
 .calva/output-window/
 .classpath
 .clj-kondo/.cache
+.idea/
 .cpcache
 .DS_Store
 .eastwood
@@ -30,3 +31,4 @@
 /resources/.keep
 /setCredentials.sh
 /.clj-kondo/
+*.iml

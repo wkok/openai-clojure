@@ -37,6 +37,9 @@
                 azure/m (delay (stub-martian azure-martian))]
     (f)))
 
+
+
+
 (deftest api-test
 
   (with-stubbed-martians
@@ -191,7 +194,10 @@
               (api/delete-model {:model "fine-tune"})))
 
        (is (= :success
-              (api/create-moderation {:input "I want to kill them"}))))))
+              (api/create-moderation {:input "I want to kill them"})))
+
+       (is (= :success
+              (api/list-assistants {:limit 3}))))))
 
 
 (deftest stream-test

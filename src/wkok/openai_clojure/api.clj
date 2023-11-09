@@ -183,7 +183,7 @@
    (create-embedding params nil))
   ([params options]
    (let [opt (if (keyword? options)
-               {:impl options} ;; backwards compatibility for when 2nd arg was impl
+               {:impl options}                              ;; backwards compatibility for when 2nd arg was impl
                options)]
      (core/response-for :create-embedding params opt))))
 
@@ -483,3 +483,629 @@
    (create-moderation params nil))
   ([params options]
    (core/response-for :create-moderation params options)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Assistants (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(defn list-assistants
+  "Returns a list of assistants.
+
+  Example:
+  ```
+  (list-assistants {:limit 3})
+  ```
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistants
+  "
+  ([]
+   (list-assistants nil))
+  ([params]
+   (list-assistants params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-assistants params opts))))
+
+
+
+(defn create-assistant
+  "Create an assistant with a model and instructions.
+
+  Example:
+  ```
+  (create-assistants {:name \"My PDF Assistant\"
+                      :model \"gpt-4-1106-preview\"
+                      :instructions \"You are my personal PDF assistant. You modify
+                                      and extract pages from the file.\"
+                      :tools [{:type \"code_interpreter\"}]
+  ```
+  :model param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistant
+  "
+  ([params]
+   (create-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-assistant params opts))))
+
+
+
+(defn retrieve-assistant
+  "Retrieves an assistant.
+
+  Example:
+  ```
+  (retrieve-assistants {:assistant_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :model too (but not in spec)
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistant
+  "
+  ([params]
+   (retrieve-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-assistant params opts))))
+
+
+(defn modify-assistant
+  "Modifies an assistant.
+
+  Example:
+  ```
+  (modify-assistant {:name \"assistant-name\"
+                     :model \"gpt4.. \"
+                     :description \" update the assistant \"
+                      ...})
+  ```
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/modifyAssistant
+  "
+  ([params]
+   (modify-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-assistant params opts))))
+
+
+(defn delete-assistant
+  "Delete an assistant.
+
+  Example:
+  ```
+  (delete-assistant {:assistant_id \"----id----\"})
+  ```
+  :assistant_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
+  "
+  ([params]
+   (delete-assistant params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-assistant params opts))))
+
+
+(defn list-assistant-files
+  "Returns a list of assistant files.
+
+  Example:
+  ```
+  (list-assistant-files {:assistant_id \"----id----\"
+                         :limit 5})
+  ```
+  :assistant_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles
+  "
+  ([params]
+   (list-assistant-files params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-assistant-files params opts))))
+
+
+
+(defn create-assistant-file
+  "Create an assistant file by attaching a File to an assistant.
+
+  Example:
+  ```
+  (create-assistant-file {:assistant_id \"----id----\"
+                          :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/createAssistantFile
+  "
+  ([params]
+   (create-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-assistant-file params opts))))
+
+
+
+(defn retrieve-assistant-file
+  "Retrieves an AssistantFile.
+
+  Example:
+  ```
+  (retrieve-assistant-file {:assistant_id \"----id----\"
+                       :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/getAssistantFile
+  "
+  ([params]
+   (retrieve-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-assistant-file params opts))))
+
+
+(defn delete-assistant-file
+  "Delete an assistant file.
+
+  Example:
+  ```
+  (delete-assistant-file {:assistant_id \"----id----\"
+                          :file_id \"----id----\"})
+  ```
+  :assistant_id param required
+  :file_id param required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile
+  "
+  ([params]
+   (delete-assistant-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-assistant-file params opts))))
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Threads (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(defn create-thread
+  "Create a thread.
+
+  Example:
+  ```
+  (create-thread) or
+  (create-thread {:messages [{:role    \"user\"
+                              :content \"Hello, what is AI?\"}
+                             {:role    \"user\"
+                              :content \"How does AI work? Explain it in simple terms.\"}]})
+  ```
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/createThread
+  "
+  ([]
+   (create-thread {} nil))
+  ([params]
+   (create-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-thread params opts))))
+
+
+
+(defn retrieve-thread
+  "Retrieves a thread.
+
+  Example:
+  ```
+  (retrieve-thread {:thread_id \",,,\"})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/getThread
+  "
+  ([params]
+   (retrieve-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-thread params opts))))
+
+
+
+(defn modify-thread
+  "Modifies a thread.
+
+  Example:
+  ```
+  (modify-thread {:thread_id \",,,\"
+                  :metadata {,,,}})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/modifyThread
+  "
+  ([params]
+   (modify-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-thread params opts))))
+
+
+(defn delete-thread
+  "Delete a thread.
+
+  Example:
+  ```
+  (delete-thread {:thread_id \",,,\"})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/threads/deleteThread
+  "
+  ([params]
+   (delete-thread params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :delete-thread params opts))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Messages (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn create-message
+  "Create a message.
+
+  Example:
+  ```
+  (create-message {:thread_id \",,,\"
+                   :role      \"user\"})
+  ```
+  thread_id required
+  :role only user supported
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/createMessage
+  "
+  ([params]
+   (create-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-message params opts))))
+
+
+(defn list-messages
+  "Returns a list of messages for a given thread.
+
+  Example:
+  ```
+  (list-messages {:thread_id \",,,\"
+                  :limit      20})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessages
+  "
+  ([params]
+   (list-messages params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-messages params opts))))
+
+
+(defn retrieve-message
+  "Retrieve a message.
+
+  Example:
+  ```
+  (retrieve-message {:thread_id   \",,,\"
+                :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+  "
+  ([params]
+   (retrieve-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-message params opts))))
+
+
+(defn modify-message
+  "Modify a message.
+
+  Example:
+  ```
+  (modify-message {:thread_id   \",,,\"
+                   :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  You can attach key-value pairs to the message with this function.
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessage
+  "
+  ([params]
+   (modify-message params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-message params opts))))
+
+
+
+(defn list-message-files
+  "Returns a list of message files.
+
+  Example:
+  ```
+  (list-message-files {:thread_id   \",,,\"
+                       :message_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  file_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/listMessageFiles
+  "
+  ([params]
+   (list-message-files params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-message-files params opts))))
+
+
+
+(defn retrieve-message-file
+  "Retrieves a message file.
+
+  Example:
+  ```
+  (retrieve-message-file {:thread_id   \",,,\"
+                       :message_id  \",,,\"
+                       :file_id  \",,,\"})
+  ```
+  thread_id required
+  message_id required
+  file_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/messages/getMessageFile
+  "
+  ([params]
+   (retrieve-message-file params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-message-file params opts))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Runs (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(defn list-runs
+  "Returns a list of runs belonging to a thread.
+
+  Example:
+  ```
+  (list-runs {:thread_id   \",,,\"})
+  ```
+  thread_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRuns
+  "
+  ([params]
+   (list-runs params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-runs params opts))))
+
+
+
+(defn create-run
+  "Create a run.
+
+  Example:
+  ```
+  (create-run {:thread_id   \",,,\"
+               :assistant_id   \",,,\"})
+  ```
+  thread_id required
+  assistant_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createRun
+  "
+  ([params]
+   (create-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-run params opts))))
+
+
+
+(defn retrieve-run
+  "Retrieves a run.
+
+  Example:
+  ```
+  (retrieve-run {:thread_id   \",,,\"
+            :run_id      \",,,\"})
+  ```
+  thread_id required
+  run_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
+  "
+  ([params]
+   (retrieve-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-run params opts))))
+
+
+
+(defn modify-run
+  "Modifies a run.
+
+  Example:
+  ```
+  (modify-run {:thread_id   \",,,\"
+               :run_id      \",,,\"})
+  ```
+  thread_id required
+  run_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/modifyRun
+  "
+  ([params]
+   (modify-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :modify-run params opts))))
+
+
+
+(defn submit-tool-outputs-to-run
+  "When a run has the `status: \"requires_action\"` and `required_action.type` is
+   `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool
+   calls once they're all completed. All outputs must be submitted in a single request.
+
+   Example:
+
+   ```
+   (submit-tool-outputs-to-run {:thread_id    \",,,\"
+                             :run_id       \",,,\"
+                              :tool_outputs  [{:tool_call_id  \"call_wwg3TXXXF0SCT7UTTvqxjZc\",\n
+                                               :output        \"Budapest, Hungary\"}]})
+    ```
+    thread_id required
+    run_id required
+    tool_outputs required
+
+
+    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/submitToolOutputs
+    "
+  ([params]
+   (submit-tool-outputs-to-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :submit-tool-outputs-to-run params opts))))
+
+
+(defn list-run-steps
+  "Returns a list of run steps belonging to a run.
+
+   Example:
+
+   ```
+   (list-run-steps {:thread_id    \",,,\"
+                    :run_id       \",,,\"})
+    ```
+    thread_id required
+    run_id required
+
+
+    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/listRunSteps
+    "
+  ([params]
+   (list-run-steps params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :list-run-steps params opts))))
+
+
+
+
+(defn cancel-run
+  "Returns a list of run steps belonging to a run.
+
+   Example:
+
+   ```
+   (cancel-run {:thread_id    \",,,\"
+                :run_id       \",,,\"})
+   ```
+   thread_id required
+   run_id required
+
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/cancelRun
+   "
+  ([params]
+   (cancel-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :cancel-run params opts))))
+
+
+
+
+(defn retrieve-run-step
+  "Retrieves a run step.
+
+   Example:
+
+   ```
+   (retrieve-run-step-steps {:thread_id    \",,,\"
+                             :run_id       \",,,\"
+                             :step_id      \",,,\"})
+    ```
+    thread_id required
+    run_id    required
+    step_id   required
+
+
+    Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/getRun
+    "
+  ([params]
+   (retrieve-run-step params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :get-run-step params opts))))
+
+
+
+
+(defn create-thread-and-run
+  "Create a thread and run it in one request.
+
+   Example:
+
+   ```
+   (create-thread-and-run {:assistant_id    \",,,\"})
+   ```
+   assistant_id required
+
+   Also see the [OpenAI documentation]https://platform.openai.com/docs/api-reference/runs/createThreadAndRun
+   "
+  ([params]
+   (create-thread-and-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+     (core/response-for :create-thread-and-run params opts))))
+
+
+
+
+
+
+
+

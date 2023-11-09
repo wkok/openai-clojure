@@ -41,9 +41,11 @@
     (testing "atoms get initialized correctly"
 
       (is (= {"Authorization" "Bearer my-secret-key",
-              "OpenAI-Organization" "my-company"}
+              "OpenAI-Organization" "my-company"
+              "OpenAI-Beta" "assistants=v1"}
              (-> (add-headers-fn {:params {:wkok.openai-clojure.core/options {:api-key "my-secret-key"
-                                                                              :organization "my-company"}}})
+                                                                              :organization "my-company"
+                                                                              :openai-beta "assistants=v1"}}})
                  :request
                  :headers))))))
 

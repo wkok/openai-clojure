@@ -13,3 +13,8 @@ More info in this   [PR](https://github.com/wkok/openai-clojure/pull/23#issuecom
 
 * from: `ChatCompletionFunctionParameters`
 * to: `{}`
+
+Fix the typo:  [PR](https://github.com/openai/openai-openapi/pull/114)
+
+* from: `submitToolOuputsToRun`
+* to:   `submitToolOutputsToRun`
