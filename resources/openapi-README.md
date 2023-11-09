@@ -14,6 +14,8 @@ More info in this   [PR](https://github.com/wkok/openai-clojure/pull/23#issuecom
 * from: `ChatCompletionFunctionParameters`
 * to: `{}`
 
+## /threads/{thread_id}/runs/{run_id}/submit_tool_outputs
+
 Fix the typo:  [PR](https://github.com/openai/openai-openapi/pull/114)
 
 * from: `submitToolOuputsToRun`

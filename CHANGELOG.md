@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.12.0 - 2023-11-09
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- (Beta) Added support for Assistants, Threads, Messages & Runs (thanks [Bader Szabolcs](https://github.com/damesek))
+
 ## 0.11.1 - 2023-11-04
 ### Supported API versions
 - OpenAI v2.0.0
