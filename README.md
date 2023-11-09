@@ -33,6 +33,10 @@ tools and applications which can work with both variants.
 | [Files](https://platform.openai.com/docs/api-reference/files) | X | |
 | [Fine-tuning](https://platform.openai.com/docs/api-reference/fine-tuning) | X | |
 | [Moderations](https://platform.openai.com/docs/api-reference/moderations) | X | |
+| [Assistants](https://platform.openai.com/docs/api-reference/assistants) | (beta) | |
+| [Threads](https://platform.openai.com/docs/api-reference/threads) | (beta) | |
+| [Messages](https://platform.openai.com/docs/api-reference/messages) | (beta) | |
+| [Runs](https://platform.openai.com/docs/api-reference/runs) | (beta) | |
 | [Fine-tunes (deprecated)](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
 
 ## Configuration
