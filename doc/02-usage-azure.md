@@ -9,13 +9,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.12.2"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.12.3"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.12.2"]
+[net.clojars.wkok/openai-clojure "0.12.3"]
 ```
 
 ## Authentication
@@ -44,7 +44,7 @@ Alternatively the `api-key` and/or `api-endpoint` can be passed in the `options`
 
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -83,18 +83,18 @@ Result:
 
 ### Completions
 
-* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-completion)
+* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
 
 ### Chat
 
-* [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-chat-completion)
+* [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-chat-completion)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#chat-completions)
 
 ### Embeddings
 
-* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-embedding)
+* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-embedding)
 
 Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)

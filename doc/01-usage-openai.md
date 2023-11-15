@@ -9,13 +9,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.12.2"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.12.3"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.12.2"]
+[net.clojars.wkok/openai-clojure "0.12.3"]
 ```
 
 ## Authentication
@@ -48,7 +48,7 @@ Alternatively the `api-key` and/or `organization` and/or `api-endpoint` can be p
 
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api) api documentation for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 
@@ -86,74 +86,74 @@ Result:
 
 ### Models
 
-* [list-models](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#list-models)
-* [retrieve-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#retrieve-model)
+* [list-models](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#list-models)
+* [retrieve-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#retrieve-model)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/models)
 
 ### Completions
 
-* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-completion)
+* [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-completion)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/completions)
 
 ### Chat
 
-* [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-chat-completion)
+* [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-chat-completion)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat)
 
 ### Edits
 
-* [create-edit](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-edit)
+* [create-edit](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-edit)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/edits)
 
 ### Images
 
-* [create-image](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-image)
-* [create-image-edit](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-image-edit)
-* [create-image-variation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-image-variation)
+* [create-image](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-image)
+* [create-image-edit](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-image-edit)
+* [create-image-variation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-image-variation)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images)
 
 ### Embeddings
 
-* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-embedding)
+* [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-embedding)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/embeddings)
 
 ### Audio
 
-* [create-transcription](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-transcription)
-* [create-translation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-translation)
+* [create-transcription](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-transcription)
+* [create-translation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-translation)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio)
 
 ### Files
 
-* [list-files](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#list-files)
-* [create-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-file)
-* [delete-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#delete-file)
-* [retrieve-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#retrieve-file)
-* [download-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#download-file)
+* [list-files](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#list-files)
+* [create-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-file)
+* [delete-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#delete-file)
+* [retrieve-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#retrieve-file)
+* [download-file](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#download-file)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files)
 
 ### Fine-tunes
 
-* [create-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-fine-tune)
-* [list-fine-tunes](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#list-fine-tunes)
-* [retrieve-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#retrieve-fine-tune)
-* [cancel-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#cancel-fine-tune)
-* [list-fine-tune-events](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#list-fine-tune-events)
-* [delete-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#delete-model)
+* [create-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-fine-tune)
+* [list-fine-tunes](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#list-fine-tunes)
+* [retrieve-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#retrieve-fine-tune)
+* [cancel-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#cancel-fine-tune)
+* [list-fine-tune-events](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#list-fine-tune-events)
+* [delete-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#delete-model)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes)
 
 ### Moderations
 
-* [create-moderation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.2/api/wkok.openai-clojure.api#create-moderation)
+* [create-moderation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.12.3/api/wkok.openai-clojure.api#create-moderation)
 
 ### Assistants
 
