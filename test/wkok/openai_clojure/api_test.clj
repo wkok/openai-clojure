@@ -142,6 +142,11 @@
        (is (= :success
               (api/create-translation {:file  (io/file "path/to/file/german.m4a")
                                        :model "whisper-1"})))
+       (is (= :success
+              (api/create-speech {:model "tts-1"
+                                  :input "Hey there! Nice to meet you!"
+                                  :voice "alloy"
+                                  :response_format "mp3"})))
 
        (is (= :success
               (api/list-files)))
