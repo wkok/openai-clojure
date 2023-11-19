@@ -320,6 +320,27 @@
        (is (= :success
               (api/create-thread-and-run {:assistant_id    "----id----"}))))))
 
+(deftest create-chat-completion-tools
+
+  (with-stubbed-martians
+
+    #(testing "Spec override for tools parameter. See https://github.com/wkok/openai-clojure/issues/41"
+
+       (is (= :success
+              (api/create-chat-completion {:model       "gpt-3.5-turbo"
+                                           :messages    [{:role    "user"
+                                                          :content "Wikipedia page about foxes"}]
+                                           :tools
+                                           [{:type     "function"
+                                             :function {:name        "get_current_weather"
+                                                        :description "Get the current weather in a given location"
+                                                        :parameters
+                                                        {:type       "object"
+                                                         :properties {:location {:type        "string"
+                                                                                 :description "The city and state, e.g. San Francisco, CA"}
+                                                                      :unit     {:type "string"
+                                                                                 :enum ["celsius" "fahrenheit"]}}}}}]
+                                           :tool_choice "auto"}))))))
 
 (deftest stream-test
 
