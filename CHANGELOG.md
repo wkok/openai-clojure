@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.13.0 - 2023-11-19
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Added support for the [speech api](https://platform.openai.com/docs/api-reference/audio/createSpeech) (thanks [Stoica George-Ovidiu](https://github.com/ovistoica))
+- Fixed schema validation issue [41](https://github.com/wkok/openai-clojure/issues/41) when including the `:tools` parameter in a chat completions request
+
 ## 0.12.3 - 2023-11-15
 ### Supported API versions
 - OpenAI v2.0.0
