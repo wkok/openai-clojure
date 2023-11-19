@@ -222,6 +222,23 @@
   ([params options]
    (core/response-for :create-translation params options)))
 
+(defn create-speech
+  "Creates audio from text.
+
+  Example:
+  ```
+  (create-speech {:model \"tts-1\"
+                  :input \"Hello! Nice to meet you!.\"
+                  :voice \"alloy\"
+                  :response_format \"mp3\"})
+  ```
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/createSpeech)
+  "
+  ([params]
+   (create-speech params nil))
+  ([params options]
+   (core/response-for :create-speech params options)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Files
