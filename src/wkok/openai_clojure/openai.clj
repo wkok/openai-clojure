@@ -79,19 +79,41 @@
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
   (let [definition (yaml/yaml->edn (slurp (io/resource "openapi.yaml")))
-        base-url (openapi/base-url nil nil definition)
-        encoders (assoc (encoders/default-encoders)
-                   "multipart/form-data" nil)
-        opts (update martian-http/default-opts
-                     :interceptors (fn [interceptors]
-                                     (-> (remove #(#{:martian.hato/perform-request} (:name %))
-                                                 interceptors)
-                                         (concat [add-headers
-                                                  openai-interceptors/set-request-options
-                                                  (override-api-endpoint base-url)
-                                                  (interceptors/encode-body encoders)
-                                                  multipart-form-data
-                                                  sse/perform-sse-capable-request]))))]
+        base-url   (openapi/base-url nil nil definition)
+        encoders   (assoc (encoders/default-encoders)
+                          "multipart/form-data" nil
+                          "application/octet-stream" nil)
+        opts       (update martian-http/default-opts
+                           :interceptors (fn [interceptors]
+                                           (-> interceptors
+                                               (interceptors/inject
+                                                 add-headers
+                                                 :after
+                                                 :martian.interceptors/header-params)
+                                               (interceptors/inject
+                                                 multipart-form-data
+                                                 :after
+                                                 ::add-headers)
+                                               (interceptors/inject
+                                                 openai-interceptors/set-request-options
+                                                 :before
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 (override-api-endpoint base-url)
+                                                 :before
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 sse/perform-sse-capable-request
+                                                 :replace
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 (interceptors/encode-body encoders)
+                                                 :replace
+                                                 :martian.interceptors/encode-body)
+                                               (interceptors/inject
+                                                 (interceptors/coerce-response encoders)
+                                                 :replace
+                                                 :martian.interceptors/coerce-response))))]
     (-> (martian/bootstrap-openapi base-url definition opts)
         update-file-schemas)))
 
