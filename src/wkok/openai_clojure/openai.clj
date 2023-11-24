@@ -6,10 +6,10 @@
     [martian.openapi :as openapi]
     [martian.yaml :as yaml]
     [wkok.openai-clojure.sse :as sse]
+    [wkok.openai-clojure.interceptors :as openai-interceptors]
     [martian.encoders :as encoders]
     [martian.interceptors :as interceptors]
-    [schema.core :as s]
-    [clojure.string :as string]))
+    [schema.core :as s]))
 
 (def add-headers
   {:name  ::add-headers
@@ -87,6 +87,7 @@
                                      (-> (remove #(#{:martian.hato/perform-request} (:name %))
                                                  interceptors)
                                          (concat [add-headers
+                                                  openai-interceptors/set-request-options
                                                   (override-api-endpoint base-url)
                                                   (interceptors/encode-body encoders)
                                                   multipart-form-data

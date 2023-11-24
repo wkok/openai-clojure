@@ -386,3 +386,18 @@
                       :multipart)]
     (is (some #(#{"file"} (:name %)) multipart))
     (is (some #(#{"model"} (:name %)) multipart))))
+
+
+(deftest request-options-test
+  (testing "Request options are set on the http client"
+    (let [request (martian/request-for @openai/m
+                                       :create-chat-completion
+                                       {:model    "gpt-3.5-turbo"
+                                        :messages [{:role "system" :content "You are a helpful assistant."}
+                                                   {:role "user" :content "Who won the world series in 2020?"}
+                                                   {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                                   {:role "user" :content "Where was it played?"}]
+                                        :wkok.openai-clojure.core/options {:request {:timeout 1000}}})]
+
+      (is (= 1000
+             (:timeout request))))))
