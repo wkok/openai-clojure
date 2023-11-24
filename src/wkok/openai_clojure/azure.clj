@@ -5,6 +5,7 @@
    [clojure.string :as s]
    [martian.core :as martian]
    [martian.hato :as martian-http]
+   [wkok.openai-clojure.interceptors :as openai-interceptors]
    [wkok.openai-clojure.sse :as sse]))
 
 (def add-authentication-header
@@ -48,13 +49,16 @@
 (def m
   (delay
     (patch-handler
-     (martian/bootstrap-openapi "/openai"
-                                (load-openai-spec)
-                                (update
-                                 martian-http/default-opts
-                                 :interceptors
-                                 #(-> (remove (comp #{martian-http/perform-request}) %)
-                                      (concat [add-authentication-header override-api-endpoint sse/perform-sse-capable-request])))))))
+      (martian/bootstrap-openapi "/openai"
+                                 (load-openai-spec)
+                                 (update
+                                   martian-http/default-opts
+                                   :interceptors
+                                   #(-> (remove (comp #{martian-http/perform-request}) %)
+                                        (concat [add-authentication-header
+                                                 openai-interceptors/set-request-options
+                                                 override-api-endpoint
+                                                 sse/perform-sse-capable-request])))))))
 
 (defn patch-params [params]
   {:api-version "2023-05-15"
