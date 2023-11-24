@@ -1,4 +1,4 @@
-(ns wkok.openai-clojure.interceptors)
+(ns ^:no-doc wkok.openai-clojure.interceptors)
 
 (def set-request-options
   {:name ::set-request-options
