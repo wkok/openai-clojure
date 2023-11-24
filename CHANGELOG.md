@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.14.0 - 2023-11-24
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Added ability to pass http client request options like the timeout. Issue [44](https://github.com/wkok/openai-clojure/issues/44)
+- Added ability to specify the sliding buffer size in an SSE request, or default to infinite buffer. Issue [43](https://github.com/wkok/openai-clojure/issues/43)
+- Fixed warning about no matching content-type [42](https://github.com/wkok/openai-clojure/issues/42)
+
 ## 0.13.0 - 2023-11-19
 ### Supported API versions
 - OpenAI v2.0.0
