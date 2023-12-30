@@ -85,7 +85,7 @@
                   data (slurp (byte-array next-byte-coll))]
               (if-let [es (not-empty (re-seq event-mask data))]
                 (if (every? true? (map #(a/>!! events %) es))
-                  (recur (drop (apply + (map #(count (.getBytes %)) es))
+                  (recur (drop (apply + (map #(count (.getBytes ^String %)) es))
                                next-byte-coll))
 
                   ;; Output stream closed, exiting read-loop
