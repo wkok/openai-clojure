@@ -105,35 +105,32 @@
     {:status 200
      :body events}))
 
-(defn wrap-logger
-  "Middleware that allows the user to supply a logging-fn that
+(defn wrap-trace
+  "Middleware that allows the user to supply a trace function that
   will receive the raw request & response as arguments.
   See: https://github.com/gnarroway/hato?tab=readme-ov-file#custom-middleware"
-  [logger]
+  [trace]
   (fn [client]
     (fn
       ([req]
        (let [resp (client req)]
-         (logger (or (:body req)
-                     (:url req))
-                 (:body resp))
+         (trace (:body req)
+                (:body resp))
          resp))
       ([req respond raise]
        (client req
-               #(respond (do (logger (or (:body req)
-                                         (:url req))
-                                     (:body %))
+               #(respond (do (trace (:body req)
+                                    (:body %))
                              %))
                raise)))))
-
 
 (def perform-sse-capable-request
   {:name  ::perform-sse-capable-request
    :leave (fn [{:keys [request params] :as ctx}]
-            (let [{{logger :logger} :wkok.openai-clojure.core/options} params]
+            (let [{{trace :trace} :wkok.openai-clojure.core/options} params]
               (assoc ctx :response (if (:stream params)
                                      (sse-request ctx)
                                      (http/request
-                                       (if logger
-                                         (assoc request :middleware (conj hm/default-middleware (wrap-logger logger)))
+                                       (if trace
+                                         (assoc request :middleware (conj hm/default-middleware (wrap-trace trace)))
                                          request))))))})
