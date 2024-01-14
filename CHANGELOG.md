@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.15.0 - 2024-01-14
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-05-15
+### Changes
+- Added support for a `:trace` function in `:options` to capture raw request details. See [doc](doc/04-debugging.md) and PR [50](https://github.com/wkok/openai-clojure/pull/50)
+
 ## 0.14.0 - 2023-11-24
 ### Supported API versions
 - OpenAI v2.0.0
