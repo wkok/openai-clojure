@@ -1,6 +1,7 @@
 (ns ^:no-doc wkok.openai-clojure.sse
   (:require
    [hato.client :as http]
+   [hato.middleware :as hm]
    [clojure.core.async :as a]
    [clojure.string :as string]
    [cheshire.core :as json]
@@ -104,9 +105,57 @@
     {:status 200
      :body events}))
 
+(defn wrap-trace
+  "Middleware that allows the user to supply a trace function that
+  will receive the raw request & response as arguments.
+  See: https://github.com/gnarroway/hato?tab=readme-ov-file#custom-middleware"
+  [trace]
+  (fn [client]
+    (fn
+      ([req]
+       (let [resp (client req)]
+         (trace req resp)
+         resp))
+      ([req respond raise]
+       (client req
+               #(respond (do (trace req %)
+                             %))
+               raise)))))
+
+(defn middleware
+  "The default list of middleware hato uses for wrapping requests but
+  with added wrap-trace in the correct position to allow tracing of error messages."
+  [trace]
+  [hm/wrap-request-timing
+
+   hm/wrap-query-params
+   hm/wrap-basic-auth
+   hm/wrap-oauth
+   hm/wrap-user-info
+   hm/wrap-url
+
+   hm/wrap-decompression
+   hm/wrap-output-coercion
+
+   (wrap-trace trace)
+
+   hm/wrap-exceptions
+   hm/wrap-accept
+   hm/wrap-accept-encoding
+   hm/wrap-multipart
+
+   hm/wrap-content-type
+   hm/wrap-form-params
+   hm/wrap-nested-params
+   hm/wrap-method])
+
 (def perform-sse-capable-request
-  {:name ::perform-sse-capable-request
+  {:name  ::perform-sse-capable-request
    :leave (fn [{:keys [request params] :as ctx}]
-            (assoc ctx :response (if (:stream params)
-                                   (sse-request ctx)
-                                   (http/request request))))})
+            (let [{{trace :trace} :wkok.openai-clojure.core/options} params]
+              (assoc ctx :response (if (:stream params)
+                                     (sse-request ctx)
+                                     (http/request
+                                       (if trace
+                                         (assoc request :middleware (middleware trace))
+                                         request))))))})
