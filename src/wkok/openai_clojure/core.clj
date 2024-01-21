@@ -15,7 +15,7 @@
 
 (defn response-for
   [operation params
-   {:keys [impl]
+   {:keys [impl request]
     :or {impl :openai}
     :as options}]
 
@@ -31,7 +31,10 @@
                            :openai identity
                            :azure azure/patch-params)
 
-          patched-params (patch-parms-fn params)]
+          patched-params (patch-parms-fn params)
 
-      (-> (martian/response-for m operation (assoc patched-params ::options options))
-          :body))))
+          response (martian/response-for m operation (assoc patched-params ::options options))]
+
+      (if (:async? request)
+        response
+        (:body response)))))

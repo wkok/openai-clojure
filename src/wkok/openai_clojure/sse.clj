@@ -1,5 +1,6 @@
 (ns ^:no-doc wkok.openai-clojure.sse
   (:require
+   [martian.hato :as martian.hato]
    [hato.client :as http]
    [hato.middleware :as hm]
    [clojure.core.async :as a]
@@ -150,12 +151,27 @@
    hm/wrap-method])
 
 (def perform-sse-capable-request
-  {:name  ::perform-sse-capable-request
+
+  {:name ::perform-sse-capable-request
+
    :leave (fn [{:keys [request params] :as ctx}]
-            (let [{{trace :trace} :wkok.openai-clojure.core/options} params]
-              (assoc ctx :response (if (:stream params)
-                                     (sse-request ctx)
-                                     (http/request
-                                       (if trace
-                                         (assoc request :middleware (middleware trace))
-                                         request))))))})
+
+            (let [{{trace            :trace
+                    {async? :async?} :request}
+                   :wkok.openai-clojure.core/options}
+                  params
+
+                  request'
+                  (if trace
+                    (assoc request :middleware (middleware trace))
+                    request)
+
+                  ctx' (assoc ctx :request request')]
+
+              (if async?
+
+                ((:leave martian.hato/perform-request-async) ctx')
+
+                (assoc ctx :response (if (:stream params)
+                                       (sse-request ctx')
+                                       (http/request request'))))))})
