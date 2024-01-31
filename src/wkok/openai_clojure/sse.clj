@@ -170,7 +170,13 @@
 
               (if async?
 
-                ((:leave martian.hato/perform-request-async) ctx')
+                (-> ((:leave martian.hato/perform-request-async) ctx')
+                    (update :response
+                            #(.thenApply
+                               %
+                               (reify java.util.function.Function
+                                 (apply [_ response']
+                                   (:body response'))))))
 
                 (assoc ctx :response (if (:stream params)
                                        (sse-request ctx')
