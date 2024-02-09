@@ -61,6 +61,6 @@
                                                  sse/perform-sse-capable-request])))))))
 
 (defn patch-params [params]
-  {:api-version "2023-05-15"
+  {:api-version "2023-12-01-preview"
    :deployment-id (:model params)
    :martian.core/body (dissoc params :model)})
