@@ -28,7 +28,6 @@ tools and applications which can work with both variants.
 | [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
 | [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
 | [Models](https://platform.openai.com/docs/api-reference/models) | X | |
-| [Edits](https://platform.openai.com/docs/api-reference/edits) | X | |
 | [Images](https://platform.openai.com/docs/api-reference/images) | X | |
 | [Files](https://platform.openai.com/docs/api-reference/files) | X | |
 | [Fine-tuning](https://platform.openai.com/docs/api-reference/fine-tuning) | X | |
@@ -37,7 +36,6 @@ tools and applications which can work with both variants.
 | [Threads](https://platform.openai.com/docs/api-reference/threads) | (beta) | |
 | [Messages](https://platform.openai.com/docs/api-reference/messages) | (beta) | |
 | [Runs](https://platform.openai.com/docs/api-reference/runs) | (beta) | |
-| [Fine-tunes (deprecated)](https://platform.openai.com/docs/api-reference/fine-tunes) | X | |
 
 ## Configuration
 

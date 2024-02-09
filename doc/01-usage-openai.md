@@ -163,7 +163,7 @@ Also see the [OpenAI documentation](https://platform.openai.com/docs/api-referen
 * [list-fine-tuning-events](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.16.0/api/wkok.openai-clojure.api#list-fine-tuning-events)
 * [delete-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.16.0/api/wkok.openai-clojure.api#delete-model)
 
-Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes)
+Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tuning)
 
 ### Moderations
 
