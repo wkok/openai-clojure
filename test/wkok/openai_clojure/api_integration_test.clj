@@ -10,3 +10,17 @@
                                                            {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
                                                            {:role "user" :content "Where was it played?"}]})
                    :choices))))
+
+
+(deftest create-chat-completion-async
+  (testing "creates a simple chat completion async"
+    (let [result (api/create-chat-completion {:model    "gpt-3.5-turbo"
+                                              :messages [{:role "system" :content "You are a helpful assistant."}
+                                                         {:role "user" :content "Who won the world series in 2020?"}
+                                                         {:role "assistant" :content "The Los Angeles Dodgers won the World Series in 2020."}
+                                                         {:role "user" :content "Where was it played?"}]}
+                                             {:request {:async? true}})]
+
+      (is (future? result))
+
+      (is (contains? @result :choices)))))
