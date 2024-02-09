@@ -101,11 +101,6 @@
                                           {:impl :azure})))
 
        (is (= :success
-              (api/create-edit {:model       "text-davinci-edit-001"
-                                :input       "What day of the wek is it?"
-                                :instruction "Fix the spelling mistakes"})))
-
-       (is (= :success
               (api/create-image {:prompt "A cute baby sea otter"
                                  :n      2
                                  :size   "1024x1024"})))
@@ -163,21 +158,6 @@
 
        (is (= :success
               (api/download-file {:file-id "file-wefuhweof"})))
-
-       (is (= :success
-              (api/create-fine-tune {:training_file "file-xuhfiwuefb"})))
-
-       (is (= :success
-              (api/list-fine-tunes)))
-
-       (is (= :success
-              (api/retrieve-fine-tune {:fine_tune_id "ft-1wefweub"})))
-
-       (is (= :success
-              (api/cancel-fine-tune {:fine_tune_id "ft-1wefweub"})))
-
-       (is (= :success
-              (api/list-fine-tune-events {:fine_tune_id "ft-1wefweub"})))
 
        (is (= :success
               (api/create-fine-tuning-job {:training_file "file-xuhfiwuefb"

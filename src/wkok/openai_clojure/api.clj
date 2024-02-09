@@ -84,27 +84,6 @@
    (core/response-for :create-chat-completion params options)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Edit
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn create-edit
-  "Creates a new edit for the provided input, instruction, and parameters
-
-  Example:
-  ```
-  (create-edit {:model \"text-davinci-edit-001\"
-                :input \"What day of the wek is it?\"
-                :instruction \"Fix the spelling mistakes\"})
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/edits/create)
-  "
-  ([params]
-   (create-edit params nil))
-  ([params options]
-   (core/response-for :create-edit params options)))
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Images
@@ -314,82 +293,6 @@
    (download-file params nil))
   ([params options]
    (core/response-for :download-file params options)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fine tune (deprecated)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn ^:deprecated create-fine-tune
-  "(Deprecated) Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
-
-  Example:
-  ```
-  (create-fine-tune {:training_file \"file-xuhfiwuefb\"})
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/create)
-  "
-  ([params]
-   (create-fine-tune params nil))
-  ([params options]
-   (core/response-for :create-fine-tune params options)))
-
-(defn ^:deprecated list-fine-tunes
-  "(Deprecated) List your organization's fine-tuning jobs
-
-  Example:
-  ```
-  (list-fine-tunes)
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/list)
-  "
-  ([]
-   (list-fine-tunes nil))
-  ([options]
-   (core/response-for :list-fine-tunes {} options)))
-
-(defn ^:deprecated retrieve-fine-tune
-  "(Deprecated) Gets info about the fine-tune job.
-
-  Example:
-  ```
-  (retrieve-fine-tune {:fine_tune_id \"ft-1wefweub\"})
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/retrieve)
-  "
-  ([params]
-   (retrieve-fine-tune params nil))
-  ([params options]
-   (core/response-for :retrieve-fine-tune params options)))
-
-(defn ^:deprecated cancel-fine-tune
-  "(Deprecated) Immediately cancel a fine-tune job.
-
-  Example:
-  ```
-  (cancel-fine-tune {:fine_tune_id \"ft-1wefweub\"})
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/cancel)
-  "
-  ([params]
-   (cancel-fine-tune params nil))
-  ([params options]
-   (core/response-for :cancel-fine-tune params options)))
-
-
-(defn ^:deprecated list-fine-tune-events
-  "(Deprecated) Get fine-grained status updates for a fine-tune job.
-
-  Example:
-  ```
-  (list-fine-tune-events {:fine_tune_id \"ft-1wefweub\"})
-  ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes/events)
-  "
-  ([params]
-   (list-fine-tune-events params nil))
-  ([params options]
-   (core/response-for :list-fine-tune-events params options)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -988,8 +891,7 @@
    (submit-tool-outputs-to-run params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
-     (core/response-for :submit-tool-outputs-to-run params opts))))
-
+     (core/response-for :submit-tool-ouputs-to-run params opts))))
 
 (defn list-run-steps
   "Returns a list of run steps belonging to a run.
