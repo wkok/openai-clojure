@@ -121,12 +121,6 @@ Also see the [OpenAI documentation](https://platform.openai.com/docs/api-referen
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat)
 
-### Edits
-
-* [create-edit](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#create-edit)
-
-Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/edits)
-
 ### Images
 
 * [create-image](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#create-image)
@@ -160,13 +154,13 @@ Also see the [OpenAI documentation](https://platform.openai.com/docs/api-referen
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/files)
 
-### Fine-tunes
+### Fine-tuning
 
-* [create-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#create-fine-tune)
-* [list-fine-tunes](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#list-fine-tunes)
-* [retrieve-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#retrieve-fine-tune)
-* [cancel-fine-tune](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#cancel-fine-tune)
-* [list-fine-tune-events](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#list-fine-tune-events)
+* [create-fine-tuning-job](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#create-fine-tuning-job)
+* [list-fine-tuning-jobs](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#list-fine-tuning-jobs)
+* [retrieve-fine-tuning-job](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#retrieve-fine-tuning-job)
+* [cancel-fine-tuning-job](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#cancel-fine-tuning-job)
+* [list-fine-tuning-events](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#list-fine-tuning-events)
 * [delete-model](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.15.0/api/wkok.openai-clojure.api#delete-model)
 
 Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/fine-tunes)
