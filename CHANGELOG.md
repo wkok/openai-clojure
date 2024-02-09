@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.16.0 - 2024-02-09
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-12-01-preview
+### Changes
+- Added async support PR [53](https://github.com/wkok/openai-clojure/pull/53)
+- Updated to latest Azure spec v2023-12-01-preview
+- Updated to latest OpenAI spec as at 2024-02-09
+- Removed deprecated endpoints - edit
+- Removed deprecated endpoints - fine tune
+
 ## 0.15.0 - 2024-01-14
 ### Supported API versions
 - OpenAI v2.0.0
