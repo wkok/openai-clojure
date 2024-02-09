@@ -22,7 +22,7 @@ tools and applications which can work with both variants.
 
 |             | OpenAI | Azure OpenAI |
 | ----------- | :----: | :----------: |
-| Version     | v2.0.0 | v2023-05-15  |
+| Version     | v2.0.0 | v2023-12-01-preview  |
 | [Chat](https://platform.openai.com/docs/api-reference/chat) | X | X |
 | [Audio](https://platform.openai.com/docs/api-reference/audio) | X | |
 | [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
