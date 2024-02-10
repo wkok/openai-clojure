@@ -34,7 +34,7 @@ Set the environment variable `AZURE_OPENAI_API_ENDPOINT` to your [Azure OpenAPI 
 
 Alternatively the `api-key` and/or `api-endpoint` can be passed in the `options` argument of each api function
 
-```
+```clojure
 (api/create-completion {:model "text-davinci-003"
                         :prompt "Say this is a test"}
                        {:api-key "xxxxx"
@@ -54,7 +54,7 @@ Require the `api` namespace
 
 A simple chat conversation with ChatGPT could be:
 
-```
+```clojure
 (api/create-chat-completion {:model "gpt-35-turbo"
                              :messages [{:role "system" :content "You are a helpful assistant."}
                                         {:role "user" :content "Who won the world series in 2020?"}
@@ -64,7 +64,7 @@ A simple chat conversation with ChatGPT could be:
 ```
 
 Result:
-```
+```clojure
 {:id "chatcmpl-6srOKLabYTpTRwRUQxjkcBxw3uf1H",
  :object "chat.completion",
  :created 1678532968,

@@ -91,7 +91,7 @@ Require the `api` namespace
 
 A simple chat conversation with OpenAI's ChatGPT could be:
 
-```
+```clojure
 (api/create-chat-completion {:model "gpt-3.5-turbo"
                              :messages [{:role "system" :content "You are a helpful assistant."}
                                         {:role "user" :content "Who won the world series in 2020?"}
@@ -100,7 +100,7 @@ A simple chat conversation with OpenAI's ChatGPT could be:
 ```
 
 Result:
-```
+```clojure
 {:id "chatcmpl-6srOKLabYTpTRwRUQxjkcBxw3uf1H",
  :object "chat.completion",
  :created 1678532968,
