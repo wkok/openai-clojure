@@ -5,11 +5,8 @@
    [hato.middleware :as hm]
    [clojure.core.async :as a]
    [clojure.string :as string]
-   [cheshire.core :as json]
-   [clojure.core.async.impl.protocols :as impl])
-  (:import (java.io InputStream)
-           (clojure.lang Counted)
-           (java.util    LinkedList)))
+   [cheshire.core :as json])
+  (:import (java.io InputStream)))
 
 (def event-mask (re-pattern (str "(?s).+?\n\n")))
 
@@ -31,39 +28,13 @@
       (-> (subs raw-event data-idx)
           (json/parse-string true)))))
 
-(deftype InfiniteBuffer [^LinkedList buf]
-  impl/UnblockingBuffer
-  impl/Buffer
-  (full? [_this]
-    false)
-  (remove! [_this]
-    (.removeLast buf))
-  (add!* [this itm]
-    (.addFirst buf itm)
-    this)
-  (close-buf! [_this])
-  Counted
-  (count [_this]
-    (.size buf)))
-
-(defn infinite-buffer []
-  (InfiniteBuffer. (LinkedList.)))
-
 (defn calc-buffer-size
-  "- Use stream_buffer_len if provided.
-   - Otherwise, buffer size should be at least equal to max_tokens
-     plus the [DONE] terminator if it is provided.
-   - Else fallbacks on ##Inf and use an infinite-buffer instead"
-  [{:keys [stream_buffer_len max_tokens]}]
-  (or stream_buffer_len
-      (when max_tokens (inc max_tokens))
-      ##Inf))
-
-(defn make-buffer [params]
-  (let [size (calc-buffer-size params)]
-    (if (= size ##Inf)
-      (infinite-buffer)
-      (a/sliding-buffer size))))
+  "Buffer size should be at least equal to max_tokens
+  or 16 (the default in openai as of 2023-02-19)
+  plus the [DONE] terminator"
+  [{:keys [max_tokens]
+    :or {max_tokens 16}}]
+  (inc max_tokens))
 
 (defn sse-events
   "Returns a core.async channel with events as clojure data structures.
@@ -72,7 +43,8 @@
   (let [event-stream ^InputStream (:body (http/request (merge request
                                                               params
                                                               {:as :stream})))
-        events (a/chan (make-buffer params) (map parse-event))]
+        buffer-size (calc-buffer-size params)
+        events (a/chan (a/sliding-buffer buffer-size) (map parse-event))]
     (a/thread
       (loop [byte-coll []]
         (let [byte-arr (byte-array (max 1 (.available event-stream)))
