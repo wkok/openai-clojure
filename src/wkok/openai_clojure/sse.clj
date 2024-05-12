@@ -28,12 +28,16 @@
       (-> (subs raw-event data-idx)
           (json/parse-string true)))))
 
+; Per this discussion: https://community.openai.com/t/clarification-for-max-tokens/19576
+; if the max_tokens is not provided, the response will try to use all the available
+; tokens to generate response, hence DEFAULT_BUFFER_SIZE should be large enough
+(def ^:private DEFAULT_BUFFER_SIZE 100000)
+
 (defn calc-buffer-size
   "Buffer size should be at least equal to max_tokens
-  or 16 (the default in openai as of 2023-02-19)
   plus the [DONE] terminator"
   [{:keys [max_tokens]
-    :or {max_tokens 16}}]
+    :or {max_tokens DEFAULT_BUFFER_SIZE}}]
   (inc max_tokens))
 
 (defn sse-events
@@ -44,7 +48,7 @@
                                                               params
                                                               {:as :stream})))
         buffer-size (calc-buffer-size params)
-        events (a/chan (a/sliding-buffer buffer-size) (map parse-event))]
+        events (a/chan (a/buffer buffer-size) (map parse-event))]
     (a/thread
       (loop [byte-coll []]
         (let [byte-arr (byte-array (max 1 (.available event-stream)))
@@ -153,3 +157,4 @@
                 (assoc ctx :response (if (:stream params)
                                        (sse-request ctx')
                                        (http/request request'))))))})
+
