@@ -448,7 +448,7 @@
   ([params]
    (create-assistant params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] "assistants=v2")]
      (core/response-for :create-assistant params opts))))
 
 
