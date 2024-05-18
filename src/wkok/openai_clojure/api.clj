@@ -2,6 +2,10 @@
   (:require [wkok.openai-clojure.core :as core]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Constants
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(def ^:private ASSISTANTS_HTTP_HEADER_STR  "assistants=v2")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Models
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -426,7 +430,7 @@
   ([params]
    (list-assistants params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-assistants params opts))))
 
 
@@ -448,7 +452,7 @@
   ([params]
    (create-assistant params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v2")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-assistant params opts))))
 
 
@@ -467,7 +471,7 @@
   ([params]
    (retrieve-assistant params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-assistant params opts))))
 
 
@@ -487,7 +491,7 @@
   ([params]
    (modify-assistant params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-assistant params opts))))
 
 
@@ -504,7 +508,7 @@
   ([params]
    (delete-assistant params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :delete-assistant params opts))))
 
 
@@ -523,7 +527,7 @@
   ([params]
    (list-assistant-files params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-assistant-files params opts))))
 
 
@@ -542,7 +546,7 @@
   ([params]
    (create-assistant-file params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-assistant-file params opts))))
 
 
@@ -561,7 +565,7 @@
   ([params]
    (retrieve-assistant-file params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-assistant-file params opts))))
 
 
@@ -579,7 +583,7 @@
   ([params]
    (delete-assistant-file params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :delete-assistant-file params opts))))
 
 
@@ -611,7 +615,7 @@
   ([params]
    (create-thread params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-thread params opts))))
 
 
@@ -629,7 +633,7 @@
   ([params]
    (retrieve-thread params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-thread params opts))))
 
 
@@ -648,7 +652,7 @@
   ([params]
    (modify-thread params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-thread params opts))))
 
 
@@ -665,7 +669,7 @@
   ([params]
    (delete-thread params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :delete-thread params opts))))
 
 
@@ -691,7 +695,7 @@
   ([params]
    (create-message params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-message params opts))))
 
 
@@ -709,7 +713,7 @@
   ([params]
    (list-messages params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-messages params opts))))
 
 
@@ -727,7 +731,7 @@
   ([params]
    (retrieve-message params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-message params opts))))
 
 
@@ -745,7 +749,7 @@
   ([params]
    (modify-message params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-message params opts))))
 
 
@@ -764,7 +768,7 @@
   ([params]
    (list-message-files params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-message-files params opts))))
 
 
@@ -784,7 +788,7 @@
   ([params]
    (retrieve-message-file params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-message-file params opts))))
 
 
@@ -809,7 +813,7 @@
   ([params]
    (list-runs params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-runs params opts))))
 
 
@@ -828,7 +832,7 @@
   ([params]
    (create-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-run params opts))))
 
 
@@ -847,7 +851,7 @@
   ([params]
    (retrieve-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-run params opts))))
 
 
@@ -866,7 +870,7 @@
   ([params]
    (modify-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-run params opts))))
 
 
@@ -890,7 +894,7 @@
   ([params]
    (submit-tool-outputs-to-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :submit-tool-ouputs-to-run params opts))))
 
 (defn list-run-steps
@@ -908,7 +912,7 @@
   ([params]
    (list-run-steps params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-run-steps params opts))))
 
 
@@ -929,7 +933,7 @@
   ([params]
    (cancel-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :cancel-run params opts))))
 
 
@@ -951,7 +955,7 @@
   ([params]
    (retrieve-run-step params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :get-run-step params opts))))
 
 
@@ -971,5 +975,5 @@
   ([params]
    (create-thread-and-run params nil))
   ([params options]
-   (let [opts (assoc-in options [:openai-beta] "assistants=v1")]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-thread-and-run params opts))))
