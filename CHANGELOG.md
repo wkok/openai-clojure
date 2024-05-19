@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.17.0 - 2024-05-19
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-12-01-preview
+### Changes
+- Removed LinkedList import to enable Babashka support PR [60](https://github.com/wkok/openai-clojure/pull/60)
+- Updated assistants HTTP header PR [61](https://github.com/wkok/openai-clojure/pull/61)
+
 ## 0.16.0 - 2024-02-09
 ### Supported API versions
 - OpenAI v2.0.0
