@@ -50,26 +50,30 @@
         buffer-size (calc-buffer-size params)
         events (a/chan (a/buffer buffer-size) (map parse-event))]
     (a/thread
-      (loop [byte-coll []]
-        (let [byte-arr (byte-array (max 1 (.available event-stream)))
-              bytes-read (.read event-stream byte-arr)]
+      (try
+        (loop [byte-coll []]
+          (let [byte-arr (byte-array (max 1 (.available event-stream)))
+                bytes-read (.read event-stream byte-arr)]
 
-          (if (neg? bytes-read)
+            (if (neg? bytes-read)
 
-            ;; Input stream closed, exiting read-loop
-            (.close event-stream)
+              ;; Input stream closed, exiting read-loop
+              nil
 
-            (let [next-byte-coll (concat byte-coll (seq byte-arr))
-                  data (slurp (byte-array next-byte-coll))]
-              (if-let [es (not-empty (re-seq event-mask data))]
-                (if (every? true? (map #(a/>!! events %) es))
-                  (recur (drop (apply + (map #(count (.getBytes ^String %)) es))
-                               next-byte-coll))
+              (let [next-byte-coll (concat byte-coll (seq byte-arr))
+                    data (slurp (byte-array next-byte-coll))]
+                (if-let [es (not-empty (re-seq event-mask data))]
+                  (if (every? true? (map #(a/>!! events %) es))
+                    (recur (drop (apply + (map #(count (.getBytes ^String %)) es))
+                                 next-byte-coll))
 
-                  ;; Output stream closed, exiting read-loop
-                  (.close event-stream))
+                    ;; Output stream closed, exiting read-loop
+                    nil)
 
-                (recur next-byte-coll)))))))
+                  (recur next-byte-coll))))))
+        (finally
+          (a/close! events)
+          (.close event-stream))))
     events))
 
 (defn sse-request
