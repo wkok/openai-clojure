@@ -75,6 +75,11 @@
       (update-file-schema :create-image-edit (schema.core/optional-key :mask))
       (update-file-schema :create-image-variation :image)))
 
+(defn fix-tools? [m]
+  (martian/update-handler m :create-chat-completion
+                          (fn [op]
+                            (assoc-in op [:body-schema :body (schema.core/optional-key :tools)] schema.core/Any))))
+
 (defn bootstrap-openapi
   "Bootstrap the martian from a local copy of the openai swagger spec"
   []
@@ -115,6 +120,7 @@
                                                  :replace
                                                  :martian.interceptors/coerce-response))))]
     (-> (martian/bootstrap-openapi base-url definition opts)
-        update-file-schemas)))
+        update-file-schemas
+        fix-tools?)))
 
 (def m (delay (bootstrap-openapi)))
