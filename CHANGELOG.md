@@ -1,5 +1,20 @@
 # Change Log
 
+## 0.18.0 - 2024-06-10
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-12-01-preview
+### Changes
+- Updated to latest OpenAI spec commit 4e97768 from 2024-06-07
+- Removed deprecated functions
+  - list-assistant-files
+  - create-assistant-file
+  - retrieve-assistant-file
+  - delete-assistant-file
+  - list-message-files
+  - retrieve-message-file
+  - submit-tool-outputs-to-run
+
 ## 0.17.0 - 2024-05-19
 ### Supported API versions
 - OpenAI v2.0.0

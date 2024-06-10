@@ -511,85 +511,6 @@
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :delete-assistant params opts))))
 
-
-(defn list-assistant-files
-  "Returns a list of assistant files.
-
-  Example:
-  ```
-  (list-assistant-files {:assistant_id \"----id----\"
-                         :limit 5})
-  ```
-  :assistant_id param required
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/listAssistantFiles)
-  "
-  ([params]
-   (list-assistant-files params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :list-assistant-files params opts))))
-
-
-
-(defn create-assistant-file
-  "Create an assistant file by attaching a File to an assistant.
-
-  Example:
-  ```
-  (create-assistant-file {:assistant_id \"----id----\"
-                          :file_id \"----id----\"})
-  ```
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/createAssistantFile)
-  "
-  ([params]
-   (create-assistant-file params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :create-assistant-file params opts))))
-
-
-
-(defn retrieve-assistant-file
-  "Retrieves an AssistantFile.
-
-  Example:
-  ```
-  (retrieve-assistant-file {:assistant_id \"----id----\"
-                            :file_id \"----id----\"})
-  ```
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/getAssistantFile)
-  "
-  ([params]
-   (retrieve-assistant-file params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :get-assistant-file params opts))))
-
-
-(defn delete-assistant-file
-  "Delete an assistant file.
-
-  Example:
-  ```
-  (delete-assistant-file {:assistant_id \"----id----\"
-                          :file_id \"----id----\"})
-  ```
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/assistants/deleteAssistantFile)
-  "
-  ([params]
-   (delete-assistant-file params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :delete-assistant-file params opts))))
-
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Threads (beta)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -752,48 +673,6 @@
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-message params opts))))
 
-
-
-(defn list-message-files
-  "Returns a list of message files.
-
-  Example:
-  ```
-  (list-message-files {:thread_id   \"----id----\"
-                       :message_id  \"----id----\"})
-  ```
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/listMessageFiles)
-  "
-  ([params]
-   (list-message-files params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :list-message-files params opts))))
-
-
-
-(defn retrieve-message-file
-  "Retrieves a message file.
-
-  Example:
-  ```
-  (retrieve-message-file {:thread_id   \"----id----\"
-                          :message_id  \"----id----\"
-                          :file_id  \"----id----\"})
-  ```
-
-   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/messages/getMessageFile)
-  "
-  ([params]
-   (retrieve-message-file params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :get-message-file params opts))))
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Runs (beta)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -872,30 +751,6 @@
   ([params options]
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-run params opts))))
-
-
-
-(defn submit-tool-outputs-to-run
-  "When a run has the `status: \"requires_action\"` and `required_action.type` is
-   `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool
-   calls once they're all completed. All outputs must be submitted in a single request.
-
-   Example:
-
-   ```
-   (submit-tool-outputs-to-run {:thread_id    \"----id----\"
-                                :run_id       \"----id----\"
-                                :tool_outputs  [{:tool_call_id  \"call_wwg3TXXXF0SCT7UTTvqxjZc\"
-                                                 :output        \"Budapest, Hungary\"}]})
-    ```
-
-    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs)
-    "
-  ([params]
-   (submit-tool-outputs-to-run params nil))
-  ([params options]
-   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :submit-tool-ouputs-to-run params opts))))
 
 (defn list-run-steps
   "Returns a list of run steps belonging to a run.

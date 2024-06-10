@@ -203,22 +203,6 @@
               (api/delete-assistant {:assistant_id "----id----"})))
 
        (is (= :success
-              (api/list-assistant-files {:assistant_id "----id----"
-                                         :limit        5})))
-
-       (is (= :success
-              (api/create-assistant-file {:assistant_id "----id----"
-                                          :file_id      "----id----"})))
-
-       (is (= :success
-              (api/retrieve-assistant-file {:assistant_id "----id----"
-                                            :file_id      "----id----"})))
-
-       (is (= :success
-              (api/delete-assistant-file {:assistant_id "----id----"
-                                          :file_id      "----id----"})))
-
-       (is (= :success
               (api/create-thread)))
 
        (is (= :success
@@ -255,15 +239,6 @@
                                    :message_id "----id----"})))
 
        (is (= :success
-              (api/list-message-files {:thread_id  "----id----"
-                                       :message_id "----id----"})))
-
-       (is (= :success
-              (api/retrieve-message-file {:thread_id  "----id----"
-                                          :message_id "----id----"
-                                          :file_id    "----id----"})))
-
-       (is (= :success
               (api/list-runs {:thread_id   "----id----"})))
 
        (is (= :success
@@ -277,12 +252,6 @@
        (is (= :success
               (api/modify-run {:thread_id   "----id----"
                                :run_id      "----id----"})))
-
-       (is (= :success
-              (api/submit-tool-outputs-to-run {:thread_id    "----id----"
-                                               :run_id       "----id----"
-                                               :tool_outputs [{:tool_call_id "call_wwg3TXXXF0SCT7UTTvqxjZc"
-                                                               :output       "Budapest, Hungary"}]})))
 
        (is (= :success
               (api/list-run-steps {:thread_id    "----id----"

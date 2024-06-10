@@ -5032,7 +5032,7 @@ paths:
 
     /threads/{thread_id}/runs/{run_id}/submit_tool_outputs:
         post:
-            operationId: submitToolOuputsToRun
+            operationId: submitToolOutputsToRun
             tags:
                 - Assistants
             summary: |
@@ -7509,7 +7509,7 @@ components:
                         - name
             required:
                 - role
-        
+
         # TODO(apeng): This is only because we don't support tools yet. Use allOf once we do.
         FineTuneChatCompletionRequestAssistantMessage:
             type: object
@@ -7546,7 +7546,7 @@ components:
                     enum: [0, 1]
                     description: "Controls whether the assistant message is trained against (0 or 1)"
             required:
-                - role                    
+                - role
 
         ChatCompletionRequestToolMessage:
             type: object
@@ -7587,7 +7587,7 @@ components:
                 - role
                 - content
                 - name
-        
+
         # TODO(apeng): This is only because we don't support tools yet. Add back deprecated once we do.
         FineTuneChatCompletionRequestFunctionMessage:
             allOf:
@@ -7611,8 +7611,7 @@ components:
                 name:
                     type: string
                     description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-                parameters:
-                    $ref: "#/components/schemas/FunctionParameters"
+                parameters: {}
             required:
                 - name
 
@@ -7649,8 +7648,7 @@ components:
                 name:
                     type: string
                     description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-                parameters:
-                    $ref: "#/components/schemas/FunctionParameters"
+                parameters: {}
             required:
                 - name
 
@@ -9684,7 +9682,7 @@ components:
                 name: Training format for chat models
                 example: |
                   {"messages":[{"role":"user","content":"What is the weather in San Francisco?"},{"role":"assistant","function_call":{"name":"get_current_weather","arguments":"{\"location\": \"San Francisco, USA\", \"format\": \"celsius\"}"}}],"functions":[{"name":"get_current_weather","description":"Get the current weather","parameters":{"type":"object","properties":{"location":{"type":"string","description":"The city and country, eg. San Francisco, USA"},"format":{"type":"string","enum":["celsius","fahrenheit"]}},"required":["location","format"]}}]}
-        
+
         FinetuneCompletionRequestInput:
             type: object
             description: The per-line training example of a fine-tuning input file for completions models
@@ -10018,7 +10016,7 @@ components:
                                                               description: Always `auto`.
                                                               enum: ["auto"]
                                                       required:
-                                                          - type 
+                                                          - type
                                                     - type: object
                                                       title: Static Chunking Strategy
                                                       additionalProperties: false
@@ -10040,7 +10038,7 @@ components:
                                                                       type: integer
                                                                       description: |
                                                                           The number of tokens that overlap between chunks. The default value is `400`.
-                                                                          
+
                                                                           Note that the overlap must not exceed half of `max_chunk_size_tokens`.
                                                               required:
                                                                   - max_chunk_size_tokens
@@ -11029,7 +11027,7 @@ components:
                                                               description: Always `auto`.
                                                               enum: ["auto"]
                                                       required:
-                                                          - type 
+                                                          - type
                                                     - type: object
                                                       title: Static Chunking Strategy
                                                       additionalProperties: false
@@ -11051,7 +11049,7 @@ components:
                                                                       type: integer
                                                                       description: |
                                                                           The number of tokens that overlap between chunks. The default value is `400`.
-                                                                          
+
                                                                           Note that the overlap must not exceed half of `max_chunk_size_tokens`.
                                                               required:
                                                                   - max_chunk_size_tokens
@@ -12598,7 +12596,7 @@ components:
                     type: integer
                     description: |
                         The number of tokens that overlap between chunks. The default value is `400`.
-                        
+
                         Note that the overlap must not exceed half of `max_chunk_size_tokens`.
             required:
                 - max_chunk_size_tokens
