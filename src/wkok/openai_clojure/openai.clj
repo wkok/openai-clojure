@@ -118,3 +118,25 @@
         update-file-schemas)))
 
 (def m (delay (bootstrap-openapi)))
+
+(comment
+
+  ;; Get all operations defined in spec
+
+  (def spec (->>  (martian/explore @m)
+                  (map first)
+                  #_(map #(martian/explore @m %))
+                  set))
+
+  ;; Get all functions defined in api
+
+  (require 'wkok.openai-clojure.api)
+
+  (def impl (->>  (keys (ns-publics 'wkok.openai-clojure.api))
+                  (map keyword)
+                  set))
+
+  ;; Compare the two
+
+  (clojure.set/difference impl spec)
+  )

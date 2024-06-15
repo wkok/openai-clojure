@@ -254,6 +254,12 @@
                                :run_id      "----id----"})))
 
        (is (= :success
+              (api/submit-tool-outputs-to-run {:thread_id    "----id----"
+                                               :run_id       "----id----"
+                                               :tool_outputs [{:tool_call_id "call_wwg3TXXXF0SCT7UTTvqxjZc"
+                                                               :output       "Budapest, Hungary"}]})))
+
+       (is (= :success
               (api/list-run-steps {:thread_id    "----id----"
                                    :run_id       "----id----"})))
 

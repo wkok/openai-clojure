@@ -16,7 +16,7 @@ tools and applications which can work with both variants.
 * [Usage - OpenAI](/doc/01-usage-openai.md)
 * [Usage - Azure OpenAI](/doc/02-usage-azure.md)
 * [Streaming Tokens](/doc/03-streaming.md)
-* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.18.0/api/wkok.openai-clojure.api)
+* [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.18.1/api/wkok.openai-clojure.api)
 
 ## Supported APIs
 
@@ -46,13 +46,13 @@ Add the `openai-clojure` dependency
 ### deps.edn
 
 ```
-net.clojars.wkok/openai-clojure {:mvn/version "0.18.0"}
+net.clojars.wkok/openai-clojure {:mvn/version "0.18.1"}
 ```
 
 ### Leiningen project.clj
 
 ```
-[net.clojars.wkok/openai-clojure "0.18.0"]
+[net.clojars.wkok/openai-clojure "0.18.1"]
 ```
 
 ## Java
@@ -81,7 +81,7 @@ See: [Authentication - Azure OpenAI](/doc/02-usage-azure.md#authentication)
 
 ## Quickstart
 
-See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.18.0/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
+See the full [API Reference](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.18.1/api/wkok.openai-clojure.api) for examples of all the supported OpenAI APIs.
 
 Require the `api` namespace
 

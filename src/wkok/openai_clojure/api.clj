@@ -752,6 +752,30 @@
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :modify-run params opts))))
 
+
+
+(defn submit-tool-outputs-to-run
+  "When a run has the `status: \"requires_action\"` and `required_action.type` is
+   `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool
+   calls once they're all completed. All outputs must be submitted in a single request.
+
+   Example:
+
+   ```
+   (submit-tool-outputs-to-run {:thread_id    \"----id----\"
+                                :run_id       \"----id----\"
+                                :tool_outputs  [{:tool_call_id  \"call_wwg3TXXXF0SCT7UTTvqxjZc\"
+                                                 :output        \"Budapest, Hungary\"}]})
+    ```
+
+    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/runs/submitToolOutputs)
+    "
+  ([params]
+   (submit-tool-outputs-to-run params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :submit-tool-outputs-to-run params opts))))
+
 (defn list-run-steps
   "Returns a list of run steps belonging to a run.
 

@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.18.1 - 2024-06-15
+### Supported API versions
+- OpenAI v2.0.0
+- Azure OpenAI v2023-12-01-preview
+### Changes
+- Fixed [Issue 65](https://github.com/wkok/openai-clojure/issues/65) restored `submit-tool-outputs-to-run`
+
+
 ## 0.18.0 - 2024-06-10
 ### Supported API versions
 - OpenAI v2.0.0
