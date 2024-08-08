@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.19.0 - 2024-08-08
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Updated to latest OpenAI spec commit a1bdd5f from 2024-08-08
+- Updated to latest Azure OpenAI spec (stable) commit 81a4ee5 from 2024-06-28
+
 ## 0.18.1 - 2024-06-15
 ### Supported API versions
 - OpenAI v2.0.0
