@@ -57,7 +57,7 @@
 
   Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
-  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions) documentation
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/completions/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions) documentation
   "
   ([params]
    (create-completion params nil))
@@ -80,7 +80,7 @@
 
   Streaming of token events is supported via the `:stream` param, see [Streaming Tokens](/doc/03-streaming.md)
 
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#chat-completions) documentation
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions) documentation
   "
   ([params]
    (create-chat-completion params nil))
@@ -102,7 +102,10 @@
                  :n 2
                  :size \"1024x1024\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/images/create)
+
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/images/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#image-generation) documentation
   "
   ([params]
    (create-image params nil))
@@ -160,7 +163,7 @@
 
   For Azure OpenAI pass `{:impl :azure}` for the `options` argument
 
-  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/embeddings/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings) documentation
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/embeddings/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#embeddings) documentation
   "
   ([params]
    (create-embedding params nil))
@@ -183,7 +186,10 @@
   (create-transcription {:file (clojure.java.io/file \"path/to/audio.mp3\")
                          :model \"whisper-1\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
+
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/audio/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#transcriptions) documentation
   "
   ([params]
    (create-transcription params nil))
@@ -198,7 +204,10 @@
   (create-translation {:file (clojure.java.io/file \"path/to/file/german.m4a\")
                        :model \"whisper-1\"})
   ```
-  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/audio/create)
+
+  For Azure OpenAI pass `{:impl :azure}` for the `options` argument
+
+  Also see the [OpenAI](https://platform.openai.com/docs/api-reference/audio/create) / [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#translations) documentation
   "
   ([params]
    (create-translation params nil))

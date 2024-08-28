@@ -26,22 +26,27 @@
                                idx (s/index-of url "/openai")]
                            (str endpoint (subs url idx))))))})
 
+(defn- ->patched-handler
+  [m from to]
+  (->  (martian/handler-for  m :completions-create)
+       (assoc :route-name :create-completion)))
+
+(def route-mappings
+  {:completions-create :create-completion
+   :chat-completions-create :create-chat-completion
+   :embeddings-create :create-embedding
+   :transcriptions-create :create-transcription
+   :translations-create :create-translation
+   :image-generations-create :create-image})
+
 (defn patch-handler
   "Patching azure's handlers to support the same operation-id names as the standard openai api"
   [m]
-  (let [patched-completions-create-handler (->  (martian/handler-for  m :completions-create)
-                                                (assoc :route-name :create-completion))
-        patched-chat-completions-create-handler (->  (martian/handler-for  m :chat-completions-create)
-                                                (assoc :route-name :create-chat-completion))
-        patched-embeddings-create-handler (->  (martian/handler-for  m :embeddings-create)
-                                               (assoc :route-name :create-embedding))
-
-
-        patched-handlers [patched-completions-create-handler
-                          patched-embeddings-create-handler
-                          patched-chat-completions-create-handler]]
-
-    (assoc m :handlers patched-handlers)))
+  (update m :handlers
+          (fn [handlers]
+            (map (fn [{route-name :route-name :as handler}]
+                   (update handler :route-name #(route-name route-mappings %)))
+                 handlers))))
 
 (defn load-openai-spec []
   (json/decode (slurp (io/resource "azure_openai.json")) keyword))
@@ -64,3 +69,26 @@
   {:api-version "2024-06-01"
    :deployment-id (:model params)
    :martian.core/body (dissoc params :model)})
+
+
+(comment
+
+  ;; Get all operations defined in spec
+
+  (def spec (->>  (martian/explore @m)
+                  (map first)
+                  #_(map #(martian/explore @m %))
+                  set))
+
+  ;; Get all functions defined in api
+
+  (require 'wkok.openai-clojure.api)
+
+  (def impl (->>  (keys (ns-publics 'wkok.openai-clojure.api))
+                  (map keyword)
+                  set))
+
+  ;; Compare the two
+
+  (clojure.set/difference impl spec)
+  )

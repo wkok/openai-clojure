@@ -106,6 +106,13 @@
                                  :size   "1024x1024"})))
 
        (is (= :success
+              (api/create-image {:model "dall-e"
+                                 :prompt "A cute baby sea otter"
+                                 :n      2
+                                 :size   "1024x1024"}
+                                {:impl :azure})))
+
+       (is (= :success
               (api/create-image-edit {:image  (io/file "path/to/otter.png")
                                       :mask   (io/file "path/to/mask.png")
                                       :prompt "A cute baby sea otter wearing a beret"
@@ -135,8 +142,19 @@
                                          :model "whisper-1"})))
 
        (is (= :success
+              (api/create-transcription {:file  (io/file "path/to/audio.mp3")
+                                         :model "whisper-1"}
+                                        {:impl :azure})))
+
+       (is (= :success
               (api/create-translation {:file  (io/file "path/to/file/german.m4a")
                                        :model "whisper-1"})))
+
+       (is (= :success
+              (api/create-translation {:file  (io/file "path/to/file/german.m4a")
+                                       :model "whisper-1"}
+                                      {:impl :azure})))
+
        (is (= :success
               (api/create-speech {:model "tts-1"
                                   :input "Hey there! Nice to meet you!"

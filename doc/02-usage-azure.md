@@ -104,16 +104,34 @@ Any of these [supported request options](https://github.com/gnarroway/hato#reque
 
 * [create-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-completion)
 
-Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#completions)
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions)
 
 ### Chat
 
 * [create-chat-completion](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-chat-completion)
 
-Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#chat-completions)
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)
 
 ### Embeddings
 
 * [create-embedding](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-embedding)
 
-Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference#embeddings)
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#embeddings)
+
+### Transcriptions
+
+* [create-transcription](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-transcription)
+
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#transcriptions)
+
+### Translations
+
+* [create-translation](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-translation)
+
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#translations)
+
+### Images
+
+* [create-image](https://cljdoc.org/d/net.clojars.wkok/openai-clojure/0.19.0/api/wkok.openai-clojure.api#create-image)
+
+Also see the [Azure OpenAI documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#image-generation)
