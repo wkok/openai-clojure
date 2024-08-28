@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.20.0 - 2024-08-28
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Added support for Azure OpenAI Translations, Transcriptions, Images as supported in the GA release v2024-06-01
+
 ## 0.19.0 - 2024-08-08
 ### Supported API versions
 - OpenAI v2.3.0
