@@ -24,11 +24,11 @@ tools and applications which can work with both variants.
 | ----------- | :----: | :----------: |
 | Version     | v2.3.0 | v2024-06-01  |
 | [Chat](https://platform.openai.com/docs/api-reference/chat) | X | X |
-| [Audio](https://platform.openai.com/docs/api-reference/audio) | X | |
+| [Audio](https://platform.openai.com/docs/api-reference/audio) | X | X |
 | [Completion](https://platform.openai.com/docs/api-reference/completions) | X | X |
 | [Embeddings](https://platform.openai.com/docs/api-reference/embeddings) | X | X |
 | [Models](https://platform.openai.com/docs/api-reference/models) | X | |
-| [Images](https://platform.openai.com/docs/api-reference/images) | X | |
+| [Images](https://platform.openai.com/docs/api-reference/images) | X | X |
 | [Files](https://platform.openai.com/docs/api-reference/files) | X | |
 | [Fine-tuning](https://platform.openai.com/docs/api-reference/fine-tuning) | X | |
 | [Moderations](https://platform.openai.com/docs/api-reference/moderations) | X | |
