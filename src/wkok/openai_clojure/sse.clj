@@ -15,7 +15,7 @@
   (when on-next
     (a/go
       (loop []
-        (let [event (a/<! events)]
+        (when-let [event (a/<! events)]
           (when (not= :done event)
             (on-next event)
             (recur)))))))
