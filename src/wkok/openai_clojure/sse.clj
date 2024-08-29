@@ -43,8 +43,9 @@
 (defn sse-events
   "Returns a core.async channel with events as clojure data structures.
   Inspiration from https://gist.github.com/oliyh/2b9b9107e7e7e12d4a60e79a19d056ee"
-  [{:keys [request params]}]
-  (let [event-stream ^InputStream (:body (http/request (merge request
+  [{:keys [request params] :as m}]
+  (let [close? (:stream/close? params)
+        event-stream ^InputStream (:body (http/request (merge request
                                                               params
                                                               {:as :stream})))
         buffer-size (calc-buffer-size params)
@@ -72,7 +73,8 @@
 
                   (recur next-byte-coll))))))
         (finally
-          (a/close! events)
+          (when close?
+            (a/close! events))
           (.close event-stream))))
     events))
 
