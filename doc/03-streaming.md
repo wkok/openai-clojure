@@ -53,6 +53,8 @@ Provide your callback function in the `:on-next` parameter for example
 
 ```
 
+> If you need to ensure the `core.async` channel gets closed, pass the `:stream/close?` parameter. For more information see [this PR](https://github.com/wkok/openai-clojure/pull/63)
+
 ## Example returned token
 
 ```clojure
