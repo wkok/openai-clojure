@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.21.0 - 2024-09-03
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Added support for a `:stream/close?` parameter to ensure `core.async` channel gets closed. See [this PR](https://github.com/wkok/openai-clojure/pull/63)
+
 ## 0.20.0 - 2024-08-28
 ### Supported API versions
 - OpenAI v2.3.0
