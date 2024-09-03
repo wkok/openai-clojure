@@ -6,7 +6,9 @@
    [martian.core :as martian]
    [martian.hato :as martian-http]
    [wkok.openai-clojure.interceptors :as openai-interceptors]
-   [wkok.openai-clojure.sse :as sse]))
+   [wkok.openai-clojure.sse :as sse]
+   [martian.interceptors :as interceptors]
+   [martian.encoders :as encoders]))
 
 (def add-authentication-header
   {:name ::add-authentication-header
@@ -25,11 +27,6 @@
                                             (System/getenv "AZURE_OPENAI_API_ENDPOINT"))
                                idx (s/index-of url "/openai")]
                            (str endpoint (subs url idx))))))})
-
-(defn- ->patched-handler
-  [m from to]
-  (->  (martian/handler-for  m :completions-create)
-       (assoc :route-name :create-completion)))
 
 (def route-mappings
   {:completions-create :create-completion
@@ -51,23 +48,92 @@
 (defn load-openai-spec []
   (json/decode (slurp (io/resource "azure_openai.json")) keyword))
 
+(defn- multipart-form-data?
+  [handler]
+  (-> handler :openapi-definition :requestBody :content :multipart/form-data))
+
+(defn- param->multipart-entry
+  [[param content]]
+  {:name    (name param)
+   :content (if (or (instance? java.io.File content)
+                    (instance? java.io.InputStream content)
+                    (bytes? content))
+              content
+              (str content))})
+
+(def multipart-form-data
+  {:name  ::multipart-form-data
+   :enter (fn [{:keys [handler params] :as ctx}]
+            (let [params' (:martian.core/body params)]
+              (if (multipart-form-data? handler)
+                (-> (assoc-in ctx [:request :multipart]
+                              (map param->multipart-entry params'))
+                    (update-in [:request :headers] dissoc "Content-Type")
+                    (update :request dissoc :body))
+                ctx)))})
+
+(defn update-file-schema
+  [m operation-id field-name]
+  (martian/update-handler m operation-id assoc-in [:body-schema :body field-name] java.io.File))
+
+(defn update-file-schemas
+  [m]
+  (-> m
+      (update-file-schema :transcriptions-create :file)
+      (update-file-schema :translations-create :file)))
+
+
+(defn bootstrap-openapi
+  "Bootstrap the martian from a local copy of the openai swagger spec"
+  []
+  (let [definition (load-openai-spec)
+        base-url   "/openai"
+        encoders   (assoc (encoders/default-encoders)
+                          "multipart/form-data" nil
+                          "application/octet-stream" nil)
+        opts       (update martian-http/default-opts
+                           :interceptors (fn [interceptors]
+                                           (-> interceptors
+                                               (interceptors/inject
+                                                 add-authentication-header
+                                                 :after
+                                                 :martian.interceptors/header-params)
+                                               (interceptors/inject
+                                                 multipart-form-data
+                                                 :after
+                                                 ::add-authentication-header)
+                                               (interceptors/inject
+                                                 openai-interceptors/set-request-options
+                                                 :before
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 override-api-endpoint
+                                                 :before
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 sse/perform-sse-capable-request
+                                                 :replace
+                                                 :martian.hato/perform-request)
+                                               (interceptors/inject
+                                                 (interceptors/encode-body encoders)
+                                                 :replace
+                                                 :martian.interceptors/encode-body)
+                                               (interceptors/inject
+                                                 (interceptors/coerce-response encoders)
+                                                 :replace
+                                                 :martian.interceptors/coerce-response))))]
+
+    (-> (martian/bootstrap-openapi base-url definition opts)
+        update-file-schemas)))
+
 (def m
   (delay
     (patch-handler
-      (martian/bootstrap-openapi "/openai"
-                                 (load-openai-spec)
-                                 (update
-                                   martian-http/default-opts
-                                   :interceptors
-                                   #(-> (remove (comp #{martian-http/perform-request}) %)
-                                        (concat [add-authentication-header
-                                                 openai-interceptors/set-request-options
-                                                 override-api-endpoint
-                                                 sse/perform-sse-capable-request])))))))
+      (bootstrap-openapi))))
 
 (defn patch-params [params]
-  {:api-version "2024-06-01"
-   :deployment-id (:model params)
+  {:api-version       "2024-06-01"
+   :deployment-id     (:model params)
    :martian.core/body (dissoc params :model)})
 
 
