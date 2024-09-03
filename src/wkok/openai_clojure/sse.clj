@@ -15,7 +15,7 @@
   (when on-next
     (a/go
       (loop []
-        (let [event (a/<! events)]
+        (when-let [event (a/<! events)]
           (when (not= :done event)
             (on-next event)
             (recur)))))))
@@ -43,33 +43,39 @@
 (defn sse-events
   "Returns a core.async channel with events as clojure data structures.
   Inspiration from https://gist.github.com/oliyh/2b9b9107e7e7e12d4a60e79a19d056ee"
-  [{:keys [request params]}]
-  (let [event-stream ^InputStream (:body (http/request (merge request
+  [{:keys [request params] :as m}]
+  (let [close? (:stream/close? params)
+        event-stream ^InputStream (:body (http/request (merge request
                                                               params
                                                               {:as :stream})))
         buffer-size (calc-buffer-size params)
         events (a/chan (a/buffer buffer-size) (map parse-event))]
     (a/thread
-      (loop [byte-coll []]
-        (let [byte-arr (byte-array (max 1 (.available event-stream)))
-              bytes-read (.read event-stream byte-arr)]
+      (try
+        (loop [byte-coll []]
+          (let [byte-arr (byte-array (max 1 (.available event-stream)))
+                bytes-read (.read event-stream byte-arr)]
 
-          (if (neg? bytes-read)
+            (if (neg? bytes-read)
 
-            ;; Input stream closed, exiting read-loop
-            (.close event-stream)
+              ;; Input stream closed, exiting read-loop
+              nil
 
-            (let [next-byte-coll (concat byte-coll (seq byte-arr))
-                  data (slurp (byte-array next-byte-coll))]
-              (if-let [es (not-empty (re-seq event-mask data))]
-                (if (every? true? (map #(a/>!! events %) es))
-                  (recur (drop (apply + (map #(count (.getBytes ^String %)) es))
-                               next-byte-coll))
+              (let [next-byte-coll (concat byte-coll (seq byte-arr))
+                    data (slurp (byte-array next-byte-coll))]
+                (if-let [es (not-empty (re-seq event-mask data))]
+                  (if (every? true? (map #(a/>!! events %) es))
+                    (recur (drop (apply + (map #(count (.getBytes ^String %)) es))
+                                 next-byte-coll))
 
-                  ;; Output stream closed, exiting read-loop
-                  (.close event-stream))
+                    ;; Output stream closed, exiting read-loop
+                    nil)
 
-                (recur next-byte-coll)))))))
+                  (recur next-byte-coll))))))
+        (finally
+          (when close?
+            (a/close! events))
+          (.close event-stream))))
     events))
 
 (defn sse-request
