@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.21.1 - 2024-09-24
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Patched the azure schema to properly support multipart file uploads [Issue 71](https://github.com/wkok/openai-clojure/issues/71)
+
 ## 0.21.0 - 2024-09-03
 ### Supported API versions
 - OpenAI v2.3.0
