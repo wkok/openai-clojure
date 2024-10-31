@@ -134,7 +134,7 @@
 (defn patch-params [params]
   {:api-version       "2024-06-01"
    :deployment-id     (:model params)
-   :martian.core/body (dissoc params :model)})
+   :martian.core/body (dissoc params :model :on-next :wkok.openai-clojure.core/options)})
 
 
 (comment
