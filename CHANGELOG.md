@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.21.2 - 2024-11-03
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Fixed Azure SSE Streaming Support via the `:stream` parameter [PR 73](https://github.com/wkok/openai-clojure/pull/73)
+
 ## 0.21.1 - 2024-09-24
 ### Supported API versions
 - OpenAI v2.3.0
