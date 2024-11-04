@@ -892,7 +892,7 @@
 
    Example:
    ```
-   (list-vector-stores)
+   (list-vector-stores {:limit 1})
    ```
    Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/list)
    "
@@ -902,9 +902,7 @@
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :list-vector-stores params opts))))
 
-;;; This raises an error "Could not find route :retrieve-vector-store"
-;;; Instead of calling this function, I think you can call modify-vector-store with params specifying just :vector_store_id.
-#_(defn retrieve-vector-store
+(defn retrieve-vector-store
   "Retrieves a vector store.
 
    Example:
@@ -917,7 +915,7 @@
    (retrieve-vector-store params nil))
   ([params options]
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
-     (core/response-for :retrieve-vector-store params opts))))
+     (core/response-for :get-vector-store params opts))))
 
 (defn modify-vector-store
   "Modifies a vector store.
