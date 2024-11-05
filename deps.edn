@@ -4,14 +4,24 @@
         com.github.oliyh/martian-hato {:mvn/version "0.1.26"}
         org.clojure/core.async {:mvn/version "1.6.681"}}
  :aliases
- {:build {:deps {io.github.seancorfield/build-clj
+ {#_#_:build {:deps {io.github.seancorfield/build-clj
                  {:git/tag "v0.6.4" :git/sha "c21cfde"}}
+              :ns-default build}
+
+  :build {:deps {io.github.clojure/tools.build {:git/tag "0.21.175" #_#_:git/sha "SHA"}}
           :ns-default build}
+
   :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                       io.github.cognitect-labs/test-runner
                       {:git/tag "v0.5.0" :git/sha "48c3c67"}}
-
          ;; Commented out PR 48 as it causes tests not to run
          ;; https://github.com/wkok/openai-clojure/pull/48/files
-         #_#_:main-opts ["-e" "(set! *warn-on-reflection* true)"]}}}
+         #_#_:main-opts ["-e" "(set! *warn-on-reflection* true)"]}
+
+  ; POD
+  :deploy {:replace-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
+           :exec-fn deps-deploy.deps-deploy/deploy
+           :exec-args {:installer :remote
+                       :sign-releases? false
+                       :artifact "target/openai-clojure-0.21.176.jar"}}}} ; <================
