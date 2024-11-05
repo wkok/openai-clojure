@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.22.0 - 2024-11-05
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Added support for OpenAI Vector Stores [PR 75](https://github.com/wkok/openai-clojure/pull/75)
+
 ## 0.21.2 - 2024-11-03
 ### Supported API versions
 - OpenAI v2.3.0

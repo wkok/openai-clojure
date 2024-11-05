@@ -303,9 +303,6 @@
               (api/retrieve-vector-store {:vector_store_id "----id----"})))
 
        (is (= :success
-              (api/retrieve-vector-store {:vector_store_id "----id----"})))
-
-       (is (= :success
               (api/modify-vector-store {:vector_store_id "----id----" :name "Support FAQ v2"})))
 
        (is (= :success
