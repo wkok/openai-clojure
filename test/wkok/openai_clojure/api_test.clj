@@ -291,7 +291,25 @@
                                       :step_id   "----id----"})))
 
        (is (= :success
-              (api/create-thread-and-run {:assistant_id    "----id----"}))))))
+              (api/create-thread-and-run {:assistant_id    "----id----"})))
+
+       (is (= :success
+              (api/create-vector-store {:name "Support FAQ" :file-ids ["----id----"]})))
+
+       (is (= :success
+              (api/list-vector-stores {:limit 1})))
+
+       (is (= :success
+              (api/retrieve-vector-store {:vector_store_id "----id----"})))
+
+       (is (= :success
+              (api/retrieve-vector-store {:vector_store_id "----id----"})))
+
+       (is (= :success
+              (api/modify-vector-store {:vector_store_id "----id----" :name "Support FAQ v2"})))
+
+       (is (= :success
+              (api/delete-vector-store {:vector_store_id "----id----"}))))))
 
 (deftest create-chat-completion-tools
 

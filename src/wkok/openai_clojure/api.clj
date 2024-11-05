@@ -865,3 +865,84 @@
   ([params options]
    (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
      (core/response-for :create-thread-and-run params opts))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Vector stores (beta)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn create-vector-store
+  "Create a vector store.
+
+   Example:
+   ```
+   (create-vector-store {:name \"Support FAQ\" :file-ids [\"file-id-123\"]})
+   ```
+
+  Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/create)
+  "
+  ([params]
+   (create-vector-store params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :create-vector-store params opts))))
+
+(defn list-vector-stores
+  "Returns a list of vector stores.
+
+   Example:
+   ```
+   (list-vector-stores {:limit 1})
+   ```
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/list)
+   "
+  ([params]
+   (list-vector-stores params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :list-vector-stores params opts))))
+
+(defn retrieve-vector-store
+  "Retrieves a vector store.
+
+   Example:
+   ```
+   (retrieve-vector-store {:vector_store_id \"vs_abc123\"})
+   ```
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/retrieve)
+   "
+  ([params]
+   (retrieve-vector-store params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :get-vector-store params opts))))
+
+(defn modify-vector-store
+  "Modifies a vector store.
+
+   Example:
+   ```
+   (modify-vector-store {:vector_store_id \"vs_abc123\" :name \"Support FAQ\"})
+   ```
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/modify)
+   "
+  ([params]
+   (modify-vector-store params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :modify-vector-store params opts))))
+
+(defn delete-vector-store
+  "Deletes a vector store.
+
+   Example:
+   ```
+   (delete-vector-store {:vector_store_id \"vs_abc123\"})
+   ```
+   Also see the [OpenAI documentation](https://platform.openai.com/docs/api-reference/vector-stores/delete)
+   "
+  ([params]
+   (delete-vector-store params nil))
+  ([params options]
+   (let [opts (assoc-in options [:openai-beta] ASSISTANTS_HTTP_HEADER_STR)]
+     (core/response-for :delete-vector-store params opts))))
