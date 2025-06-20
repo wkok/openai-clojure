@@ -18,10 +18,10 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4.2.2
 
     - name: Cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4.2.3
       with:
         path: |
           .cpcache
@@ -29,9 +29,9 @@ jobs:
         key: ${{ runner.os }}-deps-${{ hashFiles('**/deps.edn') }}
 
     - name: Setup Clojure
-      uses: DeLaGuardo/setup-clojure@3.0
+      uses: DeLaGuardo/setup-clojure@13.4
       with:
-        tools-deps: '1.11.1.1208'
+        tools-deps: '1.12.1.1550'
 
     - name: Test
       run: clojure -T:build test
