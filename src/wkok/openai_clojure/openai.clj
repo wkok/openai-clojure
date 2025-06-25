@@ -107,9 +107,9 @@
                                                  :replace
                                                  :martian.hato/perform-request)
                                                (interceptors/inject
-                                                 (interceptors/encode-body encoders)
+                                                 (interceptors/encode-request encoders)
                                                  :replace
-                                                 :martian.interceptors/encode-body)
+                                                 :martian.interceptors/encode-request)
                                                (interceptors/inject
                                                  (interceptors/coerce-response encoders)
                                                  :replace
