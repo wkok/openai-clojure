@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.23.0 - 2025-07-31
+### Supported API versions
+- OpenAI v2.3.0
+- Azure OpenAI v2024-06-01
+### Changes
+- Added feature to optionally preserve headers [PR 81](https://github.com/wkok/openai-clojure/pull/81)
+- Updated dependencies [PR 80](https://github.com/wkok/openai-clojure/pull/80)
+
 ## 0.22.0 - 2024-11-05
 ### Supported API versions
 - OpenAI v2.3.0
