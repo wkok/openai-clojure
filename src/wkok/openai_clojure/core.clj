@@ -15,8 +15,9 @@
 
 (defn response-for
   [operation params
-   {:keys [impl request]
-    :or {impl :openai}
+   {:keys [impl request full-response?]
+    :or {impl :openai
+         full-response? false}
     :as options}]
 
   (if-let [{:keys [p o]} (transform-deprecated-args? params options)]
@@ -37,4 +38,6 @@
 
       (if (:async? request)
         response
-        (:body response)))))
+        (if full-response?
+          response
+          (:body response))))))
